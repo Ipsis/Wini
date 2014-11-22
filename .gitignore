@@ -1,0 +1,17 @@
+/.gradle
+/.settings
+/bin
+/build
+/eclipse
+/.classpath
+/.project
+/libs
+Thumbs.db
+
+## intellij
+/out
+/.idea
+/*.iml
+/*.ipr
+/*.iws
+/atlassian-ide-plugin.xml

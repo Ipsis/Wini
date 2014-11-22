@@ -1,0 +1,17 @@
+[
+{
+  "modid": "wini",
+  "name": "Wini",
+  "description": "What I Need Is",
+  "version": "${version}",
+  "mcversion": "${mcversion}",
+  "url": "http://www.github.com/ipsis/Wini/",
+  "updateUrl": "",
+  "authorList": ["Ipsis"],
+  "credits": "",
+  "logoFile": "",
+  "screenshots": [],
+  "dependencies": [
+    ]
+}
+]
