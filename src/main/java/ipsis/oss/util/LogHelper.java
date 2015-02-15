@@ -1,4 +1,4 @@
-package ipsis.wini.utils;
+package ipsis.oss.util;
 
 import cpw.mods.fml.common.FMLLog;
 import ipsis.wini.reference.Reference;

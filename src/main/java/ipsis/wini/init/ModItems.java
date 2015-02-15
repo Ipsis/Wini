@@ -1,6 +1,6 @@
-package ipsis.wini.item;
+package ipsis.wini.init;
 
-public class WiniItems {
+public class ModItems {
 
     public static void preInit() {
 
