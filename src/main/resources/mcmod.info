@@ -14,6 +14,5 @@
   "dependencies": [ CoFHLib ],
   "requiredMods": [ CoFHLib ],
   "useDependencyInformation": true
-    ]
 }
 ]

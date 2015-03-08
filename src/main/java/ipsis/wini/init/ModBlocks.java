@@ -1,18 +1,18 @@
 package ipsis.wini.init;
 
-import com.mojang.realmsclient.gui.RealmsGenericErrorScreen;
 import cpw.mods.fml.common.registry.GameRegistry;
-import ipsis.wini.block.BlockPortachant;
+import ipsis.wini.block.BlockCompacted;
+import ipsis.wini.block.BlockWini;
+import ipsis.wini.item.ItemBlockCompacted;
 import ipsis.wini.reference.Names;
-import ipsis.wini.reference.Reference;
 
 public class ModBlocks {
 
     public static void preInit() {
 
-        blockPortachant = new BlockPortachant();
+        blockCompacted = new BlockCompacted();
 
-        GameRegistry.registerBlock(blockPortachant, Names.Blocks.BLOCK_PORTACHANT);
+        GameRegistry.registerBlock(blockCompacted, ItemBlockCompacted.class, Names.Blocks.BLOCK_COMPACTED);
     }
 
     public static void initialize() {
@@ -23,5 +23,6 @@ public class ModBlocks {
 
     }
 
-    public static BlockPortachant blockPortachant;
+    public static BlockWini blockCompacted;
+
 }
