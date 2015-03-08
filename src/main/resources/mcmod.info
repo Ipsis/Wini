@@ -11,7 +11,9 @@
   "credits": "",
   "logoFile": "",
   "screenshots": [],
-  "dependencies": [
+  "dependencies": [ CoFHLib ],
+  "requiredMods": [ CoFHLib ],
+  "useDependencyInformation": true
     ]
 }
 ]
