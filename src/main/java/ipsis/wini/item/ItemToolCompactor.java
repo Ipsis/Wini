@@ -1,7 +1,7 @@
 package ipsis.wini.item;
 
 import cofh.lib.util.position.BlockPosition;
-import ipsis.oss.util.LogHelper;
+import ipsis.wini.block.BlockCompacted;
 import ipsis.wini.init.ModBlocks;
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
@@ -54,6 +54,7 @@ public class ItemToolCompactor extends ItemWini {
         ForgeDirection dir = ForgeDirection.getOrientation(side).getOpposite();
 
         BlockPosition pos = new BlockPosition(x, y, z, dir);
+        Block originBlock = world.getBlock(x, y, z);
 
         List<BlockPosition> blocks = new ArrayList<BlockPosition>();
         for (int i = 0; i < 2; i++) {
@@ -75,33 +76,34 @@ public class ItemToolCompactor extends ItemWini {
             count += (compactBlock(world, blockPos) == true ? 1 : 0);
         }
 
+        if (count > 0) {
+            /* We changed blocks so make one sound, based off the block that was clicked */
+            world.playSoundEffect((double) ((float) x + 0.5F), (double) ((float) y + 0.5F), (double) ((float) z + 0.5F),
+                    originBlock.stepSound.func_150496_b(), (originBlock.stepSound.getVolume() + 1.0F) / 2.0F, originBlock.stepSound.getPitch() * 0.8F);
+
+        }
+
         return count;
     }
 
     private boolean compactBlock(World world, BlockPosition p) {
 
-        boolean changed = true;
+        int newmeta = 0;
+        boolean changed = false;
         Block b = p.getBlock(world);
-        if (isGravel((b)))
-            world.setBlock(p.x, p.y, p.z, ModBlocks.blockCompacted, 1, 3);
-        else if (isSand((b)))
-            world.setBlock(p.x, p.y, p.z, ModBlocks.blockCompacted, 0, 3);
-        else
-            changed = false;
+
+        if (b == Blocks.gravel) {
+            newmeta = BlockCompacted.META_GRAVEL;
+            changed = true;
+        } else if (b == Blocks.sand) {
+            newmeta = (world.getBlockMetadata(p.x, p.y, p.z) == 0 ? BlockCompacted.META_SAND : BlockCompacted.META_RED_SAND);
+            changed = true;
+        }
+
+        if (changed == true) {
+            world.setBlock(p.x, p.y, p.z, ModBlocks.blockCompacted, newmeta, 3);
+        }
 
         return changed;
     }
-
-    private boolean isGravel(Block b) {
-        return b == Blocks.gravel;
-    }
-
-    private boolean isSand(Block b) {
-        return b == Blocks.sand;
-    }
-
-    private boolean canCompact(Block b) {
-        return (b != null && (isGravel(b) || isSand(b)));
-    }
-
 }
