@@ -12,6 +12,6 @@ public class Names {
     public static class Blocks {
 
         public final static String BLOCK_COMPACTED = "blockCompacted";
-        public final static String BLOCK_COMPACTED_SUBTYPES[] = { "sand", "gravel" };
+        public final static String BLOCK_COMPACTED_SUBTYPES[] = { "sand", "gravel", "red_sand" };
     }
 }

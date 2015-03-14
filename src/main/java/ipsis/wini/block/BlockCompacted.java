@@ -17,6 +17,10 @@ import java.util.Random;
 
 public class BlockCompacted extends BlockWini {
 
+    public static final int META_SAND = 0;
+    public static final int META_GRAVEL = 1;
+    public static final int META_RED_SAND = 2;
+
     public BlockCompacted() {
         super(Material.ground);
         this.setBlockName(Names.Blocks.BLOCK_COMPACTED);
@@ -30,7 +34,7 @@ public class BlockCompacted extends BlockWini {
     @Override
     @SideOnly(Side.CLIENT)
     public void registerBlockIcons(IIconRegister iconRegister) {
-        this.icons = new IIcon[2];
+        this.icons = new IIcon[Names.Blocks.BLOCK_COMPACTED_SUBTYPES.length];
 
         for (int i = 0; i < Names.Blocks.BLOCK_COMPACTED_SUBTYPES.length; i++)
             this.icons[i] = iconRegister.registerIcon(Textures.RESOURCE_PREFIX + Names.Blocks.BLOCK_COMPACTED + "_" + Names.Blocks.BLOCK_COMPACTED_SUBTYPES[i]);
@@ -39,7 +43,7 @@ public class BlockCompacted extends BlockWini {
     @Override
     @SideOnly(Side.CLIENT)
     public IIcon getIcon(int side, int meta) {
-        meta = MathHelper.clampI(meta, 0, 1);
+        meta = MathHelper.clampI(meta, 0, Names.Blocks.BLOCK_COMPACTED_SUBTYPES.length - 1);
         return this.icons[meta];
     }
 
@@ -53,7 +57,7 @@ public class BlockCompacted extends BlockWini {
 
     @Override
     public int damageDropped(int meta) {
-        return MathHelper.clampI(meta, 0, 1);
+        return MathHelper.clampI(meta, 0, Names.Blocks.BLOCK_COMPACTED_SUBTYPES.length - 1);
     }
 
     @Override
