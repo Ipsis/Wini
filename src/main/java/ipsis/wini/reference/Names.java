@@ -6,6 +6,7 @@ public class Names {
 
         public final static String ITEM_COMPACTOR = "compactor";
         public final static String ITEM_COMPACTOR_SUBTYPES[] = { "stone", "iron", "diamond" };
+        public final static String ITEM_TORCH_POUCH = "torchPouch";
 
     }
 

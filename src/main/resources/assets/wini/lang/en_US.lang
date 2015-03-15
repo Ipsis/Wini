@@ -4,3 +4,5 @@ tile.wini:blockCompacted.gravel.name=Compacted Gravel
 item.wini:compactor_stone.name=Stone Compactor
 item.wini:compactor_iron.name=Iron Compactor
 item.wini:compactor_diamond.name=Diamond Compactor
+
+item.wini:torchPouch.name=Torch Pouch

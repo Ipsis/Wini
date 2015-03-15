@@ -5,6 +5,8 @@ import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
+import cpw.mods.fml.common.network.NetworkRegistry;
+import ipsis.wini.handler.GuiHandler;
 import ipsis.wini.init.ModBlocks;
 import ipsis.wini.init.ModItems;
 import ipsis.wini.proxy.IProxy;
@@ -28,6 +30,8 @@ public class Wini {
 
     @Mod.EventHandler
     public void initialize(FMLInitializationEvent event) {
+
+        NetworkRegistry.INSTANCE.registerGuiHandler(instance, new GuiHandler());
 
         ModBlocks.initialize();
         ModItems.initialize();
