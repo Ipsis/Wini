@@ -16,15 +16,6 @@ buildscript {
     }
 }
 
-repositories {
-
-    ivy { // The repo from which to get CoFHLib
-        name "CoFHLib"
-        artifactPattern "http://addons.cursecdn.com/files/2221/834/[module]-[revision].[ext]"
-    }
-
-}
-
 apply plugin: 'forge'
 
 // Define properties file
@@ -35,6 +26,15 @@ configFile.withReader {
     def prop = new Properties()
     prop.load(it)
     project.ext.config = new ConfigSlurper().parse prop
+}
+
+repositories {
+
+    ivy { // The repo from which to get CoFHLib
+        name "CoFHLib"
+        artifactPattern "http://addons-origin.cursecdn.com/files/${config.cofh_lib_cf}/[module]-[revision].[ext]"
+    }
+
 }
 
 version = "${config.minecraft_version}-${config.mod_version}"
