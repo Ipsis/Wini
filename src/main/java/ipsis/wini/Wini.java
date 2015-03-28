@@ -9,6 +9,7 @@ import cpw.mods.fml.common.network.NetworkRegistry;
 import ipsis.wini.handler.GuiHandler;
 import ipsis.wini.init.ModBlocks;
 import ipsis.wini.init.ModItems;
+import ipsis.wini.init.ModTileEntities;
 import ipsis.wini.proxy.IProxy;
 import ipsis.wini.reference.Reference;
 
@@ -26,6 +27,8 @@ public class Wini {
 
         ModBlocks.preInit();
         ModItems.preInit();
+
+        ModTileEntities.preInit();
     }
 
     @Mod.EventHandler
@@ -35,6 +38,8 @@ public class Wini {
 
         ModBlocks.initialize();
         ModItems.initialize();
+
+        ModTileEntities.initialize();
     }
 
     @Mod.EventHandler
@@ -42,5 +47,7 @@ public class Wini {
 
         ModBlocks.postInit();
         ModItems.postInit();
+
+        ModTileEntities.postInit();
     }
 }
