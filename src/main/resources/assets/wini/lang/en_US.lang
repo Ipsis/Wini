@@ -1,8 +1,13 @@
+# Blocks
 tile.wini:blockCompacted.sand.name=Compacted Sand
 tile.wini:blockCompacted.gravel.name=Compacted Gravel
 
+# Items
 item.wini:compactor_stone.name=Stone Compactor
 item.wini:compactor_iron.name=Iron Compactor
 item.wini:compactor_diamond.name=Diamond Compactor
-
 item.wini:torchPouch.name=Torch Pouch
+item.wini:voidBag.name=Void Bag
+
+# Tooltips
+tooltip.wini:voidBag=Bag with hole

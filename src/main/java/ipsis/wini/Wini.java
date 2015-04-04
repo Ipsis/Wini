@@ -10,6 +10,7 @@ import ipsis.wini.handler.GuiHandler;
 import ipsis.wini.init.ModBlocks;
 import ipsis.wini.init.ModItems;
 import ipsis.wini.init.ModTileEntities;
+import ipsis.wini.network.PacketHandler;
 import ipsis.wini.proxy.IProxy;
 import ipsis.wini.reference.Reference;
 
@@ -24,6 +25,8 @@ public class Wini {
 
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent event) {
+
+        PacketHandler.init();
 
         ModBlocks.preInit();
         ModItems.preInit();
@@ -40,6 +43,8 @@ public class Wini {
         ModItems.initialize();
 
         ModTileEntities.initialize();
+
+        proxy.registerEventHandlers();
     }
 
     @Mod.EventHandler
