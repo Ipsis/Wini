@@ -9,6 +9,7 @@ public class Textures {
         public static final String SHEET_LOCATION = "textures/gui/";
 
         public static final String TORCH_POUCH = RESOURCE_PREFIX + SHEET_LOCATION + "torchPouch.png";
+        public static final String VOID_BAG = RESOURCE_PREFIX + SHEET_LOCATION + "voidBag.png";
 
     }
 }

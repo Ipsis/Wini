@@ -19,5 +19,7 @@ public class Lang {
 
     public static class Tooltips {
 
+        public static final String ITEM_VOID_BAG = TAG_TOOLTIP + Names.Items.ITEM_VOID_BAG;
+
     }
 }
