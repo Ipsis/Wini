@@ -25,7 +25,7 @@ public class ItemInventoryWini implements IInventory {
     }
 
     private boolean isValidSlotNum(int slotNum) {
-        return slotNum > 0 && slotNum < getSizeInventory();
+        return slotNum >= 0 && slotNum < getSizeInventory();
     }
 
     /**
