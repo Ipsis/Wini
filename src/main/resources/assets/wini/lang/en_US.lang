@@ -1,5 +1,6 @@
 # Blocks
 tile.wini:blockCompacted.sand.name=Compacted Sand
+tile.wini:blockCompacted.red_sand.name=Compacted Red Sand
 tile.wini:blockCompacted.gravel.name=Compacted Gravel
 
 # Items
