@@ -3,10 +3,10 @@ package ipsis.wini.creativetab;
 import cofh.lib.util.helpers.StringHelper;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import ipsis.wini.init.ModItems;
 import ipsis.wini.reference.Lang;
 import ipsis.wini.reference.Reference;
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 
 public class CreativeTab {
@@ -16,8 +16,7 @@ public class CreativeTab {
         @Override
         public Item getTabIconItem() {
 
-            return Items.apple;
-            //return WiniItems;
+            return ModItems.itemCompactorDiamond;
         }
 
         @Override
