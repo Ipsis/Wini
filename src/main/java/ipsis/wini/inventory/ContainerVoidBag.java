@@ -31,8 +31,6 @@ public class ContainerVoidBag extends Container {
             else
                 this.addSlotToContainer(new Slot(entityPlayer.inventory, x, 8 + x * 18, 109));
         }
-
-        voidBag.loadInventory();
     }
 
     @Override
@@ -52,6 +50,7 @@ public class ContainerVoidBag extends Container {
     public void onContainerClosed(EntityPlayer entityPlayer) {
 
         super.onContainerClosed(entityPlayer);
-        voidBag.saveInventoryToStack(entityPlayer.getHeldItem());
+        if (!entityPlayer.worldObj.isRemote)
+            voidBag.saveInventoryToStack(entityPlayer.getHeldItem());
     }
 }

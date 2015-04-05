@@ -1,7 +1,6 @@
 package ipsis.wini.gui;
 
 import ipsis.wini.inventory.ContainerVoidBag;
-import ipsis.wini.inventory.InventoryVoidBag;
 import ipsis.wini.reference.Textures;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;

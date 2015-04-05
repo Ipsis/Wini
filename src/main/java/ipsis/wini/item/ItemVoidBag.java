@@ -35,7 +35,7 @@ public class ItemVoidBag extends ItemWini {
             for (int slot = 0; slot < inventory.getSizeInventory(); slot++) {
 
                 ItemStack c = inventory.getStackInSlot(slot);
-                if (ItemHelper.itemsIdentical(c, itemStack)) {
+                if (c != null && ItemHelper.itemsIdentical(c, itemStack)) {
                     LogHelper.info("Delete Item");
                     handled = true;
                     break;

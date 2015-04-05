@@ -10,4 +10,8 @@ item.wini:torchPouch.name=Torch Pouch
 item.wini:voidBag.name=Void Bag
 
 # Tooltips
-tooltip.wini:voidBag=Bag with hole
+tooltip.wini:voidBag=Bag with a hole
+tooltip.wini:voidBagBig=Bigger bag with a hole
+
+# Tabs
+itemGroup.wini:Wini=What I Need Is

@@ -22,6 +22,7 @@ public class ItemInventoryWini implements IInventory {
         this.stackLimit = stackLimit;
         if (!parentStack.hasTagCompound())
             parentStack.setTagCompound(new NBTTagCompound());
+        loadInventory();
     }
 
     private boolean isValidSlotNum(int slotNum) {
@@ -75,6 +76,19 @@ public class ItemInventoryWini implements IInventory {
             itemStack.setTagCompound(new NBTTagCompound());
 
         writeToNBT(itemStack.getTagCompound());
+    }
+
+    /**
+     * How many items are in the inventory regardless of type
+     * @return
+     */
+    public short getItemCount() {
+
+        short count = 0;
+        for (int i = 0; i < getSizeInventory(); i++)
+            count += (getStackInSlot(i) != null ? getStackInSlot(i).stackSize : 0);
+
+        return count;
     }
 
     /**
