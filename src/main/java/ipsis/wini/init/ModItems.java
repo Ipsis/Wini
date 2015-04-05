@@ -18,7 +18,8 @@ public class ModItems {
         /* Emerald is diamond! */
 
         itemTorchPouch = new ItemTorchPouch();
-        itemVoidBag = new ItemVoidBag();
+        itemVoidBag = new ItemVoidBag(ItemVoidBag.BagSize.SMALL);
+        itemVoidBagBig = new ItemVoidBag(ItemVoidBag.BagSize.LARGE);
 
         GameRegistry.registerItem(itemCompactorStone, "item." + Names.Items.ITEM_COMPACTOR + "_" + Names.Items.ITEM_COMPACTOR_SUBTYPES[0]);
         GameRegistry.registerItem(itemCompactorIron, "item." + Names.Items.ITEM_COMPACTOR + "_" + Names.Items.ITEM_COMPACTOR_SUBTYPES[1]);
@@ -26,6 +27,7 @@ public class ModItems {
 
         GameRegistry.registerItem(itemTorchPouch, "item." + Names.Items.ITEM_TORCH_POUCH);
         GameRegistry.registerItem(itemVoidBag, "item." + Names.Items.ITEM_VOID_BAG);
+        GameRegistry.registerItem(itemVoidBagBig, "item." + Names.Items.ITEM_VOID_BAG_BIG);
     }
 
     public static void initialize() {
@@ -41,4 +43,5 @@ public class ModItems {
     public static ItemWini itemCompactorDiamond;
     public static ItemWini itemTorchPouch;
     public static ItemWini itemVoidBag;
+    public static ItemWini itemVoidBagBig;
 }

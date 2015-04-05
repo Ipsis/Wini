@@ -1,6 +1,7 @@
 package ipsis.wini.inventory;
 
 import cofh.lib.gui.slot.SlotLocked;
+import ipsis.wini.item.ItemVoidBag;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.Slot;
@@ -12,11 +13,20 @@ public class ContainerVoidBag extends Container {
 
     public ContainerVoidBag(EntityPlayer entityPlayer, ItemStack itemStack) {
 
-        voidBag = new ItemInventoryVoidBag(itemStack);
+        ItemVoidBag.BagSize bagSize = ((ItemVoidBag)itemStack.getItem()).getBagSize();
+        voidBag = new ItemInventoryVoidBag(itemStack, bagSize);
+
+        int baseX;
+        int baseY = 20;
+        if (bagSize == ItemVoidBag.BagSize.SMALL)
+            baseX = 44;
+        else
+            baseX = 8;
+
 
         /* Assuming in a straight line */
         for (int i = 0; i < voidBag.getSizeInventory(); i++)
-            this.addSlotToContainer(new Slot(voidBag, i, 44 + (i * 18), 20));
+            this.addSlotToContainer(new Slot(voidBag, i, baseX + (i * 18), baseY));
 
          /* Player inventory */
         for (int y = 0; y < 3; y++) {

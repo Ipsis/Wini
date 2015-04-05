@@ -8,10 +8,13 @@ item.wini:compactor_iron.name=Iron Compactor
 item.wini:compactor_diamond.name=Diamond Compactor
 item.wini:torchPouch.name=Torch Pouch
 item.wini:voidBag.name=Void Bag
+item.wini:voidBagBig.name=Big Void Bag
 
 # Tooltips
 tooltip.wini:voidBag=Bag with a hole
-tooltip.wini:voidBagBig=Bigger bag with a hole
+tooltip.wini:voidBagBig=Bigger bag, still with a hole
+tooltip.wini:bagLocked=Locked
+tooltip.wini:bagUnlocked=Unlocked
 
 # Tabs
 itemGroup.wini:Wini=What I Need Is

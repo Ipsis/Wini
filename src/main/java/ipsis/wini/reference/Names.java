@@ -8,6 +8,7 @@ public class Names {
         public final static String ITEM_COMPACTOR_SUBTYPES[] = { "stone", "iron", "diamond" };
         public final static String ITEM_TORCH_POUCH = "torchPouch";
         public final static String ITEM_VOID_BAG = "voidBag";
+        public final static String ITEM_VOID_BAG_BIG = "voidBagBig";
 
     }
 

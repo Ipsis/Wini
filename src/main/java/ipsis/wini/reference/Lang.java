@@ -20,6 +20,9 @@ public class Lang {
     public static class Tooltips {
 
         public static final String ITEM_VOID_BAG = TAG_TOOLTIP + Names.Items.ITEM_VOID_BAG;
+        public static final String ITEM_VOID_BAG_BIG = TAG_TOOLTIP + Names.Items.ITEM_VOID_BAG_BIG;
+        public static final String ITEM_VOID_BAG_LOCKED = TAG_TOOLTIP + "bagLocked";
+        public static final String ITEM_VOID_BAG_UNLOCKED = TAG_TOOLTIP + "bagUnlocked";
 
     }
 }
