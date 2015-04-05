@@ -4,7 +4,6 @@ import ipsis.wini.reference.Nbt;
 import ipsis.wini.utils.ItemHelper;
 import net.minecraft.item.ItemStack;
 
-/* TODO add a NBT to keep track of the torch count for item info */
 public class ItemInventoryTorchPouch extends ItemInventoryWini{
 
     public ItemInventoryTorchPouch(ItemStack itemStack) {
