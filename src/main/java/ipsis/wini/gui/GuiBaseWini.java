@@ -1,8 +1,8 @@
 package ipsis.wini.gui;
 
 import cofh.lib.gui.GuiBase;
+import cofh.lib.util.helpers.StringHelper;
 import ipsis.oss.util.IconRegistry;
-import ipsis.wini.utils.StringHelper;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.inventory.Container;

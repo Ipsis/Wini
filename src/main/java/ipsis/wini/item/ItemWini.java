@@ -1,10 +1,10 @@
 package ipsis.wini.item;
 
+import cofh.lib.util.helpers.StringHelper;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import ipsis.wini.creativetab.CreativeTab;
 import ipsis.wini.reference.Reference;
-import ipsis.wini.utils.StringHelper;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
