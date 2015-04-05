@@ -1,6 +1,7 @@
 package ipsis.wini.inventory;
 
 import cofh.lib.gui.slot.SlotAcceptValid;
+import cofh.lib.gui.slot.SlotLocked;
 import cofh.lib.util.helpers.InventoryHelper;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.Container;
@@ -9,15 +10,15 @@ import net.minecraft.item.ItemStack;
 
 public class ContainerTorchPouch extends Container {
 
-    private final InventoryTorchPouch inv;
+    private ItemInventoryWini torchBag;
 
-    public ContainerTorchPouch(EntityPlayer entityPlayer, InventoryTorchPouch inv) {
+    public ContainerTorchPouch(EntityPlayer entityPlayer, ItemStack itemStack) {
 
-        this.inv = inv;
+        torchBag = new ItemInventoryTorchPouch(itemStack);
 
         /* Assuming in a straight line */
-        for (int i = 0; i < inv.getSizeInventory(); i++)
-            this.addSlotToContainer(new SlotAcceptValid(inv, i, 44 + (i * 18), 20));
+        for (int i = 0; i < torchBag.getSizeInventory(); i++)
+            this.addSlotToContainer(new SlotAcceptValid(torchBag, i, 44 + (i * 18), 20));
 
          /* Player inventory */
         for (int y = 0; y < 3; y++) {
@@ -25,8 +26,13 @@ public class ContainerTorchPouch extends Container {
                 this.addSlotToContainer(new Slot(entityPlayer.inventory, x + y * 9 + 9, 8 + x * 18, 51 + y * 18));
         }
         /* Player hotbar */
-        for (int x = 0; x < 9; x++)
-            this.addSlotToContainer(new Slot(entityPlayer.inventory, x, 8 + x * 18, 109));
+        for (int x = 0; x < 9; x++) {
+            /* Dont allow the bag inventory item to be changed */
+            if (x == entityPlayer.inventory.currentItem)
+                this.addSlotToContainer(new SlotLocked(entityPlayer.inventory, x, 8 + x * 18, 109));
+            else
+                this.addSlotToContainer(new Slot(entityPlayer.inventory, x, 8 + x * 18, 109));
+        }
     }
 
     @Override
@@ -59,15 +65,16 @@ public class ContainerTorchPouch extends Container {
             slot.putStack(null);
         else
             slot.onSlotChanged();
+
         slot.onPickupFromSlot(entityPlayer, stack);
         return result;
     }
 
     @Override
     public void onContainerClosed(EntityPlayer entityPlayer) {
-        super.onContainerClosed(entityPlayer);
 
+        super.onContainerClosed(entityPlayer);
         if (!entityPlayer.worldObj.isRemote)
-            inv.onGuiSaved(entityPlayer);
+            torchBag.saveInventoryToStack(entityPlayer.getHeldItem());
     }
 }

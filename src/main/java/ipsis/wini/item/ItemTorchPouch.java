@@ -1,17 +1,19 @@
 package ipsis.wini.item;
 
 import ipsis.wini.Wini;
-import ipsis.wini.inventory.InventoryTorchPouch;
+import ipsis.wini.inventory.ItemInventoryTorchPouch;
 import ipsis.wini.reference.Gui;
+import ipsis.wini.reference.Lang;
 import ipsis.wini.reference.Names;
-import ipsis.wini.reference.Reference;
+import ipsis.wini.reference.Nbt;
+import ipsis.wini.utils.StringHelper;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 
-import java.util.UUID;
+import java.util.List;
+
 
 public class ItemTorchPouch extends ItemWini {
 
@@ -23,17 +25,6 @@ public class ItemTorchPouch extends ItemWini {
     }
 
     private void openGui(ItemStack itemStack, EntityPlayer entityPlayer) {
-
-        /** Add a UUID */
-        if (!itemStack.hasTagCompound())
-            itemStack.stackTagCompound = new NBTTagCompound();
-
-        if (!itemStack.getTagCompound().hasKey(Reference.UUID_MS) || !itemStack.getTagCompound().hasKey(Reference.UUID_LS)) {
-
-            UUID uuid = UUID.randomUUID();
-            itemStack.getTagCompound().setLong(Reference.UUID_MS, uuid.getMostSignificantBits());
-            itemStack.getTagCompound().setLong(Reference.UUID_LS, uuid.getLeastSignificantBits());
-        }
 
         entityPlayer.openGui(Wini.instance, Gui.Ids.TORCH_POUCH, entityPlayer.worldObj,
                 (int)entityPlayer.posX, (int)entityPlayer.posY, (int)entityPlayer.posZ);
@@ -55,19 +46,33 @@ public class ItemTorchPouch extends ItemWini {
             return true;
 
         /* Try to operate the same as normal torches */
-        InventoryTorchPouch inv = new InventoryTorchPouch(itemStack);
+        ItemInventoryTorchPouch inv = new ItemInventoryTorchPouch(itemStack);
         for (int slot = 0; slot < inv.getSizeInventory(); slot++) {
             ItemStack s = inv.getStackInSlot(slot);
             if (s != null && s.stackSize != 0) {
                 /* we assume if it is in here it is a torch */
                 Item item = s.getItem();
                 if (item.onItemUse(s, entityPlayer, world, x, y, z, side, hitX, hitY, hitZ)) {
-                    inv.onGuiSaved(entityPlayer);
+                    inv.saveInventoryToStack(entityPlayer.getHeldItem());
                     break;
                 }
             }
         }
 
         return true;
+    }
+
+    @Override
+    public void addInformation(ItemStack itemStack, EntityPlayer player, List info, boolean showAdvanced) {
+        super.addInformation(itemStack, player, info, showAdvanced);
+
+        if (itemStack == null)
+            return;
+
+        short count = 0;
+        if (itemStack.hasTagCompound() && itemStack.getTagCompound().hasKey(Nbt.TORCH_POUCH_COUNT)) {
+            info.add(itemStack.getTagCompound().getShort(Nbt.TORCH_POUCH_COUNT) + "/" + 5 * 64);
+
+        }
     }
 }
