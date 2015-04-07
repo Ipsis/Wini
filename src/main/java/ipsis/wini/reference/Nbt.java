@@ -7,4 +7,7 @@ public class Nbt {
 
     public static final String VOID_BAG_LOCKED = "Locked";
     public static final String TORCH_POUCH_COUNT = "TorchCount";
+
+    public static final String TE_FACING = "Facing";
+    public static final String TE_STATE = "State";
 }
