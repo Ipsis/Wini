@@ -2,6 +2,9 @@
 tile.wini:blockCompacted.sand.name=Compacted Sand
 tile.wini:blockCompacted.red_sand.name=Compacted Red Sand
 tile.wini:blockCompacted.gravel.name=Compacted Gravel
+tile.wini:blockHysteresis.fluid.name=Hysteresis Fluid Monitor
+tile.wini:blockHysteresis.rf.name=Hysteresis RF Monitor
+tile.wini:blockHysteresis.inv.name=Hysteresis Inventory Monitor
 
 # Items
 item.wini:compactor_stone.name=Stone Compactor
@@ -19,3 +22,8 @@ tooltip.wini:bagUnlocked=Unlocked
 
 # Tabs
 itemGroup.wini:Wini=What I Need Is
+
+# Gui
+gui.wini:tab.info=Information
+gui.wini:tab.energy=Energy
+gui.wini:tab.tanks=Tanks
