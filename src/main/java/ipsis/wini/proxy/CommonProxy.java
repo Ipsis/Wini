@@ -1,6 +1,5 @@
 package ipsis.wini.proxy;
 
-import cpw.mods.fml.common.FMLCommonHandler;
 import ipsis.wini.handler.ItemEventHandler;
 import net.minecraftforge.common.MinecraftForge;
 

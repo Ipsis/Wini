@@ -3,9 +3,11 @@ package ipsis.wini.tileentity;
 import ipsis.wini.network.PacketHandler;
 import ipsis.wini.network.message.MessageTileEntityWini;
 import ipsis.wini.reference.Nbt;
+import net.minecraft.block.Block;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.Packet;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
 
 public abstract class TileEntityWini extends TileEntity {
@@ -15,6 +17,8 @@ public abstract class TileEntityWini extends TileEntity {
 
     public TileEntityWini() {
         super();
+        facing = ForgeDirection.SOUTH;
+        state = 0;
     }
 
     public ForgeDirection getFacing() {
@@ -62,5 +66,22 @@ public abstract class TileEntityWini extends TileEntity {
         setFacing(message.facing);
         setState(message.state);
         worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
+    }
+
+    /**
+     * Client Updates
+     */
+    protected void sendBlockUpdate(int x, int y, int z) {
+        if (worldObj != null)
+            worldObj.markBlockForUpdate(x, y, z);
+    }
+
+    /**
+     * Notify all the blocks adjacent block in all 6 directions
+     */
+    protected void sendNbrBlockUpdate(int x, int y, int z) {
+        if (worldObj != null) {
+            worldObj.func_147453_f(x, y, z, getBlockType());
+        }
     }
 }
