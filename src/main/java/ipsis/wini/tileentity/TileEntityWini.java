@@ -81,7 +81,8 @@ public abstract class TileEntityWini extends TileEntity {
      */
     protected void sendNbrBlockUpdate(int x, int y, int z) {
         if (worldObj != null) {
-            worldObj.func_147453_f(x, y, z, getBlockType());
+            //worldObj.func_147453_f(x, y, z, getBlockType());
+            worldObj.notifyBlocksOfNeighborChange(x, y, z, getBlockType());
         }
     }
 }

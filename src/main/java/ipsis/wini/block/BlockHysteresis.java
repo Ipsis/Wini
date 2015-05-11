@@ -3,6 +3,7 @@ package ipsis.wini.block;
 import cofh.lib.util.helpers.MathHelper;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import ipsis.oss.util.LogHelper;
 import ipsis.wini.helper.MonitorType;
 import ipsis.wini.reference.Names;
 import ipsis.wini.reference.Textures;
@@ -163,7 +164,7 @@ public class BlockHysteresis extends BlockWini implements ITileEntityProvider {
         boolean canConnect = false;
         TileEntity te = iblockaccess.getTileEntity(x, y, z);
         if (te != null && te instanceof TileEntityHysteresis)
-            canConnect = ((TileEntityHysteresis) te).getRedstoneOutputFace().ordinal() == side;
+            canConnect = ((TileEntityHysteresis) te).isRedstoneOutputFace(ForgeDirection.getOrientation(side));
 
         return canConnect;
     }
@@ -173,7 +174,7 @@ public class BlockHysteresis extends BlockWini implements ITileEntityProvider {
         int power = 0;
         TileEntity te = iblockaccess.getTileEntity(x, y, z);
         if (te != null && te instanceof TileEntityHysteresis)
-            power = (((TileEntityHysteresis) te).isEmittingStrongRedstoneSignal() ? ((TileEntityHysteresis) te).getCurrentRedstoneLevel() : 0);
+                power = (((TileEntityHysteresis) te).isEmittingStrongRedstoneSignal() ? ((TileEntityHysteresis) te).getCurrentRedstoneLevel() : 0);
 
         return power;
     }
@@ -183,7 +184,7 @@ public class BlockHysteresis extends BlockWini implements ITileEntityProvider {
         int power = 0;
         TileEntity te = iblockaccess.getTileEntity(x, y, z);
         if (te != null && te instanceof TileEntityHysteresis)
-            power = (((TileEntityHysteresis) te).isEmittingWeakRedstoneSignal() ? ((TileEntityHysteresis) te).getCurrentRedstoneLevel() : 0);
+                power = (((TileEntityHysteresis) te).isEmittingWeakRedstoneSignal() ? ((TileEntityHysteresis) te).getCurrentRedstoneLevel() : 0);
 
         return power;
     }

@@ -4,8 +4,10 @@ import cofh.lib.util.helpers.BlockHelper;
 import cofh.lib.util.helpers.MathHelper;
 import ipsis.oss.util.LogHelper;
 import ipsis.wini.helper.MonitorType;
+import ipsis.wini.reference.Nbt;
 import ipsis.wini.utils.CompareFunc;
 import ipsis.wini.utils.IRedstoneOutput;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.util.ForgeDirection;
 
@@ -19,8 +21,8 @@ public abstract class TileEntityHysteresis extends TileEntityWini implements IRe
 
     /* Redstone Output */
     IRedstoneOutput.Sense redstoneSense = IRedstoneOutput.Sense.NORMAL;
-    IRedstoneOutput.Strength redstoneStrength = IRedstoneOutput.Strength.STRONG;
-    int redstoneLevel;
+    IRedstoneOutput.Strength redstoneStrength = Strength.WEAK;
+    int redstoneLevel = 15;
     ForgeDirection redstoneOutputFace;
 
     private TileEntityHysteresis() { }
@@ -136,6 +138,11 @@ public abstract class TileEntityHysteresis extends TileEntityWini implements IRe
         };
 
         public abstract SMState processEvent(SMEvent e);
+
+        public static SMState getState(int i) {
+            i = MathHelper.clampI(i, 0, SMState.values().length - 1);
+            return SMState.values()[i];
+        }
     };
 
 
@@ -220,6 +227,10 @@ public abstract class TileEntityHysteresis extends TileEntityWini implements IRe
         return redstoneStrength == Strength.WEAK && isEmittingRedstoneSignal();
     }
 
+    public boolean isRedstoneOutputFace(ForgeDirection d) {
+        return redstoneOutputFace == d;
+    }
+
     public int getCurrentRedstoneLevel() {
         if (isEmittingRedstoneSignal())
             return redstoneLevel;
@@ -289,4 +300,42 @@ public abstract class TileEntityHysteresis extends TileEntityWini implements IRe
         sendNbrBlockUpdate(xCoord, yCoord, zCoord);
     }
 
+    /**
+     * NBT
+     */
+    @Override
+    public void readFromNBT(NBTTagCompound nbtTagCompound) {
+        super.readFromNBT(nbtTagCompound);
+
+        currState = SMState.getState(nbtTagCompound.getByte(Nbt.HYST_SM_STATE));
+        enabled = nbtTagCompound.getBoolean(Nbt.HYST_ENABLED);
+
+        triggerLevel = nbtTagCompound.getInteger(Nbt.HYST_TRIGGER_LEVEL);
+        resetLevel = nbtTagCompound.getInteger(Nbt.HYST_RESET_LEVEL);
+        triggerFunc = CompareFunc.getType(nbtTagCompound.getByte(Nbt.HYST_TRIGGER_FUNC));
+        resetFunc = CompareFunc.getType(nbtTagCompound.getByte(Nbt.HYST_RESET_FUNC));
+
+        redstoneLevel = nbtTagCompound.getByte(Nbt.HYST_REDSTONE_LEVEL);
+        redstoneOutputFace = ForgeDirection.getOrientation(nbtTagCompound.getByte(Nbt.HYST_REDSTONE_FACE));
+        redstoneSense = (nbtTagCompound.getByte(Nbt.HYST_REDSTONE_SENSE) == 1 ? Sense.NORMAL : Sense.INVERTED);
+        redstoneStrength = (nbtTagCompound.getByte(Nbt.HYST_REDSTONE_STRENGTH) == 1 ? Strength.STRONG : Strength.WEAK);
+    }
+
+    @Override
+    public void writeToNBT(NBTTagCompound nbtTagCompound) {
+        super.writeToNBT(nbtTagCompound);
+
+        nbtTagCompound.setByte(Nbt.HYST_SM_STATE, (byte) currState.ordinal());
+        nbtTagCompound.setBoolean(Nbt.HYST_ENABLED, enabled);
+
+        nbtTagCompound.setInteger(Nbt.HYST_TRIGGER_LEVEL, triggerLevel);
+        nbtTagCompound.setInteger(Nbt.HYST_RESET_LEVEL, resetLevel);
+        nbtTagCompound.setByte(Nbt.HYST_TRIGGER_FUNC, (byte) triggerFunc.ordinal());
+        nbtTagCompound.setByte(Nbt.HYST_RESET_FUNC, (byte) resetFunc.ordinal());
+
+        nbtTagCompound.setByte(Nbt.HYST_REDSTONE_LEVEL, (byte) redstoneLevel);
+        nbtTagCompound.setByte(Nbt.HYST_REDSTONE_FACE, (byte)redstoneOutputFace.ordinal());
+        nbtTagCompound.setByte(Nbt.HYST_REDSTONE_SENSE, (byte) (redstoneSense == Sense.NORMAL ? 1 : 0));
+        nbtTagCompound.setByte(Nbt.HYST_REDSTONE_STRENGTH, (byte) (redstoneStrength == Strength.STRONG ? 1 : 0));
+    }
 }
