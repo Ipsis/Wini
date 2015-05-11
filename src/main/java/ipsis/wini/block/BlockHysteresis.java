@@ -4,7 +4,9 @@ import cofh.lib.util.helpers.MathHelper;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import ipsis.oss.util.LogHelper;
+import ipsis.wini.Wini;
 import ipsis.wini.helper.MonitorType;
+import ipsis.wini.reference.Gui;
 import ipsis.wini.reference.Names;
 import ipsis.wini.reference.Textures;
 import ipsis.wini.tileentity.*;
@@ -14,6 +16,7 @@ import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
@@ -187,5 +190,21 @@ public class BlockHysteresis extends BlockWini implements ITileEntityProvider {
                 power = (((TileEntityHysteresis) te).isEmittingWeakRedstoneSignal() ? ((TileEntityHysteresis) te).getCurrentRedstoneLevel() : 0);
 
         return power;
+    }
+
+    @Override
+    public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer entityPlayer, int p_149727_6_, float hitX, float hitY, float hitZ) {
+
+        if (entityPlayer.isSneaking())
+            return false;
+
+        if (world.isRemote)
+            return true;
+
+        TileEntity te = world.getTileEntity(x, y, z);
+        if (te instanceof TileEntityHysteresis)
+            entityPlayer.openGui(Wini.instance, Gui.Ids.HYSTERESIS, world, x, y, z);
+
+        return true;
     }
 }

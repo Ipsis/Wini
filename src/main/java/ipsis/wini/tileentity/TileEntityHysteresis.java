@@ -4,9 +4,14 @@ import cofh.lib.util.helpers.BlockHelper;
 import cofh.lib.util.helpers.MathHelper;
 import ipsis.oss.util.LogHelper;
 import ipsis.wini.helper.MonitorType;
+import ipsis.wini.network.PacketHandler;
+import ipsis.wini.network.message.MessageHysteresisCfg;
 import ipsis.wini.reference.Nbt;
 import ipsis.wini.utils.CompareFunc;
 import ipsis.wini.utils.IRedstoneOutput;
+import mcp.mobius.waila.network.NetworkHandler;
+import net.minecraft.client.entity.EntityClientPlayerMP;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.util.ForgeDirection;
@@ -281,6 +286,9 @@ public abstract class TileEntityHysteresis extends TileEntityWini implements IRe
         if ((worldObj.getWorldTime() % 20) != 0)
             return;
 
+        LogHelper.info("updateEntity: " + getCurrentValue(adjacentTe) + " " + triggerFunc + " " + triggerLevel);
+        LogHelper.info("updateEntity: " + getCurrentValue(adjacentTe) + " " + resetFunc + " " + resetLevel);
+
         if (currState == SMState.RUNNING) {
             if (triggerFunc.check(triggerLevel, getCurrentValue(adjacentTe)))
                 processEvent(SMEvent.TRIGGER_MET);
@@ -337,5 +345,57 @@ public abstract class TileEntityHysteresis extends TileEntityWini implements IRe
         nbtTagCompound.setByte(Nbt.HYST_REDSTONE_FACE, (byte)redstoneOutputFace.ordinal());
         nbtTagCompound.setByte(Nbt.HYST_REDSTONE_SENSE, (byte) (redstoneSense == Sense.NORMAL ? 1 : 0));
         nbtTagCompound.setByte(Nbt.HYST_REDSTONE_STRENGTH, (byte) (redstoneStrength == Strength.STRONG ? 1 : 0));
+    }
+
+    /**
+     * HysteresisCfg
+     */
+
+    public int getTriggerLevel() {
+        return this.triggerLevel;
+    }
+    public void setTriggerLevel(int v) {
+        this.triggerLevel = v;
+    }
+    public int getResetLevel() {
+        return this.resetLevel;
+    }
+    public void setResetLevel(int v) {
+        this.resetLevel = v;
+    }
+    public CompareFunc getTriggerFunc() {
+        return this.triggerFunc;
+    }
+    public void setTriggerFunc(CompareFunc f) {
+        this.triggerFunc = f;
+    }
+    public CompareFunc getResetFunc() {
+        return this.resetFunc;
+    }
+    public void setResetFunc(CompareFunc f) {
+        this.resetFunc = f;
+    }
+    public boolean isEnabled() {
+        return this.enabled;
+    }
+    public void setEnabled(boolean b) {
+        this.enabled = b;
+    }
+
+    public void sendMessageHysteresisCfgServer() {
+        if (worldObj != null && worldObj.isRemote)
+            PacketHandler.INSTANCE.sendToServer(new MessageHysteresisCfg(this));
+    }
+
+    public void handleMessageHysteresisCfg(MessageHysteresisCfg m, EntityPlayerMP player) {
+        triggerLevel = m.trigger;
+        resetLevel = m.reset;
+        triggerFunc = CompareFunc.getType(m.triggerFunc);
+        resetFunc = CompareFunc.getType(m.resetFunc);
+        enabled = m.enabled == 1 ? true : false;
+        processEvent(enabled == true ? SMEvent.ENABLED : SMEvent.DISABLED);
+
+        if (!worldObj.isRemote && player != null)
+            PacketHandler.INSTANCE.sendTo(new MessageHysteresisCfg(this), player);
     }
 }
