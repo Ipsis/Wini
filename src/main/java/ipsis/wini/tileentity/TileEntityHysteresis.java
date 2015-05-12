@@ -6,15 +6,15 @@ import ipsis.oss.util.LogHelper;
 import ipsis.wini.helper.MonitorType;
 import ipsis.wini.network.PacketHandler;
 import ipsis.wini.network.message.MessageHysteresisCfg;
+import ipsis.wini.network.message.MessageRedstoneOutputCfg;
 import ipsis.wini.reference.Nbt;
 import ipsis.wini.utils.CompareFunc;
 import ipsis.wini.utils.IRedstoneOutput;
-import mcp.mobius.waila.network.NetworkHandler;
-import net.minecraft.client.entity.EntityClientPlayerMP;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.util.ForgeDirection;
+import sun.rmi.runtime.Log;
 
 public abstract class TileEntityHysteresis extends TileEntityWini implements IRedstoneOutput {
 
@@ -394,5 +394,19 @@ public abstract class TileEntityHysteresis extends TileEntityWini implements IRe
 
         if (!worldObj.isRemote && player != null)
             PacketHandler.INSTANCE.sendTo(new MessageHysteresisCfg(this), player);
+    }
+
+    public void sendMessageRedstoneOutputCfgServer() {
+        if (worldObj != null && worldObj.isRemote)
+            PacketHandler.INSTANCE.sendToServer(new MessageRedstoneOutputCfg(this, this.xCoord, this.yCoord, this.zCoord));
+    }
+
+    public void handleMessageRedstoneOutputCfg(MessageRedstoneOutputCfg m, EntityPlayerMP player) {
+        redstoneStrength = m.strength == true ? Strength.STRONG : Strength.WEAK;
+        redstoneSense = m.sense == true ? Sense.NORMAL : Sense.INVERTED;
+        redstoneLevel = m.level;
+
+        if (!worldObj.isRemote && player != null)
+            PacketHandler.INSTANCE.sendTo(new MessageRedstoneOutputCfg(this, this.xCoord, this.yCoord, this.zCoord), player);
     }
 }

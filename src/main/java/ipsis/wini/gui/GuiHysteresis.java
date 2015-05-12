@@ -1,8 +1,13 @@
 package ipsis.wini.gui;
 
+import cofh.lib.gui.GuiBase;
 import cofh.lib.gui.element.ElementButton;
 import cofh.lib.gui.element.ElementTextFieldFiltered;
+import cofh.lib.gui.element.TabBase;
+import ipsis.wini.gui.element.TabInfo;
+import ipsis.wini.gui.element.TabRedstoneOutput;
 import ipsis.wini.inventory.ContainerHysteresis;
+import ipsis.wini.reference.Lang;
 import ipsis.wini.reference.Textures;
 import ipsis.wini.tileentity.TileEntityHysteresis;
 import ipsis.wini.utils.CompareFunc;
@@ -63,6 +68,9 @@ public class GuiHysteresis extends GuiBaseWini {
 
         triggerTextField.setText(Integer.toString(te.getTriggerLevel()));
         resetTextField.setText(Integer.toString(te.getResetLevel()));
+
+        addTab(new TabInfo(this, TabBase.LEFT, buildInfoString(Lang.Gui.INFO_HYSTERICAL)));
+        addTab(new TabRedstoneOutput(this, TabBase.RIGHT, te));
     }
 
     @Override
@@ -104,17 +112,21 @@ public class GuiHysteresis extends GuiBaseWini {
         if (s.equals(BTN_RUNNING_STR)) {
             te.setEnabled(!te.isEnabled());
             setRunningBtn(te.isEnabled());
+            GuiBase.playSound("random.click", 1.0F, 0.4F);
         } else if (s.equals(BTN_TRIGGER_FUNC_STR)) {
             te.setTriggerFunc(te.getTriggerFunc().getNext());
             setFuncBtn(this.triggerBtn, te.getTriggerFunc());
+            GuiBase.playSound("random.click", 1.0F, 0.4F);
         } else if (s.equals(BTN_RESET_FUNC_STR)) {
             te.setResetFunc(te.getResetFunc().getNext());
             setFuncBtn(this.resetBtn, te.getResetFunc());
+            GuiBase.playSound("random.click", 1.0F, 0.4F);
         } else if (s.equals(BTN_TRIGGER_SAVE_STR)) {
             int val;
             try {
                 val = Integer.parseInt(this.triggerTextField.getText());
                 te.setTriggerLevel(val);
+                GuiBase.playSound("random.click", 1.0F, 0.4F);
             } catch (NumberFormatException e) {
                 txUpdate = false;
             }
@@ -123,6 +135,7 @@ public class GuiHysteresis extends GuiBaseWini {
             try {
                 val = Integer.parseInt(this.resetTextField.getText());
                 te.setResetLevel(val);
+                GuiBase.playSound("random.click", 1.0F, 0.4F);
             } catch (NumberFormatException e) {
                 txUpdate = false;
             }

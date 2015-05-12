@@ -1,5 +1,7 @@
 package ipsis.wini.utils;
 
+import ipsis.wini.network.message.MessageRedstoneOutputCfg;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraftforge.common.util.ForgeDirection;
 
 public interface IRedstoneOutput {
@@ -38,4 +40,7 @@ public interface IRedstoneOutput {
     int getRedstoneLevel();
     void setRedstoneOutputFace(ForgeDirection f);
     ForgeDirection getRedstoneOutputFace();
+
+    public void sendMessageRedstoneOutputCfgServer();
+    public void handleMessageRedstoneOutputCfg(MessageRedstoneOutputCfg m, EntityPlayerMP player);
 }
