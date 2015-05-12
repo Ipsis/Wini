@@ -286,9 +286,6 @@ public abstract class TileEntityHysteresis extends TileEntityWini implements IRe
         if ((worldObj.getWorldTime() % 20) != 0)
             return;
 
-        LogHelper.info("updateEntity: " + getCurrentValue(adjacentTe) + " " + triggerFunc + " " + triggerLevel);
-        LogHelper.info("updateEntity: " + getCurrentValue(adjacentTe) + " " + resetFunc + " " + resetLevel);
-
         if (currState == SMState.RUNNING) {
             if (triggerFunc.check(triggerLevel, getCurrentValue(adjacentTe)))
                 processEvent(SMEvent.TRIGGER_MET);

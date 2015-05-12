@@ -84,7 +84,7 @@ public class MessageHysteresisCfg implements IMessage, IMessageHandler<MessageHy
 
     @Override
     public String toString() {
-        return String.format("MessageHysteresisCfg - trigger:%d reset:%d triggerFunc:%d resetFunc:%d enabled:%d",
-                this.trigger, this.reset, this.triggerFunc, this.resetFunc, this.enabled);
+        return String.format("MessageHysteresisCfg - trigger:%d reset:%d triggerFunc:%s resetFunc:%s enabled:%d",
+                this.trigger, this.reset, CompareFunc.getType(this.triggerFunc), CompareFunc.getType(this.resetFunc), this.enabled);
     }
 }

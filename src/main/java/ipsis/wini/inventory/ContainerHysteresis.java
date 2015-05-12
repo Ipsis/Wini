@@ -1,7 +1,11 @@
 package ipsis.wini.inventory;
 
+import ipsis.wini.network.PacketHandler;
+import ipsis.wini.network.message.MessageHysteresisCfg;
 import ipsis.wini.tileentity.TileEntityHysteresis;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.inventory.ICrafting;
 
 public class ContainerHysteresis extends ContainerWini {
 
@@ -18,5 +22,9 @@ public class ContainerHysteresis extends ContainerWini {
         return true; /** TODO fix canInteractWith */
     }
 
-
+    @Override
+    public void addCraftingToCrafters(ICrafting iCrafting) {
+        super.addCraftingToCrafters(iCrafting);
+        PacketHandler.INSTANCE.sendTo(new MessageHysteresisCfg(this.te), (EntityPlayerMP)iCrafting);
+    }
 }

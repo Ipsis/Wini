@@ -8,6 +8,7 @@ import ipsis.wini.tileentity.TileEntityHysteresis;
 import ipsis.wini.utils.CompareFunc;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.ResourceLocation;
+import scala.Int;
 
 import java.util.regex.Pattern;
 
@@ -62,6 +63,11 @@ public class GuiHysteresis extends GuiBaseWini {
 
         triggerTextField.setText(Integer.toString(te.getTriggerLevel()));
         resetTextField.setText(Integer.toString(te.getResetLevel()));
+    }
+
+    @Override
+    protected void updateElementInformation() {
+        super.updateElementInformation();
 
         setRunningBtn(te.isEnabled());
         setFuncBtn(this.triggerBtn, te.getTriggerFunc());
@@ -123,6 +129,7 @@ public class GuiHysteresis extends GuiBaseWini {
         }
 
         /* Update the server */
-        this.te.sendMessageHysteresisCfgServer();
+        if (txUpdate)
+            this.te.sendMessageHysteresisCfgServer();
     }
 }
