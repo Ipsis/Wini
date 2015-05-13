@@ -403,6 +403,7 @@ public abstract class TileEntityHysteresis extends TileEntityWini implements IRe
             sendUpdatePacketTo(Side.CLIENT, new MessageHysteresisUpdate(this));
             sendBlockUpdate(this.xCoord, this.yCoord, this.zCoord);
             sendNbrBlockUpdate(this.xCoord, this.yCoord, this.zCoord);
+            markDirty();
         }
     }
 
@@ -447,6 +448,7 @@ public abstract class TileEntityHysteresis extends TileEntityWini implements IRe
             sendUpdatePacketTo(Side.CLIENT, new MessageHysteresisUpdate(this));
             sendBlockUpdate(this.xCoord, this.yCoord, this.zCoord);
             sendNbrBlockUpdate(this.xCoord, this.yCoord, this.zCoord);
+            markDirty();
         }
     }
 }
