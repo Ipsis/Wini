@@ -1,6 +1,10 @@
 package ipsis.wini.tileentity;
 
+import cpw.mods.fml.common.network.NetworkRegistry;
+import cpw.mods.fml.common.network.simpleimpl.IMessage;
+import cpw.mods.fml.relauncher.Side;
 import ipsis.wini.network.PacketHandler;
+import ipsis.wini.network.message.MessageHysteresisCfg;
 import ipsis.wini.network.message.MessageTileEntityWini;
 import ipsis.wini.reference.Nbt;
 import net.minecraft.block.Block;
@@ -85,4 +89,18 @@ public abstract class TileEntityWini extends TileEntity {
             worldObj.notifyBlocksOfNeighborChange(x, y, z, getBlockType());
         }
     }
+
+    protected void sendUpdatePacketTo(Side side, IMessage m) {
+        if (side == Side.CLIENT && !worldObj.isRemote) {
+            worldObj.markBlockForUpdate(this.xCoord, this.yCoord, this.zCoord);
+            PacketHandler.INSTANCE.sendToAllAround(m,
+                    new NetworkRegistry.TargetPoint(
+                            worldObj.provider.dimensionId,
+                            this.xCoord, this.yCoord, this.zCoord, 196));
+        } else if (side == Side.SERVER && worldObj.isRemote) {
+            PacketHandler.INSTANCE.sendToServer(m);
+        }
+    }
+
+
 }

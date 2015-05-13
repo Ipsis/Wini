@@ -2,10 +2,12 @@ package ipsis.wini.tileentity;
 
 import cofh.lib.util.helpers.BlockHelper;
 import cofh.lib.util.helpers.MathHelper;
+import cpw.mods.fml.relauncher.Side;
 import ipsis.oss.util.LogHelper;
 import ipsis.wini.helper.MonitorType;
 import ipsis.wini.network.PacketHandler;
 import ipsis.wini.network.message.MessageHysteresisCfg;
+import ipsis.wini.network.message.MessageHysteresisUpdate;
 import ipsis.wini.network.message.MessageRedstoneOutputCfg;
 import ipsis.wini.reference.Nbt;
 import ipsis.wini.utils.CompareFunc;
@@ -55,12 +57,14 @@ public abstract class TileEntityHysteresis extends TileEntityWini implements IRe
      */
     public void setRedstoneStrength(Strength s) {
         redstoneStrength = s;
+        dirtyRedstoneCfg();
     }
     public Strength getRedstoneStrength() {
         return redstoneStrength;
     }
     public void setRedstoneSense(Sense s) {
         redstoneSense = s;
+        dirtyRedstoneCfg();
     }
     public Sense getRedstoneSense() {
         return redstoneSense;
@@ -69,20 +73,24 @@ public abstract class TileEntityHysteresis extends TileEntityWini implements IRe
         redstoneLevel++;
         if (redstoneLevel > 15)
             redstoneLevel = 15;
+        dirtyRedstoneCfg();
     }
     public void decRedstoneLevel() {
         redstoneLevel--;
         if (redstoneLevel < 0)
             redstoneLevel = 0;
+        dirtyRedstoneCfg();
     }
     public int getRedstoneLevel() {
         return redstoneLevel;
     }
     public void setRedstoneLevel(int v) {
         redstoneLevel = MathHelper.clampI(v, 0, 15);
+        dirtyRedstoneCfg();
     }
     public void setRedstoneOutputFace(ForgeDirection f) {
         redstoneOutputFace = f;
+        dirtyRedstoneCfg();
     }
     public ForgeDirection getRedstoneOutputFace() {
         return redstoneOutputFace;
@@ -353,35 +361,49 @@ public abstract class TileEntityHysteresis extends TileEntityWini implements IRe
     }
     public void setTriggerLevel(int v) {
         this.triggerLevel = v;
+        dirtyHysteresisCfg();
     }
     public int getResetLevel() {
         return this.resetLevel;
     }
     public void setResetLevel(int v) {
         this.resetLevel = v;
+        dirtyHysteresisCfg();
     }
     public CompareFunc getTriggerFunc() {
         return this.triggerFunc;
     }
     public void setTriggerFunc(CompareFunc f) {
         this.triggerFunc = f;
+        dirtyHysteresisCfg();
     }
     public CompareFunc getResetFunc() {
         return this.resetFunc;
     }
     public void setResetFunc(CompareFunc f) {
         this.resetFunc = f;
+        dirtyHysteresisCfg();
     }
     public boolean isEnabled() {
         return this.enabled;
     }
     public void setEnabled(boolean b) {
         this.enabled = b;
+        dirtyHysteresisCfg();
     }
 
-    public void sendMessageHysteresisCfgServer() {
-        if (worldObj != null && worldObj.isRemote)
-            PacketHandler.INSTANCE.sendToServer(new MessageHysteresisCfg(this));
+    void dirtyHysteresisCfg() {
+        if (worldObj == null)
+            return;
+
+        if (worldObj.isRemote) {
+            /* Client has updated via the gui */
+            sendUpdatePacketTo(Side.SERVER, new MessageHysteresisCfg(this));
+        } else {
+            sendUpdatePacketTo(Side.CLIENT, new MessageHysteresisUpdate(this));
+            sendBlockUpdate(this.xCoord, this.yCoord, this.zCoord);
+            sendNbrBlockUpdate(this.xCoord, this.yCoord, this.zCoord);
+        }
     }
 
     public void handleMessageHysteresisCfg(MessageHysteresisCfg m, EntityPlayerMP player) {
@@ -389,24 +411,42 @@ public abstract class TileEntityHysteresis extends TileEntityWini implements IRe
         resetLevel = m.reset;
         triggerFunc = CompareFunc.getType(m.triggerFunc);
         resetFunc = CompareFunc.getType(m.resetFunc);
-        enabled = m.enabled == 1 ? true : false;
-        processEvent(enabled == true ? SMEvent.ENABLED : SMEvent.DISABLED);
-
-        if (!worldObj.isRemote && player != null)
-            PacketHandler.INSTANCE.sendTo(new MessageHysteresisCfg(this), player);
-    }
-
-    public void sendMessageRedstoneOutputCfgServer() {
-        if (worldObj != null && worldObj.isRemote)
-            PacketHandler.INSTANCE.sendToServer(new MessageRedstoneOutputCfg(this, this.xCoord, this.yCoord, this.zCoord));
+        enabled = m.enabled == 1;
+        processEvent(isEnabled() ? SMEvent.ENABLED : SMEvent.DISABLED);
+        dirtyHysteresisCfg();
     }
 
     public void handleMessageRedstoneOutputCfg(MessageRedstoneOutputCfg m, EntityPlayerMP player) {
         redstoneStrength = m.strength == true ? Strength.STRONG : Strength.WEAK;
         redstoneSense = m.sense == true ? Sense.NORMAL : Sense.INVERTED;
         redstoneLevel = m.level;
+        dirtyRedstoneCfg();
+    }
 
-        if (!worldObj.isRemote && player != null)
-            PacketHandler.INSTANCE.sendTo(new MessageRedstoneOutputCfg(this, this.xCoord, this.yCoord, this.zCoord), player);
+    /* Client only */
+    public void handleMessageHysteresisUpdate(MessageHysteresisUpdate m) {
+        triggerLevel = m.trigger;
+        resetLevel = m.reset;
+        triggerFunc = CompareFunc.getType(m.triggerFunc);
+        resetFunc = CompareFunc.getType(m.resetFunc);
+        enabled = m.enabled == 1;
+        redstoneStrength = m.strength == true ? Strength.STRONG : Strength.WEAK;
+        redstoneSense = m.sense == true ? Sense.NORMAL : Sense.INVERTED;
+        redstoneLevel = m.level;
+    }
+
+    void dirtyRedstoneCfg() {
+        if (worldObj == null)
+            return;
+
+        if (worldObj.isRemote) {
+            /* Client has updated via the gui */
+            sendUpdatePacketTo(Side.SERVER,
+                    new MessageRedstoneOutputCfg(this.redstoneStrength, this.redstoneSense, this.redstoneLevel, this.xCoord, this.yCoord, this.zCoord));
+        } else {
+            sendUpdatePacketTo(Side.CLIENT, new MessageHysteresisUpdate(this));
+            sendBlockUpdate(this.xCoord, this.yCoord, this.zCoord);
+            sendNbrBlockUpdate(this.xCoord, this.yCoord, this.zCoord);
+        }
     }
 }

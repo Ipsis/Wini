@@ -97,44 +97,33 @@ public class TabRedstoneOutput extends TabBase {
         mouseX -= currentShiftX;
         mouseY -= currentShiftY;
 
-        boolean txUpdate = false;
         if (mouseX >= 38 && mouseX <= 54 && mouseY >= 20 && mouseY <= 36) {
             if (myContainer.getRedstoneStrength() == IRedstoneOutput.Strength.WEAK) {
                 myContainer.setRedstoneStrength(IRedstoneOutput.Strength.STRONG);
                 GuiBase.playSound("random.click", 1.0F, 0.4F);
-                txUpdate = true;
             }
         } else if (mouseX >= 58 && mouseX <= 74 && mouseY >= 20 && mouseY <= 36) {
             if (myContainer.getRedstoneStrength() == IRedstoneOutput.Strength.STRONG) {
                 myContainer.setRedstoneStrength(IRedstoneOutput.Strength.WEAK);
                 GuiBase.playSound("random.click", 1.0F, 0.4F);
-                txUpdate = true;
             }
         } else if (mouseX >= 38 && mouseX <= 54 && mouseY >= 56 && mouseY <= 72) {
             if (myContainer.getRedstoneSense() == IRedstoneOutput.Sense.INVERTED) {
                 myContainer.setRedstoneSense(IRedstoneOutput.Sense.NORMAL);
                 GuiBase.playSound("random.click", 1.0F, 0.4F);
-                txUpdate = true;
             }
         } else if (mouseX >= 58 && mouseX <= 74 && mouseY >= 56 && mouseY <= 72) {
             if (myContainer.getRedstoneSense() == IRedstoneOutput.Sense.NORMAL) {
                 myContainer.setRedstoneSense(IRedstoneOutput.Sense.INVERTED);
                 GuiBase.playSound("random.click", 1.0F, 0.4F);
-                txUpdate = true;
             }
         } else if (mouseX >= 28 && mouseX <= 44 && mouseY >= 90 && mouseY <= 106) {
             myContainer.decRedstoneLevel();
             GuiBase.playSound("random.click", 1.0F, 0.4F);
-            txUpdate = true;
         } else if (mouseX >= 68 && mouseX <= 84 && mouseY >= 90 && mouseY <= 106) {
             myContainer.incRedstoneLevel();
             GuiBase.playSound("random.click", 1.0F, 0.4F);
-            txUpdate = true;
         }
-
-        /* Update the server */
-        if (txUpdate)
-            myContainer.sendMessageRedstoneOutputCfgServer();
 
         return true;
     }

@@ -41,6 +41,5 @@ public interface IRedstoneOutput {
     void setRedstoneOutputFace(ForgeDirection f);
     ForgeDirection getRedstoneOutputFace();
 
-    public void sendMessageRedstoneOutputCfgServer();
     public void handleMessageRedstoneOutputCfg(MessageRedstoneOutputCfg m, EntityPlayerMP player);
 }

@@ -108,7 +108,6 @@ public class GuiHysteresis extends GuiBaseWini {
     @Override
     public void handleElementButtonClick(String s, int i) {
 
-        boolean txUpdate = true;
         if (s.equals(BTN_RUNNING_STR)) {
             te.setEnabled(!te.isEnabled());
             setRunningBtn(te.isEnabled());
@@ -128,7 +127,6 @@ public class GuiHysteresis extends GuiBaseWini {
                 te.setTriggerLevel(val);
                 GuiBase.playSound("random.click", 1.0F, 0.4F);
             } catch (NumberFormatException e) {
-                txUpdate = false;
             }
         } else if (s.equals(BTN_RESET_SAVE_STR)) {
             int val;
@@ -137,12 +135,7 @@ public class GuiHysteresis extends GuiBaseWini {
                 te.setResetLevel(val);
                 GuiBase.playSound("random.click", 1.0F, 0.4F);
             } catch (NumberFormatException e) {
-                txUpdate = false;
             }
         }
-
-        /* Update the server */
-        if (txUpdate)
-            this.te.sendMessageHysteresisCfgServer();
     }
 }

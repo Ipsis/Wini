@@ -18,13 +18,13 @@ public class MessageRedstoneOutputCfg implements IMessage, IMessageHandler<Messa
 
     public MessageRedstoneOutputCfg() { }
 
-    public MessageRedstoneOutputCfg(IRedstoneOutput te, int x, int y, int z) {
+    public MessageRedstoneOutputCfg(IRedstoneOutput.Strength strength, IRedstoneOutput.Sense sense, int level, int x, int y, int z) {
         this.x = x;
         this.y = y;
         this.z = z;
-        this.strength = te.getRedstoneStrength() == IRedstoneOutput.Strength.STRONG ? true : false;
-        this.sense = te.getRedstoneSense() == IRedstoneOutput.Sense.NORMAL ? true : false;
-        this.level = (byte)te.getRedstoneLevel();
+        this.strength = strength == IRedstoneOutput.Strength.STRONG ? true : false;
+        this.sense = sense == IRedstoneOutput.Sense.NORMAL ? true : false;
+        this.level = (byte)level;
     }
 
     @Override
