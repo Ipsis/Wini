@@ -2,7 +2,9 @@ package ipsis.wini.gui.element;
 
 import cofh.lib.gui.GuiBase;
 import cofh.lib.gui.element.TabBase;
+import cofh.lib.util.helpers.StringHelper;
 import ipsis.oss.util.LogHelper;
+import ipsis.wini.reference.Lang;
 import ipsis.wini.reference.Textures;
 import ipsis.wini.utils.IRedstoneOutput;
 import org.lwjgl.opengl.GL11;
@@ -33,12 +35,14 @@ public class TabRedstoneOutput extends TabBase {
         myContainer = container;
     }
 
-
     @Override
-    protected void drawForeground() {
-        super.drawForeground();
-        if (!isFullyOpened())
+    public void draw() {
+
+        drawBackground();
+        drawTabIcon("Icon_Redstone");
+        if (!isFullyOpened()) {
             return;
+        }
 
         getFontRenderer().drawStringWithShadow("Redstone Strength", posXOffset() + 6, posY + 6, headerColor);
         getFontRenderer().drawStringWithShadow("Redstone Sense", posXOffset() + 6, posY + 42, headerColor);
@@ -70,10 +74,12 @@ public class TabRedstoneOutput extends TabBase {
 
     @Override
     protected void drawBackground() {
+
         super.drawBackground();
 
-        if (!isFullyOpened())
+        if (!isFullyOpened()) {
             return;
+        }
 
         float colorR = (backgroundColor >> 16 & 255) / 255.0F * 0.6F;
         float colorG = (backgroundColor >> 8 & 255) / 255.0F * 0.6F;
@@ -96,6 +102,9 @@ public class TabRedstoneOutput extends TabBase {
         }
         mouseX -= currentShiftX;
         mouseY -= currentShiftY;
+
+        if (mouseX < 38 || mouseX > 84 || mouseY < 20 || mouseY > 106)
+            return false;
 
         if (mouseX >= 38 && mouseX <= 54 && mouseY >= 20 && mouseY <= 36) {
             if (myContainer.getRedstoneStrength() == IRedstoneOutput.Strength.WEAK) {

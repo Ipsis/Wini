@@ -72,9 +72,6 @@ public abstract class TileEntityWini extends TileEntity {
         worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
     }
 
-    /**
-     * Client Updates
-     */
     protected void sendBlockUpdate(int x, int y, int z) {
         if (worldObj != null)
             worldObj.markBlockForUpdate(x, y, z);
@@ -101,6 +98,4 @@ public abstract class TileEntityWini extends TileEntity {
             PacketHandler.INSTANCE.sendToServer(m);
         }
     }
-
-
 }

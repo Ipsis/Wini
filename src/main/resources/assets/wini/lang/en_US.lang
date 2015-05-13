@@ -27,3 +27,4 @@ itemGroup.wini:Wini=What I Need Is
 gui.wini:tab.info=Information
 gui.wini:tab.energy=Energy
 gui.wini:tab.tanks=Tanks
+gui.wini:tab.redstone=Redstone
