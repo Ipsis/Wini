@@ -49,14 +49,14 @@ public class GuiHysteresis extends GuiBaseWini {
     public void initGui() {
         super.initGui();
 
-        triggerBtn = new ElementButton(this, 10, 40, BTN_TRIGGER_FUNC_STR, 0, 166, 0, 186, 0, 206, 20, 20, TEXTURE_STR);
-        resetBtn = new ElementButton(this, 10, 90, BTN_RESET_FUNC_STR, 0, 166, 0, 186, 0, 206, 20, 20, TEXTURE_STR);
-        triggerSaveBtn = new ElementButton(this, 140, 40, BTN_TRIGGER_SAVE_STR, 176, 60, 196, 60, 20, 20, TEXTURE_STR);
-        resetSaveBtn = new ElementButton(this, 140, 90, BTN_RESET_SAVE_STR, 176, 60, 196, 60, 176, 40, 20, 20, TEXTURE_STR);
+        triggerBtn = new ElementButton(this, 60, 22, BTN_TRIGGER_FUNC_STR, 0, 166, 0, 186, 0, 206, 20, 20, TEXTURE_STR);
+        resetBtn = new ElementButton(this, 60, 72, BTN_RESET_FUNC_STR, 0, 166, 0, 186, 0, 206, 20, 20, TEXTURE_STR);
+        triggerSaveBtn = new ElementButton(this, 140, 44, BTN_TRIGGER_SAVE_STR, 176, 60, 196, 60, 20, 20, TEXTURE_STR);
+        resetSaveBtn = new ElementButton(this, 140, 94, BTN_RESET_SAVE_STR, 176, 60, 196, 60, 176, 40, 20, 20, TEXTURE_STR);
         runningBtn = new ElementButton(this, 152, 142, BTN_RUNNING_STR, 176, 0, 176, 20, 176, 40, 20, 20, TEXTURE_STR);
 
-        triggerTextField = new ElementTextFieldFiltered(this, 40, 44, 60, 12).setFilter(Pattern.compile("[0-9]"), false);
-        resetTextField = new ElementTextFieldFiltered(this, 40, 94, 60, 12).setFilter(Pattern.compile("[0-9]"), false);
+        triggerTextField = new ElementTextFieldFiltered(this, 90, 48, 40, 12).setFilter(Pattern.compile("[0-9]"), false);
+        resetTextField = new ElementTextFieldFiltered(this, 90, 98, 40, 12).setFilter(Pattern.compile("[0-9]"), false);
 
         addElement(triggerBtn);
         addElement(resetBtn);
@@ -65,9 +65,6 @@ public class GuiHysteresis extends GuiBaseWini {
         addElement(runningBtn);
         addElement(triggerTextField);
         addElement(resetTextField);
-
-        triggerTextField.setText(Integer.toString(te.getTriggerLevel()));
-        resetTextField.setText(Integer.toString(te.getResetLevel()));
 
         addTab(new TabInfo(this, TabBase.LEFT, buildInfoString(Lang.Gui.INFO_HYSTERICAL)));
         addTab(new TabRedstoneOutput(this, TabBase.RIGHT, te));
@@ -88,8 +85,8 @@ public class GuiHysteresis extends GuiBaseWini {
 
         fontRendererObj.drawString("Trigger" + " :", 10, 28, 4210752);
         fontRendererObj.drawString("Reset" + " :", 10, 78, 4210752);
-        fontRendererObj.drawString("Items", 108, 46, 4210752);
-        fontRendererObj.drawString("Items", 108, 96, 4210752);
+        fontRendererObj.drawString(String.format("%d items", te.getTriggerLevel()), 90, 28, 4210752);
+        fontRendererObj.drawString(String.format("%d items", te.getResetLevel()), 90, 78, 4210752);
     }
 
     void setRunningBtn(boolean b) {
