@@ -14,7 +14,7 @@ public class ClientProxy extends CommonProxy {
             IconRegistry.addIcon("Icon_Energy", event.map.registerIcon("wini:icons/Icon_Energy"));
             IconRegistry.addIcon("Icon_Info", event.map.registerIcon("wini:icons/Icon_Info"));
             IconRegistry.addIcon("Icon_Tank", event.map.registerIcon("wini:icons/Icon_Tank"));
-            IconRegistry.addIcon("Icon_Redstone", event.map.registerIcon("wini:icons/Icon_Tank"));
+            IconRegistry.addIcon("Icon_Redstone", event.map.registerIcon("wini:icons/Icon_Redstone"));
 
             IconRegistry.addIcon("Icon_Up_Active", event.map.registerIcon("wini:icons/Icon_Up_Active"));
             IconRegistry.addIcon("Icon_Up_Inactive", event.map.registerIcon("wini:icons/Icon_Up_Inactive"));
