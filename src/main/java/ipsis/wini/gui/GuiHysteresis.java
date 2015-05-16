@@ -4,12 +4,15 @@ import cofh.lib.gui.GuiBase;
 import cofh.lib.gui.element.ElementButton;
 import cofh.lib.gui.element.ElementTextFieldFiltered;
 import cofh.lib.gui.element.TabBase;
+import cofh.lib.util.helpers.StringHelper;
 import ipsis.wini.gui.element.TabInfo;
 import ipsis.wini.gui.element.TabRedstoneOutput;
 import ipsis.wini.inventory.ContainerHysteresis;
 import ipsis.wini.reference.Lang;
 import ipsis.wini.reference.Textures;
 import ipsis.wini.tileentity.TileEntityHysteresis;
+import ipsis.wini.tileentity.TileEntityHysteresisFluid;
+import ipsis.wini.tileentity.TileEntityHysteresisInventory;
 import ipsis.wini.utils.CompareFunc;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.ResourceLocation;
@@ -28,6 +31,7 @@ public class GuiHysteresis extends GuiBaseWini {
     private ElementButton triggerSaveBtn, resetSaveBtn;
     private ElementButton runningBtn;
     private ElementTextFieldFiltered triggerTextField, resetTextField;
+    private String units;
 
     static final String BTN_TRIGGER_FUNC_STR = "TriggerFunc";
     static final String BTN_RESET_FUNC_STR = "ResetFunc";
@@ -39,10 +43,30 @@ public class GuiHysteresis extends GuiBaseWini {
 
         super(new ContainerHysteresis(entityPlayer, te), TEXTURE);
         this.te = te;
-        this.name = "Some TEst";
+        this.name = getTitle(te);
+        this.units = getUnits(te);
+
         xSize = 176;
         ySize = 166;
         drawInventory = false;
+    }
+
+    String getTitle(TileEntityHysteresis te) {
+        if (te instanceof TileEntityHysteresisInventory)
+            return StringHelper.localize(Lang.Gui.TITLE_HYSTERICAL_INV);
+        else if (te instanceof TileEntityHysteresisFluid)
+            return StringHelper.localize(Lang.Gui.TITLE_HYSTERICAL_FLUID);
+
+        return StringHelper.localize(Lang.Gui.TITLE_HYSTERICAL_RF);
+    }
+
+    String getUnits(TileEntityHysteresis te) {
+        if (te instanceof TileEntityHysteresisInventory)
+            return StringHelper.localize(Lang.Gui.TITLE_HYSTERICAL_INV + "_units");
+        else if (te instanceof TileEntityHysteresisFluid)
+            return StringHelper.localize(Lang.Gui.TITLE_HYSTERICAL_FLUID + "_units");
+
+        return StringHelper.localize(Lang.Gui.TITLE_HYSTERICAL_RF + "_units");
     }
 
     @Override
@@ -85,8 +109,8 @@ public class GuiHysteresis extends GuiBaseWini {
 
         fontRendererObj.drawString("Trigger" + " :", 10, 28, 4210752);
         fontRendererObj.drawString("Reset" + " :", 10, 78, 4210752);
-        fontRendererObj.drawString(String.format("%d items", te.getTriggerLevel()), 90, 28, 4210752);
-        fontRendererObj.drawString(String.format("%d items", te.getResetLevel()), 90, 78, 4210752);
+        fontRendererObj.drawString(String.format("%d %s", te.getTriggerLevel(), units), 90, 28, 4210752);
+        fontRendererObj.drawString(String.format("%d %s", te.getResetLevel(), units), 90, 78, 4210752);
     }
 
     void setRunningBtn(boolean b) {

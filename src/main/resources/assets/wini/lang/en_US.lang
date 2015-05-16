@@ -27,4 +27,11 @@ itemGroup.wini:Wini=What I Need Is
 gui.wini:tab.info=Information
 gui.wini:tab.energy=Energy
 gui.wini:tab.tanks=Tanks
-gui.wini:tab.redstone=Redstone
+gui.wini:tab.redstone=Redstone7
+
+gui.wini:inv=Hysteresis Inventory
+gui.wini:inv_units=Items
+gui.wini:rf=Hysteresis RF
+gui.wini:rf_units=RF
+gui.wini:fluid=Hysteresis Fluid
+gui.wini:fluid_units=mB
