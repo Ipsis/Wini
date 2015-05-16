@@ -287,6 +287,7 @@ public abstract class TileEntityHysteresis extends TileEntityWini implements IRe
         if (worldObj.isRemote)
             return;
 
+        /* TODO use block changed rather than constantly check */
         TileEntity adjacentTe = BlockHelper.getAdjacentTileEntity(this, getFacing());
         processEvent(isAdjacentBlockValid(adjacentTe) ? SMEvent.VALID_ADJ_TE : SMEvent.INVALID_ADJ_TE);
 
