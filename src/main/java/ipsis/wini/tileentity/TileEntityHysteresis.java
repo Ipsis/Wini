@@ -287,14 +287,11 @@ public abstract class TileEntityHysteresis extends TileEntityWini implements IRe
         if (worldObj.isRemote)
             return;
 
-        /* TODO use block changed rather than constantly check */
-        TileEntity adjacentTe = BlockHelper.getAdjacentTileEntity(this, getFacing());
-        processEvent(isAdjacentBlockValid(adjacentTe) ? SMEvent.VALID_ADJ_TE : SMEvent.INVALID_ADJ_TE);
-
         /* Check the levels every 1s */
         if ((worldObj.getWorldTime() % 20) != 0)
             return;
 
+        TileEntity adjacentTe = BlockHelper.getAdjacentTileEntity(this, getFacing());
         if (currState == SMState.RUNNING) {
             if (triggerFunc.check(triggerLevel, getCurrentValue(adjacentTe)))
                 processEvent(SMEvent.TRIGGER_MET);
@@ -302,6 +299,14 @@ public abstract class TileEntityHysteresis extends TileEntityWini implements IRe
             if (resetFunc.check(resetLevel, getCurrentValue(adjacentTe)))
                 processEvent(SMEvent.RESET_MET);
         }
+    }
+
+    public void onAdjacentUpdate() {
+        if (worldObj.isRemote)
+            return;
+        
+        TileEntity adjacentTe = BlockHelper.getAdjacentTileEntity(this, getFacing());
+        processEvent(isAdjacentBlockValid(adjacentTe) ? SMEvent.VALID_ADJ_TE : SMEvent.INVALID_ADJ_TE);
     }
 
     /**

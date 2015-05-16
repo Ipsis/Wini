@@ -10,6 +10,7 @@ import ipsis.wini.reference.Gui;
 import ipsis.wini.reference.Names;
 import ipsis.wini.reference.Textures;
 import ipsis.wini.tileentity.*;
+import net.minecraft.block.Block;
 import net.minecraft.block.BlockPistonBase;
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.material.Material;
@@ -126,6 +127,24 @@ public class BlockHysteresis extends BlockWini implements ITileEntityProvider {
                 world.markBlockForUpdate(x, y, z);
             }
         }
+    }
+
+    @Override
+    public void onNeighborChange(IBlockAccess world, int x, int y, int z, int tileX, int tileY, int tileZ) {
+        super.onNeighborChange(world, x, y, z, tileX, tileY, tileZ);
+
+        TileEntity te = world.getTileEntity(x, y, z);
+        if (te instanceof TileEntityHysteresis)
+            ((TileEntityHysteresis) te).onAdjacentUpdate();
+    }
+
+    @Override
+    public void onNeighborBlockChange(World world, int x, int y, int z, Block block) {
+        super.onNeighborBlockChange(world, x, y, z, block);
+
+        TileEntity te = world.getTileEntity(x, y, z);
+        if (te instanceof TileEntityHysteresis)
+            ((TileEntityHysteresis) te).onAdjacentUpdate();
     }
 
     /**
