@@ -41,6 +41,7 @@ public class BlockHysteresis extends BlockWini implements ITileEntityProvider {
     private IIcon unconnectedIcon;
     private IIcon activeIcon;
     private IIcon inactiveIcon;
+    private IIcon blankIcon;
     private IIcon[] icons;
 
 
@@ -61,6 +62,7 @@ public class BlockHysteresis extends BlockWini implements ITileEntityProvider {
         unconnectedIcon = iconRegister.registerIcon(Textures.RESOURCE_PREFIX + Names.Blocks.BLOCK_HYSTERESIS + "_unconnected");
         activeIcon = iconRegister.registerIcon(Textures.RESOURCE_PREFIX + Names.Blocks.BLOCK_HYSTERESIS + "_active");
         inactiveIcon = iconRegister.registerIcon(Textures.RESOURCE_PREFIX + Names.Blocks.BLOCK_HYSTERESIS + "_inactive");
+        blankIcon = iconRegister.registerIcon(Textures.RESOURCE_PREFIX + Names.Blocks.BLOCK_HYSTERESIS + "_blank");
     }
 
     @Override
@@ -73,6 +75,9 @@ public class BlockHysteresis extends BlockWini implements ITileEntityProvider {
     @Override
     @SideOnly(Side.CLIENT)
     public IIcon getIcon(IBlockAccess iblockaccess, int x, int y, int z, int side) {
+
+        if (side == ForgeDirection.UP.ordinal() || side == ForgeDirection.DOWN.ordinal())
+            return blankIcon;
 
         int meta = iblockaccess.getBlockMetadata(x, y, z);
         TileEntity te = iblockaccess.getTileEntity(x, y, z);
