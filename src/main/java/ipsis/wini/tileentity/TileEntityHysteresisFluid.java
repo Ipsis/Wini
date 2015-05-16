@@ -19,6 +19,8 @@ public class TileEntityHysteresisFluid extends TileEntityHysteresis {
             IFluidHandler fluidHandler = (IFluidHandler)te;
             FluidTankInfo tankInfo[] = fluidHandler.getTankInfo(getFacing());
 
+            for (FluidTankInfo info : tankInfo)
+                value += info.fluid != null ? info.fluid.amount : 0;
         }
         return value;
     }
