@@ -3,15 +3,14 @@ package ipsis.wini.block;
 import cofh.lib.util.helpers.MathHelper;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import ipsis.oss.util.LogHelper;
 import ipsis.wini.Wini;
 import ipsis.wini.helper.MonitorType;
 import ipsis.wini.reference.Gui;
 import ipsis.wini.reference.Names;
 import ipsis.wini.reference.Textures;
 import ipsis.wini.tileentity.*;
+import ipsis.wini.utils.BlockHelper;
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockPistonBase;
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
@@ -118,12 +117,11 @@ public class BlockHysteresis extends BlockWini implements ITileEntityProvider {
     public void onBlockPlacedBy(World world, int x, int y, int z, EntityLivingBase entityLiving, ItemStack itemStack) {
         if (!world.isRemote) {
             if (world.getTileEntity(x, y, z) instanceof TileEntityWini) {
-
-                /* 6 way placement of block */
-                int d = BlockPistonBase.determineOrientation(world, x, y, z, entityLiving);
+                int d = BlockHelper.determineXYZPlaceFacing(world, x, y, z, entityLiving);
                 TileEntityHysteresis te = (TileEntityHysteresis) world.getTileEntity(x, y, z);
                 te.setFacing(ForgeDirection.getOrientation(d));
                 te.setRedstoneOutputFace(ForgeDirection.getOrientation(d).getOpposite());
+                te.onAdjacentUpdate();
                 world.markBlockForUpdate(x, y, z);
             }
         }
@@ -180,6 +178,9 @@ public class BlockHysteresis extends BlockWini implements ITileEntityProvider {
 
     /**
      * Redstone
+     *
+     * isProvidingStrong/WeakPower provide the reversed side
+     * eg. it will ask for the north face when it means south
      */
     @Override
     public boolean canProvidePower() {
@@ -187,21 +188,11 @@ public class BlockHysteresis extends BlockWini implements ITileEntityProvider {
     }
 
     @Override
-    public boolean canConnectRedstone(IBlockAccess iblockaccess, int x, int y, int z, int side) {
-        boolean canConnect = false;
-        TileEntity te = iblockaccess.getTileEntity(x, y, z);
-        if (te != null && te instanceof TileEntityHysteresis)
-            canConnect = ((TileEntityHysteresis) te).isRedstoneOutputFace(ForgeDirection.getOrientation(side));
-
-        return canConnect;
-    }
-
-    @Override
     public int isProvidingStrongPower(IBlockAccess iblockaccess, int x, int y, int z, int side) {
         int power = 0;
         TileEntity te = iblockaccess.getTileEntity(x, y, z);
         if (te != null && te instanceof TileEntityHysteresis)
-                power = (((TileEntityHysteresis) te).isEmittingStrongRedstoneSignal() ? ((TileEntityHysteresis) te).getCurrentRedstoneLevel() : 0);
+                power = (((TileEntityHysteresis) te).isEmittingStrongRedstoneSignal(ForgeDirection.getOrientation(side).getOpposite()) ? ((TileEntityHysteresis) te).getCurrentRedstoneLevel() : 0);
 
         return power;
     }
@@ -211,7 +202,7 @@ public class BlockHysteresis extends BlockWini implements ITileEntityProvider {
         int power = 0;
         TileEntity te = iblockaccess.getTileEntity(x, y, z);
         if (te != null && te instanceof TileEntityHysteresis)
-                power = (((TileEntityHysteresis) te).isEmittingWeakRedstoneSignal() ? ((TileEntityHysteresis) te).getCurrentRedstoneLevel() : 0);
+                power = (((TileEntityHysteresis) te).isEmittingWeakRedstoneSignal(ForgeDirection.getOrientation(side).getOpposite()) ? ((TileEntityHysteresis) te).getCurrentRedstoneLevel() : 0);
 
         return power;
     }

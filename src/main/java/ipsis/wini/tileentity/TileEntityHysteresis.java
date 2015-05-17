@@ -232,8 +232,16 @@ public abstract class TileEntityHysteresis extends TileEntityWini implements IRe
         return false;
     }
 
+    public boolean isEmittingStrongRedstoneSignal(ForgeDirection side) {
+        return isRedstoneOutputFace(side) && isEmittingStrongRedstoneSignal();
+    }
+
     public boolean isEmittingStrongRedstoneSignal() {
         return redstoneStrength == Strength.STRONG && isEmittingRedstoneSignal();
+    }
+
+    public boolean isEmittingWeakRedstoneSignal(ForgeDirection side) {
+        return isRedstoneOutputFace(side) && isEmittingWeakRedstoneSignal();
     }
 
     public boolean isEmittingWeakRedstoneSignal() {
@@ -304,7 +312,7 @@ public abstract class TileEntityHysteresis extends TileEntityWini implements IRe
     public void onAdjacentUpdate() {
         if (worldObj.isRemote)
             return;
-        
+
         TileEntity adjacentTe = BlockHelper.getAdjacentTileEntity(this, getFacing());
         processEvent(isAdjacentBlockValid(adjacentTe) ? SMEvent.VALID_ADJ_TE : SMEvent.INVALID_ADJ_TE);
     }
@@ -317,6 +325,7 @@ public abstract class TileEntityHysteresis extends TileEntityWini implements IRe
         redstoneOutputFace = redstoneOutputFace.getRotation(axis);
         sendBlockUpdate(xCoord, yCoord, zCoord);
         sendNbrBlockUpdate(xCoord, yCoord, zCoord);
+        onAdjacentUpdate();
     }
 
     /**
