@@ -1,11 +1,17 @@
 package ipsis.wini.tileentity;
 
+import cpw.mods.fml.common.network.NetworkRegistry;
+import cpw.mods.fml.common.network.simpleimpl.IMessage;
+import cpw.mods.fml.relauncher.Side;
 import ipsis.wini.network.PacketHandler;
+import ipsis.wini.network.message.MessageHysteresisCfg;
 import ipsis.wini.network.message.MessageTileEntityWini;
 import ipsis.wini.reference.Nbt;
+import net.minecraft.block.Block;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.Packet;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
 
 public abstract class TileEntityWini extends TileEntity {
@@ -15,6 +21,8 @@ public abstract class TileEntityWini extends TileEntity {
 
     public TileEntityWini() {
         super();
+        facing = ForgeDirection.SOUTH;
+        state = 0;
     }
 
     public ForgeDirection getFacing() {
@@ -62,5 +70,32 @@ public abstract class TileEntityWini extends TileEntity {
         setFacing(message.facing);
         setState(message.state);
         worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
+    }
+
+    protected void sendBlockUpdate(int x, int y, int z) {
+        if (worldObj != null)
+            worldObj.markBlockForUpdate(x, y, z);
+    }
+
+    /**
+     * Notify all the blocks adjacent block in all 6 directions
+     */
+    protected void sendNbrBlockUpdate(int x, int y, int z) {
+        if (worldObj != null) {
+            //worldObj.func_147453_f(x, y, z, getBlockType());
+            worldObj.notifyBlocksOfNeighborChange(x, y, z, getBlockType());
+        }
+    }
+
+    protected void sendUpdatePacketTo(Side side, IMessage m) {
+        if (side == Side.CLIENT && !worldObj.isRemote) {
+            worldObj.markBlockForUpdate(this.xCoord, this.yCoord, this.zCoord);
+            PacketHandler.INSTANCE.sendToAllAround(m,
+                    new NetworkRegistry.TargetPoint(
+                            worldObj.provider.dimensionId,
+                            this.xCoord, this.yCoord, this.zCoord, 196));
+        } else if (side == Side.SERVER && worldObj.isRemote) {
+            PacketHandler.INSTANCE.sendToServer(m);
+        }
     }
 }

@@ -3,9 +3,7 @@ package ipsis.wini.network;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.network.simpleimpl.SimpleNetworkWrapper;
 import cpw.mods.fml.relauncher.Side;
-import ipsis.wini.network.message.MessageGuiFixedProgressBar;
-import ipsis.wini.network.message.MessageGuiWidget;
-import ipsis.wini.network.message.MessageTileEntityWini;
+import ipsis.wini.network.message.*;
 import ipsis.wini.reference.Reference;
 
 public class PacketHandler {
@@ -17,5 +15,8 @@ public class PacketHandler {
         INSTANCE.registerMessage(MessageGuiWidget.class, MessageGuiWidget.class, 0, Side.SERVER);
         INSTANCE.registerMessage(MessageGuiFixedProgressBar.class, MessageGuiFixedProgressBar.class, 1, Side.CLIENT);
         INSTANCE.registerMessage(MessageTileEntityWini.class, MessageTileEntityWini.class, 2, Side.CLIENT);
+        INSTANCE.registerMessage(MessageHysteresisCfg.class, MessageHysteresisCfg.class, 3, Side.SERVER);
+        INSTANCE.registerMessage(MessageRedstoneOutputCfg.class, MessageRedstoneOutputCfg.class, 4, Side.SERVER);
+        INSTANCE.registerMessage(MessageHysteresisUpdate.class, MessageHysteresisUpdate.class, 5, Side.CLIENT);
     }
 }

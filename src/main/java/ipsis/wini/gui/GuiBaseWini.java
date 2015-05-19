@@ -54,4 +54,24 @@ public class GuiBaseWini extends GuiBase {
         }
         return infoString.toString();
     }
+
+    /**
+     * From CoFHCore GuiBaseAdv
+     */
+    @Override
+    public void drawButton(IIcon icon, int x, int y, int spriteSheet, int mode) {
+
+        switch (mode) {
+            case 0:
+                drawIcon(getIcon("Icon_Button"), x, y, 1);
+                break;
+            case 1:
+                drawIcon(getIcon("Icon_ButtonHighlight"), x, y, 1);
+                break;
+            default:
+                drawIcon(getIcon("Icon_ButtonInactive"), x, y, 1);
+                break;
+        }
+        drawIcon(icon, x, y, spriteSheet);
+    }
 }

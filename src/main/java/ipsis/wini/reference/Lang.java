@@ -14,6 +14,16 @@ public class Lang {
 
     public static class Gui {
 
+        public static final String TITLE_HYSTERICAL_INV = TAG_GUI + "inv";
+        public static final String TITLE_HYSTERICAL_RF = TAG_GUI + "rf";
+        public static final String TITLE_HYSTERICAL_FLUID = TAG_GUI + "fluid";
+
+        public static final String TAB_INFO = TAG_GUI + "tab.info";
+        public static final String TAB_ENERGY = TAG_GUI + "tab.energy";
+        public static final String TAB_TANKS = TAG_GUI + "tab.tanks";
+        public static final String TAB_REDSTONE = TAG_GUI + "tab.redstone";
+
+        public static final String INFO_HYSTERICAL = TAG_GUI + "info.hysteresis";
     }
 
 
