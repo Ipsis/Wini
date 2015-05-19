@@ -5,6 +5,7 @@ tile.wini:blockCompacted.gravel.name=Compacted Gravel
 tile.wini:blockHysteresis.fluid.name=Hysteresis Fluid Monitor
 tile.wini:blockHysteresis.rf.name=Hysteresis RF Monitor
 tile.wini:blockHysteresis.inv.name=Hysteresis Inventory Monitor
+tile.wini:blockStepdown.name=Redstone Stepdown
 
 # Items
 item.wini:compactor_stone.name=Stone Compactor
