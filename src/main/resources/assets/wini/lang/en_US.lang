@@ -35,3 +35,8 @@ gui.wini:rf=Hysteresis RF
 gui.wini:rf_units=RF
 gui.wini:fluid=Hysteresis Fluid
 gui.wini:fluid_units=mB
+
+gui.wini:info.hysteresis.0=This block allows you to emit a redstone signal on one condition, then clear it on another.
+gui.wini:info.hysteresis.1=Set the trigger to the level you want to emit the signal.
+gui.wini:info.hysteresis.2=Set the reset to the level you want to stop emitting the signal.
+gui.wini:info.hysteresis.3=The redstone sense can be used to invert the signal. eg. trigger stops emitting, reset emits signal.

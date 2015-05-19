@@ -62,15 +62,7 @@ public class MessageHysteresisCfg implements IMessage, IMessageHandler<MessageHy
 
     @Override
     public IMessage onMessage(MessageHysteresisCfg message, MessageContext ctx) {
-
-        LogHelper.info("onMessage: " + message);
-
-        if (ctx.side.isClient()) {
-            TileEntity te = FMLClientHandler.instance().getWorldClient().getTileEntity(message.x, message.y, message.z);
-            if (te instanceof TileEntityHysteresis)
-                ((TileEntityHysteresis) te).handleMessageHysteresisCfg(message, null);
-
-        } else {
+        if (ctx.side.isServer()) {
             if (ctx.getServerHandler().playerEntity != null) {
                 TileEntity te = ctx.getServerHandler().playerEntity.worldObj.getTileEntity(message.x, message.y, message.z);
                 if (te instanceof TileEntityHysteresis)

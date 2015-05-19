@@ -49,14 +49,7 @@ public class MessageRedstoneOutputCfg implements IMessage, IMessageHandler<Messa
 
     @Override
     public IMessage onMessage(MessageRedstoneOutputCfg message, MessageContext ctx) {
-
-        LogHelper.info("onMessage: " + message);
-
-        if (ctx.side.isClient()) {
-            TileEntity te = FMLClientHandler.instance().getWorldClient().getTileEntity(message.x, message.y, message.z);
-            if (te instanceof IRedstoneOutput)
-                ((IRedstoneOutput) te).handleMessageRedstoneOutputCfg(message, null);
-        } else {
+        if (ctx.side.isServer()) {
             if (ctx.getServerHandler().playerEntity != null) {
                 TileEntity te = ctx.getServerHandler().playerEntity.worldObj.getTileEntity(message.x, message.y, message.z);
                 if (te instanceof IRedstoneOutput)

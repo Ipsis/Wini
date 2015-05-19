@@ -164,7 +164,6 @@ public abstract class TileEntityHysteresis extends TileEntityWini implements IRe
         currState = currState.processEvent(e);
 
         if (currState != lastState) {
-            LogHelper.info(String.format("processEvent[%s] %s->%s", e, lastState, currState));
             if (currState == SMState.UNCONNECTED)
                 runEnterUnconnected();
             else if (currState == SMState.CONNECTED)

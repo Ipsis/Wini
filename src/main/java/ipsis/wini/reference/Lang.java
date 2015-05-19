@@ -23,7 +23,7 @@ public class Lang {
         public static final String TAB_TANKS = TAG_GUI + "tab.tanks";
         public static final String TAB_REDSTONE = TAG_GUI + "tab.redstone";
 
-        public static final String INFO_HYSTERICAL = TAG_GUI + "info.hysterical";
+        public static final String INFO_HYSTERICAL = TAG_GUI + "info.hysteresis";
     }
 
 

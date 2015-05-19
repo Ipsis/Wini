@@ -103,7 +103,7 @@ public class TabRedstoneOutput extends TabBase {
         mouseX -= currentShiftX;
         mouseY -= currentShiftY;
 
-        if (mouseX < 38 || mouseX > 84 || mouseY < 20 || mouseY > 106)
+        if (mouseX < 28 || mouseX > 110 || mouseY < 20 || mouseY > 106)
             return false;
 
         if (mouseX >= 38 && mouseX <= 54 && mouseY >= 20 && mouseY <= 36) {

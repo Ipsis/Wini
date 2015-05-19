@@ -72,9 +72,6 @@ public class MessageHysteresisUpdate implements IMessage, IMessageHandler<Messag
 
     @Override
     public IMessage onMessage(MessageHysteresisUpdate message, MessageContext ctx) {
-
-        LogHelper.info("onMessage: " + message);
-
         if (ctx.side.isClient()) {
             TileEntity te = FMLClientHandler.instance().getWorldClient().getTileEntity(message.x, message.y, message.z);
             if (te instanceof TileEntityHysteresis)
