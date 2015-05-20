@@ -3,23 +3,25 @@ package ipsis.wini.block;
 import cofh.lib.util.helpers.MathHelper;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import ipsis.oss.util.LogHelper;
 import ipsis.wini.reference.Names;
 import ipsis.wini.reference.Textures;
 import ipsis.wini.tileentity.TileEntityStepdown;
 import ipsis.wini.tileentity.TileEntityWini;
 import ipsis.wini.utils.BlockHelper;
+import net.minecraft.block.Block;
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
-
-import javax.xml.soap.Text;
 
 public class BlockStepdown extends BlockWini implements ITileEntityProvider {
 
@@ -33,6 +35,11 @@ public class BlockStepdown extends BlockWini implements ITileEntityProvider {
     @SideOnly(Side.CLIENT)
     private IIcon inputIcon;
     private IIcon outputIcon;
+
+    @Override
+    public boolean isNormalCube() {
+        return false;
+    }
 
     @Override
     @SideOnly(Side.CLIENT)
@@ -67,6 +74,26 @@ public class BlockStepdown extends BlockWini implements ITileEntityProvider {
     }
 
     /**
+     * Change configuration
+     */
+    @Override
+    public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer entityPlayer, int p_149727_6_, float hitX, float hitY, float hitZ) {
+
+        if (entityPlayer.isSneaking())
+            return false;
+
+        ItemStack itemStack = entityPlayer.getHeldItem();
+        if (itemStack == null || itemStack.getItem() != Items.redstone)
+            return false;
+
+        TileEntity te = world.getTileEntity(x, y, z);
+        if (te instanceof TileEntityStepdown)
+            ((TileEntityStepdown) te).setRedstoneLevel(itemStack.stackSize);
+
+        return true;
+    }
+
+    /**
      * ITileEntityProvider
      */
     @Override
@@ -84,5 +111,44 @@ public class BlockStepdown extends BlockWini implements ITileEntityProvider {
                 world.markBlockForUpdate(x, y, z);
             }
         }
+    }
+
+    /**
+     * Redstone Output
+     *
+     * isProvidingStrong/WeakPower provide the reversed side
+     * eg. it will ask for the north face when it means south
+     */
+    @Override
+    public boolean canProvidePower() {
+        return true;
+    }
+
+    @Override
+    public int isProvidingStrongPower(IBlockAccess iblockaccess, int x, int y, int z, int side) {
+        int power = 0;
+        TileEntity te = iblockaccess.getTileEntity(x, y, z);
+        if (te != null && te instanceof TileEntityStepdown)
+            power = ((TileEntityStepdown) te).isProvidingStrongPower(ForgeDirection.getOrientation(side).getOpposite());
+        return power;
+    }
+
+    @Override
+    public int isProvidingWeakPower(IBlockAccess iblockaccess, int x, int y, int z, int side) {
+        int power = 0;
+        TileEntity te = iblockaccess.getTileEntity(x, y, z);
+        if (te != null && te instanceof TileEntityStepdown)
+            power = ((TileEntityStepdown) te).isProvidingWeakPower(ForgeDirection.getOrientation(side).getOpposite());
+        return power;
+    }
+
+    /**
+     * Redstone Input
+     */
+    @Override
+    public void onNeighborBlockChange(World world, int x, int y, int z, Block nbrBlock) {
+        TileEntity te = world.getTileEntity(x, y, z);
+        if (te != null && te instanceof TileEntityStepdown)
+            ((TileEntityStepdown) te).onNeighborChange();
     }
 }

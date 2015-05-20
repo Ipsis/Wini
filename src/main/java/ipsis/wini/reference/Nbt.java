@@ -22,5 +22,7 @@ public class Nbt {
     public static final String HYST_REDSTONE_SENSE = "RSSense";
     public static final String HYST_REDSTONE_STRENGTH = "RSStrength";
 
+    public static final String STEPDOWN_REDSTONE_LEVEL = "RSLevel";
+
 
 }
