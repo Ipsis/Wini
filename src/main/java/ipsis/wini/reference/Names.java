@@ -19,5 +19,7 @@ public class Names {
 
         public final static String BLOCK_HYSTERESIS = "blockHysteresis";
         public final static String BLOCK_HYSTERESIS_SUBSTYPES[] = { "fluid", "rf", "inv" };
+
+        public final static String BLOCK_STEPDOWN = "blockStepdown";
     }
 }
