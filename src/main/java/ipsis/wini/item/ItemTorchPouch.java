@@ -1,19 +1,25 @@
 package ipsis.wini.item;
 
+import cofh.api.item.IInventoryContainerItem;
+import cofh.lib.gui.container.InventoryContainerItemWrapper;
 import ipsis.wini.Wini;
-import ipsis.wini.inventory.ItemInventoryTorchPouch;
+import ipsis.wini.inventory.ContainerTorchPouch;
 import ipsis.wini.reference.Gui;
 import ipsis.wini.reference.Names;
 import ipsis.wini.reference.Nbt;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.NBTTagList;
 import net.minecraft.world.World;
 
 import java.util.List;
 
 
-public class ItemTorchPouch extends ItemWini {
+public class ItemTorchPouch extends ItemWini implements IInventoryContainerItem {
+
+    public static final int SLOT_COUNT = 5;
 
     public ItemTorchPouch() {
 
@@ -40,19 +46,26 @@ public class ItemTorchPouch extends ItemWini {
     @Override
     public boolean onItemUse(ItemStack itemStack, EntityPlayer entityPlayer, World world, int x, int y, int z, int side, float hitX, float hitY, float hitZ) {
 
-        if (world.isRemote || !itemStack.hasTagCompound())
+        if (world.isRemote || itemStack == null || !itemStack.hasTagCompound())
             return true;
 
-        /* Try to operate the same as normal torches */
-        ItemInventoryTorchPouch inv = new ItemInventoryTorchPouch(itemStack);
-        for (int slot = 0; slot < inv.getSizeInventory(); slot++) {
-            ItemStack s = inv.getStackInSlot(slot);
-            if (s != null && s.stackSize != 0) {
-                /* we assume if it is in here it is a torch */
-                Item item = s.getItem();
-                if (item.onItemUse(s, entityPlayer, world, x, y, z, side, hitX, hitY, hitZ)) {
-                    inv.saveInventoryToStack(entityPlayer.getHeldItem());
-                    break;
+        int invSize = ((IInventoryContainerItem)itemStack.getItem()).getSizeInventory(itemStack);
+
+        boolean found = false;
+        for (int i = 0; i < invSize && !found; i++) {
+
+            if (!itemStack.stackTagCompound.hasKey("Slot" + i))
+                continue;
+
+            ItemStack currStack = ItemStack.loadItemStackFromNBT(itemStack.stackTagCompound.getCompoundTag("Slot" + i));
+            if (currStack != null && currStack.stackSize > 0) {
+                if (currStack.getItem().onItemUse(currStack, entityPlayer, world, x, y, z, side, hitX, hitY, hitZ)) {
+                    if (currStack.stackSize == 0)
+                        itemStack.stackTagCompound.setTag("Slot" + i, new NBTTagCompound());
+                    else
+                        itemStack.stackTagCompound.setTag("Slot" + i, currStack.writeToNBT(new NBTTagCompound()));
+
+                    found = true;
                 }
             }
         }
@@ -61,16 +74,30 @@ public class ItemTorchPouch extends ItemWini {
     }
 
     @Override
-    public void addInformation(ItemStack itemStack, EntityPlayer player, List info, boolean showAdvanced) {
-        super.addInformation(itemStack, player, info, showAdvanced);
+    public void addInformation(ItemStack itemStack, EntityPlayer entityPlayer, List info, boolean showAdvanced) {
+        super.addInformation(itemStack, entityPlayer, info, showAdvanced);
 
-        if (itemStack == null)
+        if (itemStack == null || itemStack.hasTagCompound() == false)
             return;
 
-        short count = 0;
-        if (itemStack.hasTagCompound() && itemStack.getTagCompound().hasKey(Nbt.TORCH_POUCH_COUNT)) {
-            info.add(itemStack.getTagCompound().getShort(Nbt.TORCH_POUCH_COUNT) + "/" + 5 * 64);
+        int count = 0;
+        int invSize = ((IInventoryContainerItem)itemStack.getItem()).getSizeInventory(itemStack);
 
+        for (int i = 0; i < invSize; i++) {
+
+            if (!itemStack.stackTagCompound.hasKey("Slot" + i))
+                continue;
+
+            ItemStack currStack = ItemStack.loadItemStackFromNBT(itemStack.stackTagCompound.getCompoundTag("Slot" + i));
+            count += (currStack != null ? currStack.stackSize : 0);
         }
+
+        info.add(count + " torches");
     }
+
+    @Override
+    public int getSizeInventory(ItemStack itemStack) {
+        return SLOT_COUNT;
+    }
+
 }

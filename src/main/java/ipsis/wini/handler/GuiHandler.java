@@ -17,9 +17,9 @@ public class GuiHandler implements IGuiHandler {
     public Object getServerGuiElement(int ID, EntityPlayer entityPlayer, World world, int x, int y, int z) {
 
         if (ID == Gui.Ids.TORCH_POUCH) {
-            return new ContainerTorchPouch(entityPlayer, entityPlayer.getHeldItem());
+            return new ContainerTorchPouch(entityPlayer.getCurrentEquippedItem(), entityPlayer.inventory);
         } else if (ID == Gui.Ids.VOID_BAG) {
-            return new ContainerVoidBag(entityPlayer, entityPlayer.getHeldItem());
+            return new ContainerVoidBag(entityPlayer.getCurrentEquippedItem(), entityPlayer.inventory);
         } else if (ID == Gui.Ids.HYSTERESIS) {
             return new ContainerHysteresis(entityPlayer, (TileEntityHysteresis)world.getTileEntity(x, y, z));
         }
@@ -31,9 +31,9 @@ public class GuiHandler implements IGuiHandler {
     public Object getClientGuiElement(int ID, EntityPlayer entityPlayer, World world, int x, int y, int z) {
 
         if (ID == Gui.Ids.TORCH_POUCH) {
-            return new GuiTorchPouch(entityPlayer, entityPlayer.getHeldItem());
+            return new GuiTorchPouch(entityPlayer.inventory, new ContainerTorchPouch(entityPlayer.getCurrentEquippedItem(), entityPlayer.inventory));
         }  else if (ID == Gui.Ids.VOID_BAG) {
-            return new GuiVoidBag(entityPlayer, entityPlayer.getHeldItem());
+            return new GuiVoidBag(entityPlayer.inventory, new ContainerVoidBag(entityPlayer.getCurrentEquippedItem(), entityPlayer.inventory));
         } else if (ID == Gui.Ids.HYSTERESIS) {
             return new GuiHysteresis(entityPlayer, (TileEntityHysteresis)world.getTileEntity(x, y, z));
         }
