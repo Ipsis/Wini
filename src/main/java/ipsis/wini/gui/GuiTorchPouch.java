@@ -3,6 +3,7 @@ package ipsis.wini.gui;
 import ipsis.wini.inventory.ContainerTorchPouch;
 import ipsis.wini.reference.Textures;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 
@@ -12,9 +13,9 @@ public class GuiTorchPouch extends GuiBaseWini {
     private static final ResourceLocation TEXTURE = new ResourceLocation(TEXTURE_STR);
 
 
-    public GuiTorchPouch(EntityPlayer entityPlayer, ItemStack equippedItemStack) {
+    public GuiTorchPouch(InventoryPlayer invPlayer, ContainerTorchPouch containerTorchPouch) {
 
-        super(new ContainerTorchPouch(entityPlayer, equippedItemStack), TEXTURE);
+        super(containerTorchPouch, TEXTURE);
         xSize = 176;
         ySize = 133;
     }

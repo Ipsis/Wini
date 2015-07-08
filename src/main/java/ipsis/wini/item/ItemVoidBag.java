@@ -1,25 +1,24 @@
 package ipsis.wini.item;
 
-import cofh.lib.util.helpers.ItemHelper;
+import cofh.api.item.IInventoryContainerItem;
 import cofh.lib.util.helpers.StringHelper;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import ipsis.wini.Wini;
-import ipsis.wini.inventory.ItemInventoryVoidBag;
 import ipsis.wini.reference.*;
+import ipsis.wini.utils.NBTHelper;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
-import static cofh.lib.util.helpers.StringHelper.*;
-
-public class ItemVoidBag extends ItemWini {
+public class ItemVoidBag extends ItemWini implements IInventoryContainerItem {
 
     public static enum BagSize {
         SMALL(5),
@@ -54,12 +53,38 @@ public class ItemVoidBag extends ItemWini {
         return this.bagSize;
     }
 
+    private static void setDefaultTags(ItemStack itemStack) {
+        if (itemStack.hasTagCompound() == false)
+            itemStack.setTagCompound(new NBTTagCompound());
+
+        NBTHelper.setUUID(itemStack);
+    }
+
+    private static boolean hasDefaultTags(ItemStack itemStack) {
+        if (itemStack == null || itemStack.hasTagCompound() == false)
+            return false;
+
+        return NBTHelper.hasUUID(itemStack);
+    }
+
+
+    public static UUID getBagUUID(ItemStack itemStack) {
+        if (itemStack == null || !(itemStack.getItem() instanceof ItemVoidBag))
+            return null;
+
+        if (!hasDefaultTags(itemStack))
+            setDefaultTags(itemStack);
+
+        return NBTHelper.getUUID(itemStack);
+    }
+
     public boolean handleItem(EntityPlayer entityPlayer, ItemStack bagStack, ItemStack itemStack) {
 
         boolean handled = false;
 
         if (!isLocked(bagStack)) {
-        /* If it matches an item in the inventory get rid of it */
+            /* If it matches an item in the inventory get rid of it */
+            /*
             IInventory inventory = new ItemInventoryVoidBag(bagStack, this.bagSize);
             for (int slot = 0; slot < inventory.getSizeInventory(); slot++) {
 
@@ -68,7 +93,7 @@ public class ItemVoidBag extends ItemWini {
                     handled = true;
                     break;
                 }
-            }
+            } */
         }
 
         return handled;
@@ -83,7 +108,10 @@ public class ItemVoidBag extends ItemWini {
     @Override
     public ItemStack onItemRightClick(ItemStack itemStack, World world, EntityPlayer entityPlayer) {
 
-        if (!world.isRemote) {
+        if (!world.isRemote && itemStack != null) {
+
+            setDefaultTags(itemStack);
+
             if (entityPlayer.isSneaking())
                 setLockedState(itemStack, !isLocked(itemStack));
             else
@@ -137,5 +165,10 @@ public class ItemVoidBag extends ItemWini {
     public void addInformation(ItemStack itemStack, EntityPlayer player, List info, boolean showAdvanced) {
         super.addInformation(itemStack, player, info, showAdvanced);
         info.add(StringHelper.localize(isLocked(itemStack) ? Lang.Tooltips.ITEM_VOID_BAG_LOCKED : Lang.Tooltips.ITEM_VOID_BAG_UNLOCKED));
+    }
+
+    @Override
+    public int getSizeInventory(ItemStack itemStack) {
+        return getBagSize().getSize();
     }
 }
