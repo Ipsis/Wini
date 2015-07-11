@@ -1,7 +1,6 @@
 package ipsis.wini.registry;
 
 import cofh.lib.inventory.ComparableItemStackSafe;
-import ipsis.oss.util.LogHelper;
 import ipsis.wini.item.ItemVoidBag;
 import ipsis.wini.utils.ComparableItemStackBlockSafe;
 import ipsis.wini.utils.ItemContainerHelper;
@@ -31,14 +30,12 @@ public class VoidBagRegistry {
             return;
 
         UUID playerUUID = entityPlayer.getUniqueID();
-        LogHelper.info("addPlayer:" + playerUUID);
         if (!playerMap.containsKey(playerUUID))
             playerMap.put(playerUUID, new PlayerBags());
     }
 
     public void delPlayer(EntityPlayer entityPlayer) {
         UUID playerUUID = entityPlayer.getUniqueID();
-        LogHelper.info("delPlayer:" + playerUUID);
         playerMap.remove(playerUUID);
     }
 
@@ -56,7 +53,6 @@ public class VoidBagRegistry {
 
     public void addBag(EntityPlayer entityPlayer, ItemStack bagStack) {
 
-        LogHelper.info("addBag");
         if (entityPlayer == null || bagStack == null || !(bagStack.getItem() instanceof ItemVoidBag))
             return;
 
