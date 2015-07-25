@@ -6,6 +6,7 @@ import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.network.NetworkRegistry;
+import cpw.mods.fml.common.registry.GameRegistry;
 import ipsis.wini.handler.GuiHandler;
 import ipsis.wini.init.ModBlocks;
 import ipsis.wini.init.ModItems;
@@ -13,6 +14,9 @@ import ipsis.wini.init.ModTileEntities;
 import ipsis.wini.network.PacketHandler;
 import ipsis.wini.proxy.IProxy;
 import ipsis.wini.reference.Reference;
+import ipsis.wini.registry.TorchRegistry;
+import net.minecraft.block.Block;
+import net.minecraft.item.ItemStack;
 
 @Mod(modid = Reference.MOD_ID, name = Reference.MOD_NAME, version = Reference.MOD_VERSION)
 public class Wini {
@@ -54,5 +58,7 @@ public class Wini {
         ModItems.postInit();
 
         ModTileEntities.postInit();
+
+        TorchRegistry.getInstance().addModItems();
     }
 }

@@ -6,6 +6,7 @@ import cofh.lib.gui.slot.SlotLocked;
 import cofh.lib.gui.slot.SlotValidated;
 import cofh.lib.util.helpers.InventoryHelper;
 import ipsis.wini.item.ItemTorchPouch;
+import ipsis.wini.registry.TorchRegistry;
 import ipsis.wini.utils.ItemHelper;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
@@ -43,6 +44,6 @@ public class ContainerTorchPouch extends ContainerInventoryItemWini implements I
     @Override
     public boolean isItemValid(ItemStack itemStack) {
 
-        return ItemHelper.isTorch(itemStack);
+        return TorchRegistry.getInstance().isValid(itemStack);
     }
 }
