@@ -2,13 +2,9 @@ package ipsis.wini.gui.element;
 
 import cofh.lib.gui.GuiBase;
 import cofh.lib.gui.element.TabBase;
-import cofh.lib.util.helpers.StringHelper;
-import ipsis.oss.util.LogHelper;
-import ipsis.wini.reference.Lang;
 import ipsis.wini.reference.Textures;
 import ipsis.wini.utils.IRedstoneOutput;
 import org.lwjgl.opengl.GL11;
-import scala.Int;
 
 /**
  * Based off TabRedstone from CoFHCore

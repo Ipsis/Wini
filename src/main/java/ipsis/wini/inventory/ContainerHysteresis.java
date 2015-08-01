@@ -1,9 +1,7 @@
 package ipsis.wini.inventory;
 
 import ipsis.wini.network.PacketHandler;
-import ipsis.wini.network.message.MessageHysteresisCfg;
 import ipsis.wini.network.message.MessageHysteresisUpdate;
-import ipsis.wini.network.message.MessageRedstoneOutputCfg;
 import ipsis.wini.tileentity.TileEntityHysteresis;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;

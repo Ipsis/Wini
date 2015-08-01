@@ -16,7 +16,6 @@ import ipsis.wini.tileentity.TileEntityHysteresisInventory;
 import ipsis.wini.utils.CompareFunc;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.ResourceLocation;
-import scala.Int;
 
 import java.util.regex.Pattern;
 

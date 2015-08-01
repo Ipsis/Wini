@@ -1,7 +1,6 @@
 package ipsis.wini.utils;
 
 import ipsis.wini.reference.Nbt;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 

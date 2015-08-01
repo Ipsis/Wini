@@ -1,9 +1,7 @@
 package ipsis.wini.block;
 
-import cofh.lib.util.helpers.MathHelper;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import ipsis.oss.util.LogHelper;
 import ipsis.wini.reference.Names;
 import ipsis.wini.reference.Textures;
 import ipsis.wini.tileentity.TileEntityStepdown;

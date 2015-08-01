@@ -1,19 +1,12 @@
 package ipsis.wini.inventory;
 
 import cofh.lib.gui.slot.ISlotValidator;
-import cofh.lib.gui.slot.SlotAcceptValid;
 import cofh.lib.gui.slot.SlotLocked;
 import cofh.lib.gui.slot.SlotValidated;
-import cofh.lib.util.helpers.InventoryHelper;
 import ipsis.wini.item.ItemTorchPouch;
 import ipsis.wini.registry.TorchRegistry;
-import ipsis.wini.utils.ItemHelper;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
-import net.minecraft.init.Blocks;
-import net.minecraft.inventory.Container;
 import net.minecraft.inventory.Slot;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
 public class ContainerTorchPouch extends ContainerInventoryItemWini implements ISlotValidator {
