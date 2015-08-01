@@ -7,7 +7,7 @@ import net.minecraft.util.ResourceLocation;
 
 public class GuiTorchPouch extends GuiBaseWini {
 
-    private static final String TEXTURE_STR = new String(Textures.Gui.TORCH_POUCH);
+    private static final String TEXTURE_STR = Textures.Gui.TORCH_POUCH;
     private static final ResourceLocation TEXTURE = new ResourceLocation(TEXTURE_STR);
 
 
