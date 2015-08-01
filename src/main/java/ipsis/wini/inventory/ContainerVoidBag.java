@@ -18,11 +18,11 @@ public class ContainerVoidBag extends ContainerInventoryItemWini {
 
         if (bagSize == ItemVoidBag.BagSize.SMALL) {
             for (int i = 0; i < bagSize.getSize(); i++)
-                this.addSlotToContainer(new Slot(this.containerWrapper, i, 8 + (i * 18), 20));
+                this.addSlotToContainer(new SlotVoidBag(this.containerWrapper, i, 8 + (i * 18), 20));
         } else {
             for (int j = 0; j < 2; j++) {
                 for (int i = 0; i < bagSize.getSize() / 2; i++)
-                    this.addSlotToContainer(new Slot(this.containerWrapper, i + (9 * j), 8 + (i * 18), 9 + (j * 18)));
+                    this.addSlotToContainer(new SlotVoidBag(this.containerWrapper, i + (9 * j), 8 + (i * 18), 9 + (j * 18)));
             }
         }
 
