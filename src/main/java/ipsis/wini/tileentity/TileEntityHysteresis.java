@@ -3,9 +3,7 @@ package ipsis.wini.tileentity;
 import cofh.lib.util.helpers.BlockHelper;
 import cofh.lib.util.helpers.MathHelper;
 import cpw.mods.fml.relauncher.Side;
-import ipsis.oss.util.LogHelper;
 import ipsis.wini.helper.MonitorType;
-import ipsis.wini.network.PacketHandler;
 import ipsis.wini.network.message.MessageHysteresisCfg;
 import ipsis.wini.network.message.MessageHysteresisUpdate;
 import ipsis.wini.network.message.MessageRedstoneOutputCfg;
@@ -16,7 +14,6 @@ import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.util.ForgeDirection;
-import sun.rmi.runtime.Log;
 
 public abstract class TileEntityHysteresis extends TileEntityWini implements IRedstoneOutput {
 
@@ -101,7 +98,7 @@ public abstract class TileEntityHysteresis extends TileEntityWini implements IRe
      */
     enum SMEvent {
         BEGIN, VALID_ADJ_TE, INVALID_ADJ_TE, ENABLED, DISABLED, TRIGGER_MET, RESET_MET
-    };
+    }
 
     enum SMState {
         INIT {
@@ -156,7 +153,7 @@ public abstract class TileEntityHysteresis extends TileEntityWini implements IRe
             i = MathHelper.clampI(i, 0, SMState.values().length - 1);
             return SMState.values()[i];
         }
-    };
+    }
 
 
     void processEvent(SMEvent e) {

@@ -8,8 +8,8 @@ import net.minecraft.util.ResourceLocation;
 
 public class GuiVoidBag extends GuiBaseWini {
 
-    private static final String TEXTURE_STR = new String(Textures.Gui.VOID_BAG);
-    private static final String TEXTURE_BIG_STR = new String(Textures.Gui.VOID_BAG_BIG);
+    private static final String TEXTURE_STR = Textures.Gui.VOID_BAG;
+    private static final String TEXTURE_BIG_STR = Textures.Gui.VOID_BAG_BIG;
     private static final ResourceLocation TEXTURE = new ResourceLocation(TEXTURE_STR);
     private static final ResourceLocation TEXTURE_BIG = new ResourceLocation(TEXTURE_BIG_STR);
 

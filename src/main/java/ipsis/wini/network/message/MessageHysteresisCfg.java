@@ -1,17 +1,11 @@
 package ipsis.wini.network.message;
 
-import cpw.mods.fml.client.FMLClientHandler;
 import cpw.mods.fml.common.network.simpleimpl.IMessage;
 import cpw.mods.fml.common.network.simpleimpl.IMessageHandler;
 import cpw.mods.fml.common.network.simpleimpl.MessageContext;
-import cpw.mods.fml.relauncher.Side;
 import io.netty.buffer.ByteBuf;
-import ipsis.oss.util.LogHelper;
-import ipsis.wini.network.PacketHandler;
 import ipsis.wini.tileentity.TileEntityHysteresis;
 import ipsis.wini.utils.CompareFunc;
-import net.minecraft.client.entity.EntityClientPlayerMP;
-import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.tileentity.TileEntity;
 
 public class MessageHysteresisCfg implements IMessage, IMessageHandler<MessageHysteresisCfg, IMessage> {

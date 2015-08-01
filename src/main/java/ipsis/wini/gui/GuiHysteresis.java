@@ -16,13 +16,12 @@ import ipsis.wini.tileentity.TileEntityHysteresisInventory;
 import ipsis.wini.utils.CompareFunc;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.ResourceLocation;
-import scala.Int;
 
 import java.util.regex.Pattern;
 
 public class GuiHysteresis extends GuiBaseWini {
 
-    private static final String TEXTURE_STR = new String(Textures.Gui.HYSTERESIS);
+    private static final String TEXTURE_STR = Textures.Gui.HYSTERESIS;
     private static final ResourceLocation TEXTURE = new ResourceLocation(TEXTURE_STR);
 
     private TileEntityHysteresis te;

@@ -14,13 +14,12 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
 public class ItemVoidBag extends ItemWini implements IInventoryContainerItem {
 
-    public static enum BagSize {
+    public enum BagSize {
         SMALL(5),
         LARGE(9);
 
@@ -30,7 +29,7 @@ public class ItemVoidBag extends ItemWini implements IInventoryContainerItem {
         }
 
         public int getSize() { return this.size; }
-    };
+    }
 
     private BagSize bagSize;
 

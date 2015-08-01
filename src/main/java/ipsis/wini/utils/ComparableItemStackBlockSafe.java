@@ -1,7 +1,6 @@
 package ipsis.wini.utils;
 
 import cofh.lib.inventory.ComparableItemStack;
-import cofh.lib.util.helpers.ItemHelper;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 

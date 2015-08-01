@@ -62,10 +62,8 @@ public abstract class TabScrolledText extends TabBase {
 
     @Override
     public void addTooltip(List<String> list) {
-        if (!isFullyOpened()) {
+        if (!isFullyOpened())
             list.add(getTitle());
-            return;
-        }
     }
 
     @Override

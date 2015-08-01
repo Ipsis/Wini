@@ -43,7 +43,7 @@ public class GuiBaseWini extends GuiBase {
             String tag = baseTag + "." + idx;
             String t = StringHelper.localize(baseTag + "." + idx);
             while (!t.equals(tag)) {
-                infoString.append(t + " ");
+                infoString.append(t).append(" ");
                 idx++;
                 tag = baseTag + "." + idx;
                 t = StringHelper.localize(tag);

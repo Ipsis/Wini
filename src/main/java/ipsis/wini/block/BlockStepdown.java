@@ -1,9 +1,7 @@
 package ipsis.wini.block;
 
-import cofh.lib.util.helpers.MathHelper;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import ipsis.oss.util.LogHelper;
 import ipsis.wini.reference.Names;
 import ipsis.wini.reference.Textures;
 import ipsis.wini.tileentity.TileEntityStepdown;
@@ -60,7 +58,7 @@ public class BlockStepdown extends BlockWini implements ITileEntityProvider {
     @Override
     @SideOnly(Side.CLIENT)
     public IIcon getIcon(IBlockAccess iblockaccess, int x, int y, int z, int side) {
-        int meta = iblockaccess.getBlockMetadata(x, y, z);
+
         TileEntity te = iblockaccess.getTileEntity(x, y, z);
         if (te != null && te instanceof TileEntityWini) {
             TileEntityWini teh = (TileEntityWini)te;

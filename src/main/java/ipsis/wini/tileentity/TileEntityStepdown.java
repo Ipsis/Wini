@@ -62,8 +62,7 @@ public class TileEntityStepdown extends TileEntityWini {
          * isBlockProvidingPowerTo on the adjacent block
          */
         BlockPosition bPos = new BlockPosition(this).step(dir);
-        int power = worldObj.isBlockProvidingPowerTo(bPos.x, bPos.y, bPos.z, dir.ordinal());
-        return power;
+        return worldObj.isBlockProvidingPowerTo(bPos.x, bPos.y, bPos.z, dir.ordinal());
     }
 
     public void onNeighborChange() {

@@ -4,14 +4,11 @@ import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.network.simpleimpl.IMessage;
 import cpw.mods.fml.relauncher.Side;
 import ipsis.wini.network.PacketHandler;
-import ipsis.wini.network.message.MessageHysteresisCfg;
 import ipsis.wini.network.message.MessageTileEntityWini;
 import ipsis.wini.reference.Nbt;
-import net.minecraft.block.Block;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.Packet;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
 
 public abstract class TileEntityWini extends TileEntity {

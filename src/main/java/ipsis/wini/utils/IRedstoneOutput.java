@@ -6,7 +6,7 @@ import net.minecraftforge.common.util.ForgeDirection;
 
 public interface IRedstoneOutput {
 
-    public static enum Strength {
+    enum Strength {
         WEAK, STRONG;
 
         public boolean isWeak() {
@@ -18,7 +18,7 @@ public interface IRedstoneOutput {
         }
     }
 
-    public static enum Sense {
+    enum Sense {
         NORMAL, INVERTED;
 
         public boolean isNormal(){
@@ -41,5 +41,5 @@ public interface IRedstoneOutput {
     void setRedstoneOutputFace(ForgeDirection f);
     ForgeDirection getRedstoneOutputFace();
 
-    public void handleMessageRedstoneOutputCfg(MessageRedstoneOutputCfg m, EntityPlayerMP player);
+    void handleMessageRedstoneOutputCfg(MessageRedstoneOutputCfg m, EntityPlayerMP player);
 }

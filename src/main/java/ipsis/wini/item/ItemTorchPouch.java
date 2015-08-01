@@ -1,17 +1,12 @@
 package ipsis.wini.item;
 
 import cofh.api.item.IInventoryContainerItem;
-import cofh.lib.gui.container.InventoryContainerItemWrapper;
 import ipsis.wini.Wini;
-import ipsis.wini.inventory.ContainerTorchPouch;
 import ipsis.wini.reference.Gui;
 import ipsis.wini.reference.Names;
-import ipsis.wini.reference.Nbt;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.nbt.NBTTagList;
 import net.minecraft.world.World;
 
 import java.util.List;
