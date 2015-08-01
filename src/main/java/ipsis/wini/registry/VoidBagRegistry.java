@@ -1,6 +1,5 @@
 package ipsis.wini.registry;
 
-import cofh.lib.inventory.ComparableItemStackSafe;
 import ipsis.wini.item.ItemVoidBag;
 import ipsis.wini.utils.ComparableItemStackBlockSafe;
 import ipsis.wini.utils.ItemContainerHelper;
@@ -112,7 +111,7 @@ public class VoidBagRegistry {
         public boolean hashMatch(ItemStack itemStack) {
             assert(itemStack != null);
 
-            ComparableItemStackSafe compareStack = new ComparableItemStackSafe(itemStack);
+            ComparableItemStackBlockSafe compareStack = new ComparableItemStackBlockSafe(itemStack);
             for (Set<ComparableItemStackBlockSafe> currBag : bags.values()) {
                 if (currBag.contains(compareStack))
                     return true;
