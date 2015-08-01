@@ -22,6 +22,6 @@ public class GuiVoidBag extends GuiBaseWini {
             texture = TEXTURE_BIG;
 
         xSize = 176;
-        ySize = 133;
+        ySize = 140;
     }
 }

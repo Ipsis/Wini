@@ -16,29 +16,28 @@ public class ContainerVoidBag extends ContainerInventoryItemWini {
 
         ItemVoidBag.BagSize bagSize = ((ItemVoidBag)itemStack.getItem()).getBagSize();
 
-        int baseX;
-        int baseY = 20;
-        if (bagSize == ItemVoidBag.BagSize.SMALL)
-            baseX = 44;
-        else
-            baseX = 8;
-
-        /* Assuming in a straight line */
-        for (int i = 0; i < bagSize.getSize(); i++)
-            this.addSlotToContainer(new Slot(this.containerWrapper, i, baseX + (i * 18), baseY));
+        if (bagSize == ItemVoidBag.BagSize.SMALL) {
+            for (int i = 0; i < bagSize.getSize(); i++)
+                this.addSlotToContainer(new Slot(this.containerWrapper, i, 8 + (i * 18), 20));
+        } else {
+            for (int j = 0; j < 2; j++) {
+                for (int i = 0; i < bagSize.getSize() / 2; i++)
+                    this.addSlotToContainer(new Slot(this.containerWrapper, i + (9 * j), 8 + (i * 18), 9 + (j * 18)));
+            }
+        }
 
          /* Player inventory */
         for (int y = 0; y < 3; y++) {
             for (int x = 0; x < 9; x++)
-                this.addSlotToContainer(new Slot(invPlayer, x + y * 9 + 9, 8 + x * 18, 51 + y * 18));
+                this.addSlotToContainer(new Slot(invPlayer, x + y * 9 + 9, 8 + x * 18, 59 + y * 18));
         }
         /* Player hotbar */
         for (int x = 0; x < 9; x++) {
             /* Dont allow the bag inventory item to be changed */
             if (x == invPlayer.currentItem)
-                this.addSlotToContainer(new SlotLocked(invPlayer, x, 8 + x * 18, 109));
+                this.addSlotToContainer(new SlotLocked(invPlayer, x, 8 + x * 18, 117));
             else
-                this.addSlotToContainer(new Slot(invPlayer, x, 8 + x * 18, 109));
+                this.addSlotToContainer(new Slot(invPlayer, x, 8 + x * 18, 117));
         }
     }
 
