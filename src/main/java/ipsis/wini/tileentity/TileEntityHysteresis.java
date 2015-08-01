@@ -101,7 +101,7 @@ public abstract class TileEntityHysteresis extends TileEntityWini implements IRe
      */
     enum SMEvent {
         BEGIN, VALID_ADJ_TE, INVALID_ADJ_TE, ENABLED, DISABLED, TRIGGER_MET, RESET_MET
-    };
+    }
 
     enum SMState {
         INIT {
@@ -156,7 +156,7 @@ public abstract class TileEntityHysteresis extends TileEntityWini implements IRe
             i = MathHelper.clampI(i, 0, SMState.values().length - 1);
             return SMState.values()[i];
         }
-    };
+    }
 
 
     void processEvent(SMEvent e) {

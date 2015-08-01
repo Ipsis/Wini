@@ -30,7 +30,7 @@ public class ItemVoidBag extends ItemWini implements IInventoryContainerItem {
         }
 
         public int getSize() { return this.size; }
-    };
+    }
 
     private BagSize bagSize;
 
