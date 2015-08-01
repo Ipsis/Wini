@@ -20,7 +20,7 @@ import java.util.UUID;
 
 public class ItemVoidBag extends ItemWini implements IInventoryContainerItem {
 
-    public static enum BagSize {
+    public enum BagSize {
         SMALL(5),
         LARGE(9);
 
