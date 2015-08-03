@@ -5,6 +5,7 @@ import ipsis.wini.reference.Lang;
 import ipsis.wini.tileentity.TileEntityHysteresis;
 import ipsis.wini.tileentity.TileEntityHysteresisFluid;
 import ipsis.wini.tileentity.TileEntityHysteresisRf;
+import ipsis.wini.tileentity.TileEntityStepdown;
 import ipsis.wini.utils.CompareFunc;
 import ipsis.wini.utils.IRedstoneOutput;
 import mcp.mobius.waila.api.IWailaConfigHandler;
@@ -46,9 +47,10 @@ public class WiniWailaProvider implements IWailaDataProvider {
         if (!accessor.getPlayer().isSneaking())
             return currenttip;
 
-        if (accessor.getTileEntity() instanceof TileEntityHysteresis) {
+        if (accessor.getTileEntity() instanceof TileEntityHysteresis)
             currenttip = handleTileEntityHysteresis((TileEntityHysteresis) accessor.getTileEntity(), currenttip);
-        }
+        else if (accessor.getTileEntity() instanceof TileEntityStepdown)
+            currenttip = handleTileEntityStepdown((TileEntityStepdown)accessor.getTileEntity(), currenttip);
 
         return currenttip;
     }
@@ -66,9 +68,10 @@ public class WiniWailaProvider implements IWailaDataProvider {
     public static void callbackRegister(IWailaRegistrar registrar) {
 
         registrar.registerBodyProvider(new WiniWailaProvider(), TileEntityHysteresis.class);
+        registrar.registerBodyProvider(new WiniWailaProvider(), TileEntityStepdown.class);
     }
 
-    private List<String> handleTileEntityHysteresis(TileEntityHysteresis te, List<String> currentip) {
+    private List<String> handleTileEntityHysteresis(TileEntityHysteresis te, List<String> currenttip) {
         
         int on_rs, off_rs;
         CompareFunc on_f, off_f;
@@ -93,11 +96,17 @@ public class WiniWailaProvider implements IWailaDataProvider {
             off_f = te.getTriggerFunc();
         }
 
-        currentip.add(String.format(
+        currenttip.add(String.format(
                 EnumChatFormatting.GREEN + "Redstone On  : %s%s %d %s", TAB + ALIGNRIGHT, on_f.toString(), on_rs, units));
-        currentip.add(String.format(EnumChatFormatting.RED + "Redstone Off : %s%s %d %s", TAB + ALIGNRIGHT, off_f.toString(), off_rs, units));
-        currentip.add(String.format("Output Level : %s %d", te.getRedstoneStrength().toString(), te.getRedstoneLevel()));
+        currenttip.add(String.format(EnumChatFormatting.RED + "Redstone Off : %s%s %d %s", TAB + ALIGNRIGHT, off_f.toString(), off_rs, units));
+        currenttip.add(String.format("Output Level : %s %d", te.getRedstoneStrength().toString(), te.getRedstoneLevel()));
 
-        return currentip;
+        return currenttip;
+    }
+
+    private List<String> handleTileEntityStepdown(TileEntityStepdown te, List<String> currenttip) {
+
+        currenttip.add(String.format("Stepdown Level : %s%d", TAB + ALIGNRIGHT, te.getOutputLevel()));
+        return currenttip;
     }
 }
