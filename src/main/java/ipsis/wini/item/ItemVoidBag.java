@@ -20,8 +20,8 @@ import java.util.UUID;
 public class ItemVoidBag extends ItemWini implements IInventoryContainerItem {
 
     public enum BagSize {
-        SMALL(5),
-        LARGE(9);
+        SMALL(9),
+        LARGE(18);
 
         private int size;
         BagSize(int size) {
@@ -75,27 +75,6 @@ public class ItemVoidBag extends ItemWini implements IInventoryContainerItem {
             setDefaultTags(itemStack);
 
         return NBTHelper.getUUID(itemStack);
-    }
-
-    public boolean handleItem(EntityPlayer entityPlayer, ItemStack bagStack, ItemStack itemStack) {
-
-        boolean handled = false;
-
-        if (!isLocked(bagStack)) {
-            /* If it matches an item in the inventory get rid of it */
-            /*
-            IInventory inventory = new ItemInventoryVoidBag(bagStack, this.bagSize);
-            for (int slot = 0; slot < inventory.getSizeInventory(); slot++) {
-
-                ItemStack c = inventory.getStackInSlot(slot);
-                if (c != null && ItemHelper.itemsIdentical(c, itemStack)) {
-                    handled = true;
-                    break;
-                }
-            } */
-        }
-
-        return handled;
     }
 
     private void openGui(ItemStack itemStack, EntityPlayer entityPlayer) {
