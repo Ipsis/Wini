@@ -76,9 +76,6 @@ public class BlockHysteresis extends BlockWini implements ITileEntityProvider {
     @SideOnly(Side.CLIENT)
     public IIcon getIcon(IBlockAccess iblockaccess, int x, int y, int z, int side) {
 
-        if (side == ForgeDirection.UP.ordinal() || side == ForgeDirection.DOWN.ordinal())
-            return blankIcon;
-
         int meta = iblockaccess.getBlockMetadata(x, y, z);
         TileEntity te = iblockaccess.getTileEntity(x, y, z);
         if (te != null && te instanceof TileEntityHysteresis) {
