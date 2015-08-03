@@ -25,6 +25,10 @@ public class TileEntityStepdown extends TileEntityWini {
         }
     }
 
+    public int getOutputLevel() {
+        return this.redstoneLevel;
+    }
+
     @Override
     public void readFromNBT(NBTTagCompound nbtTagCompound) {
         super.readFromNBT(nbtTagCompound);

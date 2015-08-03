@@ -16,6 +16,12 @@ public interface IRedstoneOutput {
         public boolean isStrong() {
             return this == STRONG;
         }
+
+        @Override
+        public String toString() {
+            if (this == WEAK) return "Weak";
+            else return "Strong";
+        }
     }
 
     enum Sense {
@@ -27,6 +33,12 @@ public interface IRedstoneOutput {
 
         public boolean isInverted() {
             return this == INVERTED;
+        }
+
+        @Override
+        public String toString() {
+            if (this == NORMAL) return "Normal";
+            else return "Inverted";
         }
     }
 

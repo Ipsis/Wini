@@ -10,6 +10,7 @@ public enum CompareFunc {
     GT;
 
     public static final CompareFunc[] VALID_TYPES = {LT, LTE, EQ, GTE, GT};
+    private static final String[] NAMES = {"<", "<=", "=", ">=", ">"};
 
     public CompareFunc getNext() {
         int ord = (ordinal() + 1) % VALID_TYPES.length;
@@ -45,6 +46,11 @@ public enum CompareFunc {
         }
 
         return triggered;
+    }
+
+    @Override
+    public String toString() {
+        return NAMES[ordinal()];
     }
 }
 
