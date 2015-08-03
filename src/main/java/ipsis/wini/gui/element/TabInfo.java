@@ -2,6 +2,7 @@ package ipsis.wini.gui.element;
 
 import cofh.lib.gui.GuiBase;
 import cofh.lib.util.helpers.StringHelper;
+import ipsis.oss.util.TabScrolledText;
 import ipsis.wini.reference.Lang;
 import ipsis.wini.reference.Textures;
 

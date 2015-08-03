@@ -1,4 +1,4 @@
-package ipsis.wini.gui.element;
+package ipsis.oss.util;
 
 import cofh.lib.gui.GuiBase;
 import cofh.lib.gui.element.TabBase;
