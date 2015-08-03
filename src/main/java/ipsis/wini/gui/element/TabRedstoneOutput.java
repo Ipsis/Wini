@@ -60,8 +60,8 @@ public class TabRedstoneOutput extends TabBase {
             gui.drawButton("Icon_RS_Invert", posX() + 58, posY + 56, 1, 0);
         }
 
-        gui.drawButton("Icon_Dec", posX() + 28, posY + 90, 1, 0);
-        gui.drawButton("Icon_Inc", posX() + 68, posY + 90, 1, 0);
+        gui.drawButton("Icon_Dec", posX() + 28, posY + 92, 1, 0);
+        gui.drawButton("Icon_Inc", posX() + 68, posY + 92, 1, 0);
 
         getFontRenderer().drawString(Integer.toString(myContainer.getRedstoneLevel()), posXOffset() + 48, posY + 96, textColor);
 
