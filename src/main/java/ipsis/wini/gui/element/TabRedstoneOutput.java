@@ -27,7 +27,7 @@ public class TabRedstoneOutput extends TabBase {
             this.setTexture(Textures.RESOURCE_PREFIX + Textures.Gui.TAB_RIGHT, 256, 256);
 
         maxHeight = 116;
-        maxWidth = 112;
+        maxWidth = 120;
         myContainer = container;
     }
 
@@ -40,9 +40,9 @@ public class TabRedstoneOutput extends TabBase {
             return;
         }
 
-        getFontRenderer().drawStringWithShadow("Redstone Strength", posXOffset() + 6, posY + 6, headerColor);
-        getFontRenderer().drawStringWithShadow("Redstone Sense", posXOffset() + 6, posY + 42, headerColor);
-        getFontRenderer().drawStringWithShadow("Redstone Value", posXOffset() + 6, posY + 78, headerColor);
+        getFontRenderer().drawStringWithShadow("Redstone Strength", posXOffset() + 20, posY + 6, headerColor);
+        getFontRenderer().drawStringWithShadow("Redstone Sense", posXOffset() + 20, posY + 42, headerColor);
+        getFontRenderer().drawStringWithShadow("Redstone Value", posXOffset() + 20, posY + 78, headerColor);
 
         if (myContainer.getRedstoneStrength() == IRedstoneOutput.Strength.STRONG) {
             gui.drawButton("Icon_RS_Strong", posX() + 38, posY + 20, 1, 0);
