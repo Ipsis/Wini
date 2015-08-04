@@ -46,6 +46,6 @@ public class ContainerVoidBag extends ContainerInventoryItemWini {
         super.onContainerClosed(entityPlayer);
 
         if (!entityPlayer.worldObj.isRemote && entityPlayer.getCurrentEquippedItem() != null && entityPlayer.getCurrentEquippedItem().getItem() instanceof ItemVoidBag)
-            VoidBagRegistry.getInstance().addBag(entityPlayer, entityPlayer.getCurrentEquippedItem());
+            VoidBagRegistry.getInstance().setBag(entityPlayer, entityPlayer.getCurrentEquippedItem());
     }
 }

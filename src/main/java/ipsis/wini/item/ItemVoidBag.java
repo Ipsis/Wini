@@ -5,12 +5,17 @@ import cofh.lib.util.helpers.StringHelper;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import ipsis.wini.Wini;
-import ipsis.wini.reference.*;
+import ipsis.wini.reference.Gui;
+import ipsis.wini.reference.Lang;
+import ipsis.wini.reference.Names;
+import ipsis.wini.reference.Nbt;
+import ipsis.wini.registry.VoidBagRegistry;
 import ipsis.wini.utils.NBTHelper;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 
@@ -90,10 +95,13 @@ public class ItemVoidBag extends ItemWini implements IInventoryContainerItem {
 
             setDefaultTags(itemStack);
 
-            if (entityPlayer.isSneaking())
+            if (entityPlayer.isSneaking()) {
                 setLockedState(itemStack, !isLocked(itemStack));
-            else
+                VoidBagRegistry.getInstance().setBagLock(entityPlayer, itemStack);
+                entityPlayer.addChatComponentMessage(new ChatComponentText(isLocked(itemStack) ? "Locked" : "Unlocked"));
+            } else {
                 openGui(itemStack, entityPlayer);
+            }
         }
         return itemStack;
     }

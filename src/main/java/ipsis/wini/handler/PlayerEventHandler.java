@@ -13,7 +13,7 @@ public class PlayerEventHandler {
         if (event.player == null)
             return;
 
-        VoidBagRegistry.getInstance().addPlayer(event.player);
+        VoidBagRegistry.getInstance().setPlayer(event.player);
     }
 
     @SubscribeEvent
@@ -21,6 +21,7 @@ public class PlayerEventHandler {
 
         if (event.player == null)
             return;
+
         VoidBagRegistry.getInstance().delPlayer(event.player);
     }
 }
