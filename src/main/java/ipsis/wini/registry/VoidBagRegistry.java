@@ -1,5 +1,6 @@
 package ipsis.wini.registry;
 
+import ipsis.oss.util.LogHelper;
 import ipsis.wini.item.ItemVoidBag;
 import ipsis.wini.utils.ComparableItemStackBlockSafe;
 import ipsis.wini.utils.ItemContainerHelper;
@@ -21,6 +22,16 @@ public class VoidBagRegistry {
         if (registry == null)
             registry = new VoidBagRegistry();
         return registry;
+    }
+
+    /* Debug */
+    private void dumpRegistry() {
+        for (PlayerBagRegistry playerBagRegistry : playerMap.values()) {
+            LogHelper.info("dumpRegistry: " + playerBagRegistry.playerUUID);
+            for (VoidBag voidBag : playerBagRegistry.registry.values()) {
+                LogHelper.info("dumpRegistry: " + voidBag);
+            }
+        }
     }
 
     /**
@@ -139,6 +150,16 @@ public class VoidBagRegistry {
                 if (itemStack != null)
                     contents.add(new ComparableItemStackBlockSafe(itemStack));
             }
+        }
+
+        @Override
+        public String toString() {
+            StringBuilder sb = new StringBuilder();
+            sb.append(bagUUID).append(" ").append(locked).append(" ");
+            for (ComparableItemStackBlockSafe stack : contents)
+                sb.append(stack.toItemStack()).append(" ");
+
+            return sb.toString();
         }
     }
 }
