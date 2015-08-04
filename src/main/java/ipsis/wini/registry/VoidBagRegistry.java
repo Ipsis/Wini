@@ -10,13 +10,12 @@ import java.util.*;
 
 public class VoidBagRegistry {
 
-    private VoidBagRegistry() {
-        playerMap = new HashMap<UUID, PlayerBags>();
-    }
     private static VoidBagRegistry registry;
+    private Map<UUID, PlayerBagRegistry> playerMap;
 
-    private HashMap<UUID, PlayerBags> playerMap;
-
+    private VoidBagRegistry() {
+        playerMap = new HashMap<UUID, PlayerBagRegistry>();
+    }
 
     public static VoidBagRegistry getInstance() {
         if (registry == null)
@@ -24,109 +23,121 @@ public class VoidBagRegistry {
         return registry;
     }
 
-    public void addPlayer(EntityPlayer entityPlayer) {
-        if (entityPlayer == null)
-            return;
-
-        UUID playerUUID = entityPlayer.getUniqueID();
-        if (!playerMap.containsKey(playerUUID))
-            playerMap.put(playerUUID, new PlayerBags());
+    /**
+     * Adds a new player, overwriting current information if it exists
+     */
+    public void setPlayer(EntityPlayer entityPlayer) {
+        if (entityPlayer != null)
+            playerMap.put(entityPlayer.getUniqueID(), new PlayerBagRegistry(entityPlayer.getUniqueID()));
     }
 
     public void delPlayer(EntityPlayer entityPlayer) {
-        UUID playerUUID = entityPlayer.getUniqueID();
-        playerMap.remove(playerUUID);
+        if (entityPlayer != null)
+            playerMap.remove(entityPlayer.getUniqueID());
+    }
+
+    /**
+     * Add a new bag and extracts the contents
+     */
+    public void setBag(EntityPlayer entityPlayer, ItemStack bagStack) {
+        if (entityPlayer == null || bagStack == null || !(bagStack.getItem() instanceof ItemVoidBag))
+            return;
+
+        boolean isLocked = ItemVoidBag.isLocked(bagStack);
+        PlayerBagRegistry playerEntry = playerMap.get(entityPlayer.getUniqueID());
+        if (playerEntry != null) {
+            UUID bagUUID = ItemVoidBag.getBagUUID(bagStack);
+            VoidBag bag = new VoidBag(bagUUID, ItemContainerHelper.getContents(bagStack));
+            bag.locked = isLocked;
+            playerEntry.registry.put(bagUUID, bag);
+        }
     }
 
     public boolean hasBag(EntityPlayer entityPlayer, ItemStack bagStack) {
+        if (entityPlayer != null && bagStack != null && bagStack.getItem() instanceof ItemVoidBag) {
+            PlayerBagRegistry playerEntry = playerMap.get(entityPlayer.getUniqueID());
+            if (playerEntry != null)
+                return playerEntry.registry.containsKey(ItemVoidBag.getBagUUID(bagStack));
+        }
+
+        return false;
+    }
+
+    public void purgeBags(EntityPlayer entityPlayer, List<UUID> validBagList) {
+        if (entityPlayer != null) {
+            PlayerBagRegistry playerEntry = playerMap.get(entityPlayer.getUniqueID());
+            if (playerEntry != null)
+                playerEntry.registry.keySet().retainAll(validBagList);
+        }
+    }
+
+    public boolean hasMatch(EntityPlayer entityPlayer, ItemStack stack) {
+        if (entityPlayer != null && stack != null) {
+            PlayerBagRegistry playerEntry = playerMap.get(entityPlayer.getUniqueID());
+            if (playerEntry != null)
+                return playerEntry.hasMatch(stack);
+        }
+
+        return false;
+    }
+
+    public void setBagLock(EntityPlayer entityPlayer, ItemStack bagStack) {
         if (entityPlayer == null || bagStack == null || !(bagStack.getItem() instanceof ItemVoidBag))
-            return false;
-
-        UUID playerUUID = entityPlayer.getUniqueID();
-        if (!playerMap.containsKey(playerUUID))
-            return false;
-
-        UUID bagUUID = ItemVoidBag.getBagUUID(bagStack);
-        return playerMap.get(playerUUID).hasBag(bagUUID);
-    }
-
-    public void addBag(EntityPlayer entityPlayer, ItemStack bagStack) {
-
-        if (entityPlayer == null || bagStack == null || !(bagStack.getItem() instanceof ItemVoidBag))
             return;
 
-        UUID playerUUID = entityPlayer.getUniqueID();
-        if (!playerMap.containsKey(playerUUID))
-            return;
-
-        UUID bagUUID = ItemVoidBag.getBagUUID(bagStack);
-        List<ItemStack> bagContents = ItemContainerHelper.getContents(bagStack);
-        playerMap.get(playerUUID).addBag(bagUUID, bagContents);
-    }
-
-    public boolean hasMatch(EntityPlayer entityPlayer, ItemStack itemStack) {
-
-        if (entityPlayer == null || itemStack == null)
-            return false;
-
-        return playerMap.get(entityPlayer.getUniqueID()).hashMatch(itemStack);
-    }
-
-    public void purgeOldBags(EntityPlayer entityPlayer, List<UUID> validBags) {
-
-        if (entityPlayer == null || validBags == null)
-            return;
-
-        PlayerBags playerBags = playerMap.get(entityPlayer.getUniqueID());
-        playerBags.purgeOldBags(validBags);
+        boolean isLocked = ItemVoidBag.isLocked(bagStack);
+        PlayerBagRegistry playerEntry = playerMap.get(entityPlayer.getUniqueID());
+        if (playerEntry != null) {
+            VoidBag bag = playerEntry.registry.get(ItemVoidBag.getBagUUID(bagStack));
+            if (bag != null)
+                bag.locked = isLocked;
+        }
     }
 
 
-    private class PlayerBags {
+    /**
+     * PlayerBagRegistry
+     * Player UUID and a set of the void bags the player have
+     */
+    private class PlayerBagRegistry {
+        public UUID playerUUID;
+        public Map<UUID, VoidBag> registry;
 
-        private HashMap<UUID, Set<ComparableItemStackBlockSafe>> bags;
-        public PlayerBags() {
-            bags = new HashMap<UUID, Set<ComparableItemStackBlockSafe>>();
+        private PlayerBagRegistry() { }
+        public PlayerBagRegistry(UUID playerUUID) {
+            this.playerUUID = playerUUID;
+            registry = new HashMap<UUID, VoidBag>();
         }
 
-        public boolean hasBag(UUID bagUUID) {
-            return bags.containsKey(bagUUID);
-        }
-
-        public void addBag(UUID bagUUID, List<ItemStack> bagContents) {
-            assert(bagUUID != null && bagContents != null);
-
-            HashSet<ComparableItemStackBlockSafe> newBagContents = new HashSet<ComparableItemStackBlockSafe>();
-            for (ItemStack currStack : bagContents) {
-                if (currStack != null)
-                    newBagContents.add(new ComparableItemStackBlockSafe(currStack));
-            }
-            bags.put(bagUUID, newBagContents);
-        }
-
-        public void delBag(UUID bagUUID) {
-            bags.remove(bagUUID);
-        }
-
-        public boolean hashMatch(ItemStack itemStack) {
-            assert(itemStack != null);
-
-            ComparableItemStackBlockSafe compareStack = new ComparableItemStackBlockSafe(itemStack);
-            for (Set<ComparableItemStackBlockSafe> currBag : bags.values()) {
-                if (currBag.contains(compareStack))
+        public boolean hasMatch(ItemStack stack) {
+            ComparableItemStackBlockSafe compareStack = new ComparableItemStackBlockSafe(stack);
+            for (VoidBag bag : registry.values()) {
+                if (!bag.locked && bag.contents.contains(compareStack))
                     return true;
             }
 
             return false;
         }
+    }
 
-        public void purgeOldBags(List<UUID> validBags) {
+    /**
+     * VoidBag
+     * Bag UUID and a set of the bag contents
+     */
+    private class VoidBag {
+        public UUID bagUUID;
+        boolean locked;
+        Set<ComparableItemStackBlockSafe> contents;
 
-            Iterator<UUID> iter = bags.keySet().iterator();
-            while (iter.hasNext()) {
-                UUID uuid = iter.next();
-                if (validBags.contains(uuid) == false)
-                    iter.remove();
+        private VoidBag() { }
+        public VoidBag(UUID bagUUID, List<ItemStack> items) {
+            this.bagUUID = bagUUID;
+            locked = false;
+            contents = new HashSet<ComparableItemStackBlockSafe>();
+
+            for (ItemStack itemStack : items) {
+                if (itemStack != null)
+                    contents.add(new ComparableItemStackBlockSafe(itemStack));
             }
         }
     }

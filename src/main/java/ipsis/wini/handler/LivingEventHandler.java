@@ -33,11 +33,11 @@ public class LivingEventHandler {
             if (uuid != null) {
                 currBags.add(uuid);
                 if (VoidBagRegistry.getInstance().hasBag(event.player, itemStack) == false)
-                    VoidBagRegistry.getInstance().addBag(event.player, itemStack);
+                    VoidBagRegistry.getInstance().setBag(event.player, itemStack);
             }
         }
 
         if (!currBags.isEmpty())
-            VoidBagRegistry.getInstance().purgeOldBags(event.player, currBags);
+            VoidBagRegistry.getInstance().purgeBags(event.player, currBags);
     }
 }
