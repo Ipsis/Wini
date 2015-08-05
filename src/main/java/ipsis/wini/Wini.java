@@ -7,6 +7,7 @@ import cpw.mods.fml.common.event.FMLInterModComms;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.network.NetworkRegistry;
+import ipsis.wini.handler.ConfigHandler;
 import ipsis.wini.handler.GuiHandler;
 import ipsis.wini.init.ModBlocks;
 import ipsis.wini.init.ModItems;
@@ -28,6 +29,8 @@ public class Wini {
 
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent event) {
+
+        ConfigHandler.init(event.getSuggestedConfigurationFile());
 
         PacketHandler.init();
 

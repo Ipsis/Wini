@@ -3,11 +3,13 @@ package ipsis.wini.tileentity;
 import cofh.lib.util.helpers.BlockHelper;
 import cofh.lib.util.helpers.MathHelper;
 import cpw.mods.fml.relauncher.Side;
+import ipsis.oss.util.LogHelper;
 import ipsis.wini.helper.MonitorType;
 import ipsis.wini.network.message.MessageHysteresisCfg;
 import ipsis.wini.network.message.MessageHysteresisUpdate;
 import ipsis.wini.network.message.MessageRedstoneOutputCfg;
 import ipsis.wini.reference.Nbt;
+import ipsis.wini.reference.Settings;
 import ipsis.wini.utils.CompareFunc;
 import ipsis.wini.utils.IRedstoneOutput;
 import net.minecraft.entity.player.EntityPlayerMP;
@@ -292,7 +294,7 @@ public abstract class TileEntityHysteresis extends TileEntityWini implements IRe
             return;
 
         /* Check the levels every 1s */
-        if ((worldObj.getWorldTime() % 20) != 0)
+        if ((worldObj.getWorldTime() % Settings.hystUpdateRate) != 0)
             return;
 
         TileEntity adjacentTe = BlockHelper.getAdjacentTileEntity(this, getFacing());

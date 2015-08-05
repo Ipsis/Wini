@@ -41,3 +41,6 @@ gui.wini:info.hysteresis.0=This block allows you to emit a redstone signal on on
 gui.wini:info.hysteresis.1=Set the trigger to the level you want to emit the signal.
 gui.wini:info.hysteresis.2=Set the reset to the level you want to stop emitting the signal.
 gui.wini:info.hysteresis.3=The redstone sense can be used to invert the signal. eg. trigger stops emitting, reset emits signal.
+
+# Configuration
+config.wini:hyst.updateRate=Number of ticks between updates

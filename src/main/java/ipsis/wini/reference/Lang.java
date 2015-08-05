@@ -9,7 +9,7 @@ public class Lang {
     public static final String TAG_TAB = "itemGroup." + Reference.MOD_ID + ":" + Reference.MOD_NAME;
 
     public static class Config {
-
+        public static final String HYST_UPDATE_RATE = TAG_CONFIG + "hyst.updateRate";
     }
 
     public static class Gui {
