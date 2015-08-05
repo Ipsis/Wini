@@ -16,7 +16,7 @@ public class CreativeTab {
         @Override
         public Item getTabIconItem() {
 
-            return ModItems.itemCompactorDiamond;
+            return ModItems.itemVoidBagBig;
         }
 
         @Override
