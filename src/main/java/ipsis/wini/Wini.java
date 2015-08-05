@@ -11,6 +11,7 @@ import ipsis.wini.handler.GuiHandler;
 import ipsis.wini.init.ModBlocks;
 import ipsis.wini.init.ModItems;
 import ipsis.wini.init.ModTileEntities;
+import ipsis.wini.init.Recipes;
 import ipsis.wini.network.PacketHandler;
 import ipsis.wini.proxy.IProxy;
 import ipsis.wini.reference.Reference;
@@ -49,6 +50,8 @@ public class Wini {
         ModTileEntities.initialize();
 
         proxy.registerEventHandlers();
+
+        Recipes.init();
     }
 
     @Mod.EventHandler
