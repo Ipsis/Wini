@@ -1,0 +1,15 @@
+(W)hat (I) (N)eed (I)s ChangeLog
+================================
+
+1.7.10-0.1.0
+
+Features
+* Hysteresis blocks for RF/Containers/Tanks
+* Redstone stepdown block
+* Compactor tool
+* Void bags
+* Torch pouch
+
+Build Environment
+* Forge 10.13.4.1448
+* CoFHLib-[1.7.10]1.0.3-175
