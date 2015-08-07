@@ -15,17 +15,19 @@ public class LocationRegistry {
 
     public enum StructureType {
         SPAWN("Spawn", "Spawn"),
-        STRONGHOLD("Stronghold", "End Portal"),
+        STRONGHOLD("Stronghold", "End Portal");
+        /*
         VILLAGE("Village"),
         MINESHAFT("Mineshaft"),
-        FORTRESS("Fortress", "Nether Fortress");
+        FORTRESS("Fortress", "Nether Fortress");*/
 
         /* Internal name registered with MC */
         public final String mcName;
         public final String displayName;
 
         /* This must be in-sync with the enum list above! */
-        public static final StructureType validStructureTypes[] = { SPAWN, STRONGHOLD, VILLAGE, MINESHAFT, FORTRESS };
+        //public static final StructureType validStructureTypes[] = { SPAWN, STRONGHOLD, VILLAGE, MINESHAFT, FORTRESS };
+        public static final StructureType validStructureTypes[] = { SPAWN, STRONGHOLD };
 
         private StructureType(String mcName) {
             this(mcName, mcName);
