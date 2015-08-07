@@ -44,7 +44,7 @@ public class ItemLastCompass extends ItemWini {
         if (world.isRemote)
             return itemStack;
 
-        if (entityPlayer.isSneaking()) {
+        if (!entityPlayer.isSneaking()) {
             /* Search */
             LocationRegistry.StructureType type = LocationRegistry.StructureType.getStructureType(itemStack.getItemDamage());
             ChunkPosition chunkPosition = LocationRegistry.getLocationChunkPosition(type, world,
