@@ -18,6 +18,7 @@ public class ModItems {
         itemTorchPouch = new ItemTorchPouch();
         itemVoidBag = new ItemVoidBag(ItemVoidBag.BagSize.SMALL);
         itemVoidBagBig = new ItemVoidBag(ItemVoidBag.BagSize.LARGE);
+        itemLastCompass = new ItemLastCompass();
 
         GameRegistry.registerItem(itemCompactorStone, "item." + Names.Items.ITEM_COMPACTOR + "_" + Names.Items.ITEM_COMPACTOR_SUBTYPES[0]);
         GameRegistry.registerItem(itemCompactorIron, "item." + Names.Items.ITEM_COMPACTOR + "_" + Names.Items.ITEM_COMPACTOR_SUBTYPES[1]);
@@ -26,6 +27,7 @@ public class ModItems {
         GameRegistry.registerItem(itemTorchPouch, "item." + Names.Items.ITEM_TORCH_POUCH);
         GameRegistry.registerItem(itemVoidBag, "item." + Names.Items.ITEM_VOID_BAG);
         GameRegistry.registerItem(itemVoidBagBig, "item." + Names.Items.ITEM_VOID_BAG_BIG);
+        GameRegistry.registerItem(itemLastCompass, "item." + Names.Items.ITEM_LAST_COMPASS);
 
         if (Settings.blockSceptreEnabled) {
             itemMagicBlockPlacer = new ItemMagicBlockPlacer();
@@ -48,4 +50,5 @@ public class ModItems {
     public static ItemWini itemVoidBag;
     public static ItemWini itemVoidBagBig;
     public static ItemWini itemMagicBlockPlacer;
+    public static ItemWini itemLastCompass;
 }
