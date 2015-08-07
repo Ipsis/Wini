@@ -13,13 +13,15 @@ public class MessageStrutureLocation implements IMessage, IMessageHandler<Messag
     public int posX;
     public int posY;
     public int posZ;
+    public boolean valid;
 
     public MessageStrutureLocation() { }
 
-    public MessageStrutureLocation(int x, int y, int z) {
+    public MessageStrutureLocation(int x, int y, int z, boolean valid) {
         this.posX = x;
         this.posY = y;
         this.posZ = z;
+        this.valid = valid;
     }
 
     @Override
@@ -27,6 +29,7 @@ public class MessageStrutureLocation implements IMessage, IMessageHandler<Messag
         this.posX = buf.readInt();
         this.posY = buf.readInt();
         this.posZ = buf.readInt();
+        this.valid = buf.readBoolean();
     }
 
     @Override
@@ -34,13 +37,13 @@ public class MessageStrutureLocation implements IMessage, IMessageHandler<Messag
         buf.writeInt(this.posX);
         buf.writeInt(this.posY);
         buf.writeInt(this.posZ);
+        buf.writeBoolean(this.valid);
     }
 
     @Override
     public IMessage onMessage(MessageStrutureLocation message, MessageContext ctx) {
 
-        LogHelper.info("onMessage: " + message.posX + " " + message.posY + " " + message.posZ);
-        LocationRegistry.getInstance().addLocation(message.posX, message.posY, message.posZ);
+        LocationRegistry.getInstance().addLocation(message.posX, message.posY, message.posZ, message.valid);
         return null;
     }
 }

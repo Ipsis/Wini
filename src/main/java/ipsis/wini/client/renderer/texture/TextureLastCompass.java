@@ -25,14 +25,17 @@ public class TextureLastCompass extends TextureAtlasSprite {
         Minecraft minecraft = Minecraft.getMinecraft();
 
         if (minecraft.theWorld != null && minecraft.thePlayer != null) {
-
             BlockPosition p = LocationRegistry.getInstance().getCurrentLocation();
-            if (p != null)
+            if (p != null) {
+                /* Orient the compass */
                 this.updateCompass(minecraft.theWorld,
                         minecraft.thePlayer.posX, minecraft.thePlayer.posZ, (double) minecraft.thePlayer.rotationYaw);
-            else
+            } else {
+                /* Spin the compass */
                 super.updateAnimation();
+            }
         } else {
+            /* Spin the compass */
             super.updateAnimation();
         }
     }
@@ -48,7 +51,6 @@ public class TextureLastCompass extends TextureAtlasSprite {
         if (!this.framesTextureData.isEmpty()) {
 
             double d3 = 0.0D;
-
             BlockPosition p = LocationRegistry.getInstance().getCurrentLocation();
             if (world != null && p != null) {
                 double d4 = (double) p.x - posX;
