@@ -58,13 +58,17 @@ public class LocationRegistry {
         return registry;
     }
 
-    public void addLocation(int x, int y, int z, boolean valid) {
+    public void setLocation(int x, int y, int z, boolean valid) {
         pos = new BlockPosition(x, y, z);
         isValid = valid;
     }
 
+    public void clearLocation() {
+        pos = null;
+        isValid = false;
+    }
+
     public BlockPosition getCurrentLocation() {
-        LogHelper.info("getCurrentLocation: " + (isValid ? pos : null));
         return isValid ? pos : null;
     }
 
