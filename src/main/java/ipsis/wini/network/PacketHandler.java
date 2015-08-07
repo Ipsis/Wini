@@ -16,7 +16,8 @@ public class PacketHandler {
         TE_DESCRIPTION(MessageTileEntityWini.class, Side.CLIENT),
         HYST_CFG(MessageHysteresisCfg.class, Side.SERVER),
         RS_OUTPUT_CFG(MessageRedstoneOutputCfg.class, Side.SERVER),
-        HYST_UPDATE(MessageHysteresisUpdate.class, Side.CLIENT);
+        HYST_UPDATE(MessageHysteresisUpdate.class, Side.CLIENT),
+        LOC_UPDATE(MessageStrutureLocation.class, Side.CLIENT);
 
         private Class clazz;
         private Side side;
@@ -27,11 +28,9 @@ public class PacketHandler {
 
         public Class getClazz() { return this.clazz; }
         public Side getSide() { return this.side; }
-
     }
 
     public static void init() {
-
         for (ModMessage m : ModMessage.values())
             INSTANCE.registerMessage(m.getClazz(), m.getClazz(), m.ordinal(), m.getSide());
     }
