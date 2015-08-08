@@ -10,6 +10,13 @@ import net.minecraft.world.ChunkPosition;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
 
+/**
+ * So far only the overworld stronghold is for getClosestStructure, all the ChunkProviders return null
+ * for everything else.
+ * Would probably need to do some custom lookup in the generated chunks.
+ * That needs some thought!
+ */
+
 @SideOnly(Side.CLIENT)
 public class LocationRegistry {
 
@@ -72,21 +79,6 @@ public class LocationRegistry {
 
     public BlockPosition getCurrentLocation() {
         return isValid ? pos : null;
-    }
-
-    public static ChunkPosition getLocationChunkPosition(StructureType type, World world, int x, int y, int z) {
-
-        ChunkPosition pos = null;
-        if (world != null) {
-            if (type == StructureType.SPAWN) {
-                ChunkCoordinates chunkcoordinates = world.getSpawnPoint();
-                pos = new ChunkPosition(chunkcoordinates.posX, chunkcoordinates.posY, chunkcoordinates.posZ);
-            } else {
-                pos = world.findClosestStructure(type.mcName, x, y, z);
-            }
-        }
-
-        return pos;
     }
 
 }

@@ -15,6 +15,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ChatComponentText;
+import net.minecraft.util.ChunkCoordinates;
 import net.minecraft.world.ChunkPosition;
 import net.minecraft.world.World;
 import tv.twitch.chat.ChatMessage;
@@ -47,7 +48,7 @@ public class ItemLastCompass extends ItemWini {
         if (!entityPlayer.isSneaking()) {
             /* Search */
             LocationRegistry.StructureType type = LocationRegistry.StructureType.getStructureType(itemStack.getItemDamage());
-            ChunkPosition chunkPosition = LocationRegistry.getLocationChunkPosition(type, world,
+            ChunkPosition chunkPosition = getLocationChunkPosition(type, world,
                     (int) entityPlayer.posX, (int) entityPlayer.posY, (int) entityPlayer.posZ);
 
             /* Forge Docs - as long as you are on the server you can safely cast any EntityPlayer to EntityPlayerMP */
@@ -79,5 +80,20 @@ public class ItemLastCompass extends ItemWini {
 
         LocationRegistry.StructureType type = LocationRegistry.StructureType.getStructureType(itemStack.getItemDamage());
         info.add("Target: "  + type.displayName);
+    }
+
+    private ChunkPosition getLocationChunkPosition(LocationRegistry.StructureType type, World world, int x, int y, int z) {
+
+        ChunkPosition pos = null;
+        if (world != null) {
+            if (type == LocationRegistry.StructureType.SPAWN) {
+                ChunkCoordinates chunkcoordinates = world.getSpawnPoint();
+                pos = new ChunkPosition(chunkcoordinates.posX, chunkcoordinates.posY, chunkcoordinates.posZ);
+            } else {
+                pos = world.findClosestStructure(type.mcName, x, y, z);
+            }
+        }
+
+        return pos;
     }
 }
