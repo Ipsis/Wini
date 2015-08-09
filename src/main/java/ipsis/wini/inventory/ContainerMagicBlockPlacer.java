@@ -1,7 +1,6 @@
 package ipsis.wini.inventory;
 
 import cofh.lib.gui.slot.SlotLocked;
-import ipsis.wini.item.ItemMagicBlockPlacer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;

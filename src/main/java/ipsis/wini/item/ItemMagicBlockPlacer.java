@@ -2,20 +2,18 @@ package ipsis.wini.item;
 
 import cofh.api.item.IInventoryContainerItem;
 import cofh.lib.util.position.BlockPosition;
-import ipsis.oss.util.LogHelper;
 import ipsis.wini.Wini;
 import ipsis.wini.reference.Gui;
 import ipsis.wini.reference.Names;
 import net.minecraft.block.Block;
-import net.minecraft.client.Minecraft;
+
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.MathHelper;
-import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
-import sun.rmi.runtime.Log;
 
 public class ItemMagicBlockPlacer extends ItemWini implements IInventoryContainerItem {
 
@@ -33,13 +31,22 @@ public class ItemMagicBlockPlacer extends ItemWini implements IInventoryContaine
     @Override
     public ItemStack onItemRightClick(ItemStack itemStack, World world, EntityPlayer entityPlayer) {
 
-        if (world.isRemote)
+        if (world.isRemote || itemStack == null || !itemStack.hasTagCompound())
             return itemStack;
 
         if (entityPlayer.isSneaking()) {
             openGui(itemStack, entityPlayer);
         } else {
-            placeInAir(itemStack, world, entityPlayer);
+            if (itemStack.stackTagCompound.hasKey("Slot0")) {
+                ItemStack currStack = ItemStack.loadItemStackFromNBT(itemStack.stackTagCompound.getCompoundTag("Slot0"));
+                if (currStack != null && currStack.stackSize > 0) {
+                    placeInAir(currStack, world, entityPlayer);
+                    if (currStack.stackSize == 0)
+                        itemStack.stackTagCompound.setTag("Slot0", new NBTTagCompound());
+                    else
+                        itemStack.stackTagCompound.setTag("Slot0", currStack.writeToNBT(new NBTTagCompound()));
+                }
+            }
         }
 
         return itemStack;
@@ -60,9 +67,15 @@ public class ItemMagicBlockPlacer extends ItemWini implements IInventoryContaine
         Block block = world.getBlock(pos.x, pos.y, pos.z);
 
         if (block == Blocks.air) {
-            world.setBlock(pos.x, pos.y, pos.z, Blocks.cobblestone);
-            if (!entityPlayer.capabilities.isCreativeMode)
-                --itemStack.stackSize;
+
+            /* dmg/count acts as vanilla onPlayerRightClick */
+            int dmg = itemStack.getItemDamage();
+            int count  = itemStack.stackSize;
+            itemStack.tryPlaceItemIntoWorld(entityPlayer, world, pos.x, pos.y, pos.z, 0, 0.5F, 0.5F, 0.5F);
+            if (entityPlayer.capabilities.isCreativeMode) {
+                itemStack.setItemDamage(dmg);
+                itemStack.stackSize = count;
+            }
         }
     }
 
