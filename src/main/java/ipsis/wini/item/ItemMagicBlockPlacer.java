@@ -69,7 +69,7 @@ public class ItemMagicBlockPlacer extends ItemWini implements IInventoryContaine
     public static BlockPosition getSelectedBlock(World world, EntityPlayer entityPlayer) {
 
         Vec3 lookVec = entityPlayer.getLookVec();
-        
+
         /**
          * Forge forums
          * http://www.minecraftforge.net/forum/index.php?topic=29895.0
