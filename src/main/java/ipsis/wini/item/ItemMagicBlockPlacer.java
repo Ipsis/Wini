@@ -69,12 +69,25 @@ public class ItemMagicBlockPlacer extends ItemWini implements IInventoryContaine
     public static BlockPosition getSelectedBlock(World world, EntityPlayer entityPlayer) {
 
         Vec3 lookVec = entityPlayer.getLookVec();
-        Vec3 playerVec = Vec3.createVectorHelper(entityPlayer.posX, entityPlayer.posY + (entityPlayer.getEyeHeight() - entityPlayer.getDefaultEyeHeight()), entityPlayer.posZ);
+        
+        /**
+         * Forge forums
+         * http://www.minecraftforge.net/forum/index.php?topic=29895.0
+         * Yes, before 1.8 the server references entities by origin, the client references them by eyes.
+         * You need to add the eye-height on the server
+         */
+        Vec3 playerVec;
+        if (world.isRemote)
+            playerVec = Vec3.createVectorHelper(entityPlayer.posX, entityPlayer.posY, entityPlayer.posZ);
+        else
+            playerVec = Vec3.createVectorHelper(entityPlayer.posX, entityPlayer.posY + entityPlayer.getEyeHeight(), entityPlayer.posZ);
+
         Vec3 targetVec = playerVec.addVector(lookVec.xCoord * 2, lookVec.yCoord * 2, lookVec.zCoord * 2);
 
         int x = MathHelper.floor_double(targetVec.xCoord);
-        int y = MathHelper.floor_double(targetVec.yCoord) + 1;
+        int y = MathHelper.floor_double(targetVec.yCoord);
         int z = MathHelper.floor_double(targetVec.zCoord);
+
 
         return new BlockPosition(x, y, z);
     }
