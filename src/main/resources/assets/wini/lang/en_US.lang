@@ -14,6 +14,7 @@ item.wini:compactor_diamond.name=Diamond Compactor
 item.wini:torchPouch.name=Torch Pouch
 item.wini:voidBag.name=Void Bag
 item.wini:voidBagBig.name=Big Void Bag
+item.wini:magicBlockPlace.name=Magic Block Placer
 
 # Tooltips
 tooltip.wini:voidBag=Bag with a hole

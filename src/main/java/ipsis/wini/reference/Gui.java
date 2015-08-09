@@ -7,5 +7,6 @@ public class Gui {
         public static final int TORCH_POUCH = 1;
         public static final int VOID_BAG = 2;
         public static final int HYSTERESIS = 3;
+        public static final int MAGIC_BLOCK_PLACER = 4;
     }
 }

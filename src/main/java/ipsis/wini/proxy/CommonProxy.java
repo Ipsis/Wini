@@ -12,6 +12,10 @@ public class CommonProxy implements  IProxy {
     @Override
     public void registerEventHandlers() {
 
+        /**
+         *  TODO LivingEventHandler registered twice!
+         *  FMLCommonHandler.instance().bus().register for PlayerTickEvent == LivingEventHandler
+         */
         MinecraftForge.EVENT_BUS.register(new TextureEventHandlers());
         MinecraftForge.EVENT_BUS.register(new ItemEventHandler());
         MinecraftForge.EVENT_BUS.register(new LivingEventHandler());
