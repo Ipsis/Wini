@@ -11,6 +11,7 @@ public class Lang {
     public static class Config {
         public static final String HYST_UPDATE_RATE = TAG_CONFIG + "hyst.updateRate";
         public static final String BLOCK_SCEPTRE_ENABLED = TAG_CONFIG + "blockSceptreEnabled";
+        public static final String COMP_DROP_TYPE = TAG_CONFIG + "compactorDropType";
     }
 
     public static class Gui {
