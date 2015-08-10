@@ -3,8 +3,11 @@ package ipsis.wini.registry;
 import cofh.lib.util.position.BlockPosition;
 import ipsis.wini.block.BlockCompacted;
 import ipsis.wini.init.ModBlocks;
+import ipsis.wini.init.ModItems;
+import ipsis.wini.item.ItemToolCompactor;
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
+import net.minecraft.item.Item;
 import net.minecraft.world.World;
 
 public class CompactorRegistry {
@@ -32,4 +35,37 @@ public class CompactorRegistry {
 
         return changed;
     }
+
+    public static int getDamageDropped(int type, int meta) {
+        int dmg;
+
+        if (type == 0) {
+            dmg = meta;
+        } else {
+            if (meta == BlockCompacted.META_SAND)
+                dmg = 0;
+            else if (meta == BlockCompacted.META_RED_SAND)
+                dmg = 1;
+            else
+                dmg = 0;
+        }
+        return dmg;
+    }
+
+    public static Item getItemDropped(int type, int meta) {
+
+        Item item = null;
+        if (type == 0) {
+            item = Item.getItemFromBlock(ModBlocks.blockCompacted);
+        } else {
+            if (meta == BlockCompacted.META_SAND || meta == BlockCompacted.META_RED_SAND)
+                item = Item.getItemFromBlock(Blocks.sand);
+            else
+                item = Item.getItemFromBlock(Blocks.gravel);
+        }
+        return item;
+    }
+
+
+
 }

@@ -63,3 +63,5 @@ gui.wini:info.hysteresis.3=The redstone sense can be used to invert the signal. 
 
 # Configuration
 config.wini:hyst.updateRate=Number of ticks between updates
+config.wini:compactorDropType=Type of blocks that compacted blocks drop (0=compacted, 1=uncompacted)
+config.wini:blockSceptreEnabled=Enable the Block Sceptre item

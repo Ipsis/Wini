@@ -8,6 +8,9 @@ Features
 * Last compass - find the end portal or spawn
 * Guis now have tooltips
 
+Bugs
+* GH0001 - Compacted blocks drop sensible items when broken - configurable with compactorDropType
+
 1.7.10-0.1.0
 
 Features

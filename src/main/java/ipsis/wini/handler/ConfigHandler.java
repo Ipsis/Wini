@@ -26,6 +26,9 @@ public class ConfigHandler {
         Settings.blockSceptreEnabled = configuration.get(Configuration.CATEGORY_GENERAL,
                 "blockSceptreEnabled", Settings.DEF_BLOCK_SCEPTRE_ENABLED,
                 StringHelper.localize(Lang.Config.BLOCK_SCEPTRE_ENABLED)).getBoolean(Settings.DEF_BLOCK_SCEPTRE_ENABLED);
+        Settings.compactorDropType = configuration.get(Configuration.CATEGORY_GENERAL,
+                "compactorDropType", Settings.DEF_COMP_DROP_TYPE,
+                StringHelper.localize(Lang.Config.COMP_DROP_TYPE)).getInt(Settings.DEF_COMP_DROP_TYPE);
 
         if (configuration.hasChanged())
             configuration.save();
