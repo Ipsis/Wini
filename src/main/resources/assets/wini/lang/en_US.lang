@@ -14,13 +14,14 @@ item.wini:compactor_diamond.name=Diamond Compactor
 item.wini:torchPouch.name=Torch Pouch
 item.wini:voidBag.name=Void Bag
 item.wini:voidBagBig.name=Big Void Bag
-item.wini:magicBlockPlacer.name=Magic Block Placer
+item.wini:magicBlockPlacer.name=Block Sceptre
 
 # Tooltips
 tooltip.wini:voidBag=Bag with a hole
 tooltip.wini:voidBagBig=Bigger bag, still with a hole
 tooltip.wini:bagLocked=Locked
 tooltip.wini:bagUnlocked=Unlocked
+tooltip.wini:magicBlackPlacer=What dark sorcery is this!
 
 # Tabs
 itemGroup.wini:Wini=What I Need Is

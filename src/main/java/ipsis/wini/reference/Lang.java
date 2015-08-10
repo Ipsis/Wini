@@ -33,6 +33,7 @@ public class Lang {
         public static final String ITEM_VOID_BAG_BIG = TAG_TOOLTIP + Names.Items.ITEM_VOID_BAG_BIG;
         public static final String ITEM_VOID_BAG_LOCKED = TAG_TOOLTIP + "bagLocked";
         public static final String ITEM_VOID_BAG_UNLOCKED = TAG_TOOLTIP + "bagUnlocked";
+        public static final String ITEM_MAGIC_BLOCK_PLACER = TAG_TOOLTIP + Names.Items.ITEM_MAGIC_BLOCK_PLACER;
 
     }
 }

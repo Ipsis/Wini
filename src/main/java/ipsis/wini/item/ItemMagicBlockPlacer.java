@@ -1,9 +1,11 @@
 package ipsis.wini.item;
 
 import cofh.api.item.IInventoryContainerItem;
+import cofh.lib.util.helpers.StringHelper;
 import cofh.lib.util.position.BlockPosition;
 import ipsis.wini.Wini;
 import ipsis.wini.reference.Gui;
+import ipsis.wini.reference.Lang;
 import ipsis.wini.reference.Names;
 import net.minecraft.block.Block;
 
@@ -21,6 +23,7 @@ public class ItemMagicBlockPlacer extends ItemWini implements IInventoryContaine
         super();
         this.setMaxDamage(0);
         this.setUnlocalizedName(Names.Items.ITEM_MAGIC_BLOCK_PLACER);
+        this.setTooltip(StringHelper.localize(Lang.Tooltips.ITEM_MAGIC_BLOCK_PLACER));
     }
 
     private void openGui(ItemStack itemStack, EntityPlayer entityPlayer) {
