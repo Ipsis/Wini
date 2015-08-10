@@ -26,7 +26,7 @@ public class BlockCompacted extends BlockWini {
     public static final int META_RED_SAND = 2;
 
     public BlockCompacted() {
-        super(Material.ground);
+        super(Material.rock);
         this.setBlockName(Names.Blocks.BLOCK_COMPACTED);
         this.setHardness(1.5F);
         this.setResistance(10.0F);
