@@ -15,6 +15,7 @@ item.wini:torchPouch.name=Torch Pouch
 item.wini:voidBag.name=Void Bag
 item.wini:voidBagBig.name=Big Void Bag
 item.wini:magicBlockPlacer.name=Block Sceptre
+item.wini:lastCompass.name=Last Compass
 
 # Tooltips
 tooltip.wini:voidBag=Bag with a hole
