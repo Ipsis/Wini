@@ -21,7 +21,7 @@ tooltip.wini:voidBag=Bag with a hole
 tooltip.wini:voidBagBig=Bigger bag, still with a hole
 tooltip.wini:bagLocked=Locked
 tooltip.wini:bagUnlocked=Unlocked
-tooltip.wini:magicBlackPlacer=What dark sorcery is this!
+tooltip.wini:magicBlockPlacer=What dark sorcery is this!
 
 # Tabs
 itemGroup.wini:Wini=What I Need Is
