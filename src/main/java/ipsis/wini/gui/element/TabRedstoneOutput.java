@@ -2,9 +2,13 @@ package ipsis.wini.gui.element;
 
 import cofh.lib.gui.GuiBase;
 import cofh.lib.gui.element.TabBase;
+import cofh.lib.util.helpers.StringHelper;
+import ipsis.wini.reference.Lang;
 import ipsis.wini.reference.Textures;
 import ipsis.wini.utils.IRedstoneOutput;
 import org.lwjgl.opengl.GL11;
+
+import java.util.List;
 
 /**
  * Based off TabRedstone from CoFHCore
@@ -131,5 +135,26 @@ public class TabRedstoneOutput extends TabBase {
         }
 
         return true;
+    }
+
+    @Override
+    public void addTooltip(List<String> list) {
+
+        int x = gui.getMouseX() - currentShiftX;
+        int y = gui.getMouseY() - currentShiftY;
+
+        if (x >= 38 && x <= 54 && y >= 20 && y <= 36) {
+            list.add(StringHelper.localize(Lang.Gui.TIP_STRONG_RS));
+        } else if (x >= 58 && x <= 74 && y >= 20 && y <= 36) {
+            list.add(StringHelper.localize(Lang.Gui.TIP_WEAK_RS));
+        } else if (x >= 38 && x <= 54 && y >= 56 && y <= 72) {
+            list.add(StringHelper.localize(Lang.Gui.TIP_NORM_SENSE));
+        } else if (x >= 58 && x <= 74 && y >= 56 && y <= 72) {
+            list.add(StringHelper.localize(Lang.Gui.TIP_INV_SENSE));
+        } else if (x >= 28 && x <= 44 && y >= 90 && y <= 106) {
+            list.add(StringHelper.localize(Lang.Gui.TIP_DEC_RS));
+        } else if (x >= 68 && x <= 84 && y >= 90 && y <= 106) {
+            list.add(StringHelper.localize(Lang.Gui.TIP_INC_RS));
+        }
     }
 }
