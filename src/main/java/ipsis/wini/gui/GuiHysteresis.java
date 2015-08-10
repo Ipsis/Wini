@@ -17,7 +17,6 @@ import ipsis.wini.utils.CompareFunc;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.ResourceLocation;
 
-import java.util.List;
 import java.util.regex.Pattern;
 
 public class GuiHysteresis extends GuiBaseWini {

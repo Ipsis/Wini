@@ -1,7 +1,6 @@
 package ipsis.wini.init;
 
 import cpw.mods.fml.common.registry.GameRegistry;
-import ipsis.wini.reference.Names;
 import ipsis.wini.reference.Settings;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;

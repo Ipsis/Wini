@@ -2,15 +2,12 @@ package ipsis.wini.handler;
 
 import cofh.lib.util.position.BlockPosition;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
-import ipsis.oss.util.LogHelper;
 import ipsis.wini.item.ItemMagicBlockPlacer;
 import net.minecraft.block.Block;
-import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.OpenGlHelper;
 import net.minecraft.client.renderer.RenderGlobal;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
-import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import net.minecraftforge.client.event.DrawBlockHighlightEvent;
 import org.lwjgl.opengl.GL11;

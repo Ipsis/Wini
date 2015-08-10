@@ -3,7 +3,6 @@ package ipsis.wini.tileentity;
 import cofh.lib.util.helpers.BlockHelper;
 import cofh.lib.util.helpers.MathHelper;
 import cpw.mods.fml.relauncher.Side;
-import ipsis.oss.util.LogHelper;
 import ipsis.wini.helper.MonitorType;
 import ipsis.wini.network.message.MessageHysteresisCfg;
 import ipsis.wini.network.message.MessageHysteresisUpdate;
