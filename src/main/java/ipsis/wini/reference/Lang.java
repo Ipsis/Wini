@@ -25,6 +25,13 @@ public class Lang {
         public static final String TAB_REDSTONE = TAG_GUI + "tab.redstone";
 
         public static final String INFO_HYSTERICAL = TAG_GUI + "info.hysteresis";
+
+        public static final String TIP_STRONG_RS = TAG_GUI + "tooltip.strongRs";
+        public static final String TIP_WEAK_RS = TAG_GUI + "tooltip.weakRs";
+        public static final String TIP_NORM_SENSE = TAG_GUI + "tooltip.normalSense";
+        public static final String TIP_INV_SENSE = TAG_GUI + "tooltip.invertedSense";
+        public static final String TIP_INC_RS = TAG_GUI + "tooltip.incRs";
+        public static final String TIP_DEC_RS = TAG_GUI + "tooltip.decRs";
     }
 
 

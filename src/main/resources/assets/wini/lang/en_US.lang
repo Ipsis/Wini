@@ -30,7 +30,7 @@ itemGroup.wini:Wini=What I Need Is
 gui.wini:tab.info=Information
 gui.wini:tab.energy=Energy
 gui.wini:tab.tanks=Tanks
-gui.wini:tab.redstone=Redstone7
+gui.wini:tab.redstone=Redstone
 
 gui.wini:inv=Hysteresis Inventory
 gui.wini:inv_units=Items
@@ -38,6 +38,13 @@ gui.wini:rf=Hysteresis RF
 gui.wini:rf_units=RF
 gui.wini:fluid=Hysteresis Fluid
 gui.wini:fluid_units=mB
+
+gui.wini:tooltip.strongRs=Strong redstone output
+gui.wini:tooltip.weakRs=Weak redstone output
+gui.wini:tooltip.normalSense=Normal redstone output
+gui.wini:tooltip.invertedSense=Inverted redstone output
+gui.wini:tooltip.incRs=Increase redstone output value
+gui.wini:tooltip.decRs=Decrease redstone output value
 
 gui.wini:info.hysteresis.0=This block allows you to emit a redstone signal on one condition, then clear it on another.
 gui.wini:info.hysteresis.1=Set the trigger to the level you want to emit the signal.
