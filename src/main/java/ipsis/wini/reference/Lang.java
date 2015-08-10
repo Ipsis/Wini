@@ -32,6 +32,18 @@ public class Lang {
         public static final String TIP_INV_SENSE = TAG_GUI + "tooltip.invertedSense";
         public static final String TIP_INC_RS = TAG_GUI + "tooltip.incRs";
         public static final String TIP_DEC_RS = TAG_GUI + "tooltip.decRs";
+
+        public static final String TIP_HYST_GT = TAG_GUI + "tooltip.gt";
+        public static final String TIP_HYST_GTE = TAG_GUI + "tooltip.gte";
+        public static final String TIP_HYST_EQ = TAG_GUI + "tooltip.eq";
+        public static final String TIP_HYST_LT = TAG_GUI + "tooltip.lt";
+        public static final String TIP_HYST_LTE = TAG_GUI + "tooltip.lte";
+
+
+        public static final String TIP_TRIG_SAVE =TAG_GUI + "tooltip.triggerSave";
+        public static final String TIP_RESET_SAVE =TAG_GUI + "tooltip.resetSave";
+        public static final String TIP_RUNNING = TAG_GUI + "tooltip.running";
+        public static final String TIP_STOPPED = TAG_GUI + "tooltip.stopped";
     }
 
 

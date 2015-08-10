@@ -45,6 +45,15 @@ gui.wini:tooltip.normalSense=Normal redstone output
 gui.wini:tooltip.invertedSense=Inverted redstone output
 gui.wini:tooltip.incRs=Increase redstone output value
 gui.wini:tooltip.decRs=Decrease redstone output value
+gui.wini:tooltip.triggerSave=Save trigger value
+gui.wini:tooltip.resetSave=Save reset value
+gui.wini:tooltip.running=Running
+gui.wini:tooltip.stopped=Stopped
+gui.wini:tooltip.gt=Greater than
+gui.wini:tooltip.gte=Greater than or equal to
+gui.wini:tooltip.eq=Equal to
+gui.wini:tooltip.lt=Less than
+gui.wini:tooltip.lte=Less than or equal to
 
 gui.wini:info.hysteresis.0=This block allows you to emit a redstone signal on one condition, then clear it on another.
 gui.wini:info.hysteresis.1=Set the trigger to the level you want to emit the signal.
