@@ -34,12 +34,12 @@ public class ItemMagicBlockPlacer extends ItemWini implements IInventoryContaine
     @Override
     public ItemStack onItemRightClick(ItemStack itemStack, World world, EntityPlayer entityPlayer) {
 
-        if (world.isRemote || itemStack == null || !itemStack.hasTagCompound())
+        if (world.isRemote || itemStack == null)
             return itemStack;
 
         if (entityPlayer.isSneaking()) {
             openGui(itemStack, entityPlayer);
-        } else {
+        } else if (itemStack.hasTagCompound()){
             if (itemStack.stackTagCompound.hasKey("Slot0")) {
                 ItemStack currStack = ItemStack.loadItemStackFromNBT(itemStack.stackTagCompound.getCompoundTag("Slot0"));
                 if (currStack != null && currStack.stackSize > 0) {
