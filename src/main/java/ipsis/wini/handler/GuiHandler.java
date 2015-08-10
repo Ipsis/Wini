@@ -2,9 +2,11 @@ package ipsis.wini.handler;
 
 import cpw.mods.fml.common.network.IGuiHandler;
 import ipsis.wini.gui.GuiHysteresis;
+import ipsis.wini.gui.GuiMagicBlockPlacer;
 import ipsis.wini.gui.GuiTorchPouch;
 import ipsis.wini.gui.GuiVoidBag;
 import ipsis.wini.inventory.ContainerHysteresis;
+import ipsis.wini.inventory.ContainerMagicBlockPlacer;
 import ipsis.wini.inventory.ContainerTorchPouch;
 import ipsis.wini.inventory.ContainerVoidBag;
 import ipsis.wini.reference.Gui;
@@ -22,6 +24,8 @@ public class GuiHandler implements IGuiHandler {
             return new ContainerVoidBag(entityPlayer.getCurrentEquippedItem(), entityPlayer.inventory);
         } else if (ID == Gui.Ids.HYSTERESIS) {
             return new ContainerHysteresis(entityPlayer, (TileEntityHysteresis)world.getTileEntity(x, y, z));
+        } else if (ID == Gui.Ids.MAGIC_BLOCK_PLACER) {
+            return new ContainerMagicBlockPlacer(entityPlayer.getCurrentEquippedItem(), entityPlayer.inventory);
         }
 
         return null;
@@ -36,6 +40,8 @@ public class GuiHandler implements IGuiHandler {
             return new GuiVoidBag(entityPlayer.inventory, new ContainerVoidBag(entityPlayer.getCurrentEquippedItem(), entityPlayer.inventory));
         } else if (ID == Gui.Ids.HYSTERESIS) {
             return new GuiHysteresis(entityPlayer, (TileEntityHysteresis)world.getTileEntity(x, y, z));
+        } else if (ID == Gui.Ids.MAGIC_BLOCK_PLACER) {
+            return new GuiMagicBlockPlacer(entityPlayer.inventory, new ContainerMagicBlockPlacer(entityPlayer.getCurrentEquippedItem(), entityPlayer.inventory));
         }
         return null;
     }

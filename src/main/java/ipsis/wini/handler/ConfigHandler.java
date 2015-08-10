@@ -23,6 +23,9 @@ public class ConfigHandler {
         Settings.hystUpdateRate = configuration.get(Configuration.CATEGORY_GENERAL,
                 "hysteresisUpdateRate", Settings.DEF_HYST_UPDATE_RATE,
                 StringHelper.localize(Lang.Config.HYST_UPDATE_RATE)).getInt(Settings.DEF_HYST_UPDATE_RATE);
+        Settings.blockSceptreEnabled = configuration.get(Configuration.CATEGORY_GENERAL,
+                "blockSceptreEnabled", Settings.DEF_BLOCK_SCEPTRE_ENABLED,
+                StringHelper.localize(Lang.Config.BLOCK_SCEPTRE_ENABLED)).getBoolean(Settings.DEF_BLOCK_SCEPTRE_ENABLED);
 
         if (configuration.hasChanged())
             configuration.save();

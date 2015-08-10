@@ -2,7 +2,9 @@ package ipsis.wini.reference;
 
 public class Settings {
 
-    public  static final int DEF_HYST_UPDATE_RATE = 40;
+    public static final int DEF_HYST_UPDATE_RATE = 40;
+    public static final boolean DEF_BLOCK_SCEPTRE_ENABLED = true;
 
     public static int hystUpdateRate;
+    public static boolean blockSceptreEnabled;
 }
