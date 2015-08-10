@@ -2,6 +2,7 @@ package ipsis.wini.init;
 
 import cpw.mods.fml.common.registry.GameRegistry;
 import ipsis.wini.reference.Names;
+import ipsis.wini.reference.Settings;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
@@ -31,12 +32,14 @@ public class Recipes {
         GameRegistry.addRecipe(new ShapedOreRecipe(
                 new ItemStack(ModItems.itemVoidBagBig), "ldl", "lol", "lcl", 'd', "gemDiamond", 'l', Items.leather, 'o', Blocks.obsidian, 'c', Blocks.chest));
 
-        GameRegistry.addRecipe(new ShapedOreRecipe(
-                new ItemStack(ModItems.itemMagicBlockPlacer),
-                "rgr", "eoe", "fsf",
-                'r', Blocks.redstone_block, 'g', "blockGold",
-                'e', Items.ender_eye, 'o', Blocks.obsidian,
-                'f', Items.feather, 's', Items.diamond_shovel));
+        if (Settings.blockSceptreEnabled) {
+            GameRegistry.addRecipe(new ShapedOreRecipe(
+                    new ItemStack(ModItems.itemMagicBlockPlacer),
+                    "rgr", "eoe", "fsf",
+                    'r', Blocks.redstone_block, 'g', "blockGold",
+                    'e', Items.ender_eye, 'o', Blocks.obsidian,
+                    'f', Items.feather, 's', Items.diamond_shovel));
+        }
     }
 
     private static void initBlockRecipes() {

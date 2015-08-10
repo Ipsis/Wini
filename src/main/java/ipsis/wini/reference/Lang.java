@@ -10,6 +10,7 @@ public class Lang {
 
     public static class Config {
         public static final String HYST_UPDATE_RATE = TAG_CONFIG + "hyst.updateRate";
+        public static final String BLOCK_SCEPTRE_ENABLED = TAG_CONFIG + "blockSceptreEnabled";
     }
 
     public static class Gui {
