@@ -3,11 +3,15 @@ package ipsis.wini.block;
 import cofh.lib.util.helpers.MathHelper;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import ipsis.wini.init.ModBlocks;
 import ipsis.wini.reference.Names;
+import ipsis.wini.reference.Settings;
 import ipsis.wini.reference.Textures;
+import ipsis.wini.registry.CompactorRegistry;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
@@ -22,7 +26,7 @@ public class BlockCompacted extends BlockWini {
     public static final int META_RED_SAND = 2;
 
     public BlockCompacted() {
-        super(Material.ground);
+        super(Material.rock);
         this.setBlockName(Names.Blocks.BLOCK_COMPACTED);
         this.setHardness(1.5F);
         this.setResistance(10.0F);
@@ -57,17 +61,17 @@ public class BlockCompacted extends BlockWini {
 
     @Override
     public int damageDropped(int meta) {
-        return MathHelper.clampI(meta, 0, Names.Blocks.BLOCK_COMPACTED_SUBTYPES.length - 1);
+        return CompactorRegistry.getDamageDropped(Settings.compactorDropType, meta);
     }
 
     @Override
     public int quantityDropped(Random p_149745_1_) {
-        return 0;
+        return 1;
     }
 
     @Override
-    public Item getItemDropped(int p_149650_1_, Random p_149650_2_, int p_149650_3_) {
-        /* This doesn't drop anything */
-        return null;
+    public Item getItemDropped(int meta, Random random, int fortune) {
+
+        return CompactorRegistry.getItemDropped(Settings.compactorDropType, meta);
     }
 }

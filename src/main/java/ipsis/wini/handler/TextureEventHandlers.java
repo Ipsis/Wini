@@ -2,9 +2,15 @@ package ipsis.wini.handler;
 
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import ipsis.oss.util.IconRegistry;
+import ipsis.wini.client.renderer.texture.TextureLastCompass;
+import ipsis.wini.reference.Names;
+import ipsis.wini.reference.Reference;
+import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraftforge.client.event.TextureStitchEvent;
 
 public class TextureEventHandlers {
+
+    public static TextureAtlasSprite lastCompass = new TextureLastCompass();
 
     @SubscribeEvent
     public void onTextureStitchEvent(TextureStitchEvent.Pre event) {
@@ -31,6 +37,8 @@ public class TextureEventHandlers {
             IconRegistry.addIcon("Icon_Button", event.map.registerIcon("wini:icons/Icon_Button"));
             IconRegistry.addIcon("Icon_ButtonHighlight", event.map.registerIcon("wini:icons/Icon_ButtonHighlight"));
             IconRegistry.addIcon("Icon_ButtonInactive", event.map.registerIcon("wini:icons/Icon_ButtonInactive"));
+
+            event.map.setTextureEntry(Reference.MOD_ID + ":" + Names.Items.ITEM_LAST_COMPASS, lastCompass);
         }
     }
 }

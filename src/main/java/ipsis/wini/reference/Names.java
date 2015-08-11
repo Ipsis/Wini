@@ -9,7 +9,8 @@ public class Names {
         public final static String ITEM_TORCH_POUCH = "torchPouch";
         public final static String ITEM_VOID_BAG = "voidBag";
         public final static String ITEM_VOID_BAG_BIG = "voidBagBig";
-
+        public final static String ITEM_MAGIC_BLOCK_PLACER = "magicBlockPlacer";
+        public final static String ITEM_LAST_COMPASS = "lastCompass";
     }
 
     public static class Blocks {

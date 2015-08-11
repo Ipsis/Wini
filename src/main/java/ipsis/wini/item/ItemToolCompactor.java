@@ -1,13 +1,9 @@
 package ipsis.wini.item;
 
 import cofh.lib.util.position.BlockPosition;
-import ipsis.oss.util.LogHelper;
-import ipsis.wini.block.BlockCompacted;
-import ipsis.wini.init.ModBlocks;
 import ipsis.wini.registry.CompactorRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;

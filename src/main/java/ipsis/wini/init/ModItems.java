@@ -1,11 +1,9 @@
 package ipsis.wini.init;
 
 import cpw.mods.fml.common.registry.GameRegistry;
-import ipsis.wini.item.ItemToolCompactor;
-import ipsis.wini.item.ItemTorchPouch;
-import ipsis.wini.item.ItemVoidBag;
-import ipsis.wini.item.ItemWini;
+import ipsis.wini.item.*;
 import ipsis.wini.reference.Names;
+import ipsis.wini.reference.Settings;
 import net.minecraft.item.Item;
 
 public class ModItems {
@@ -20,6 +18,7 @@ public class ModItems {
         itemTorchPouch = new ItemTorchPouch();
         itemVoidBag = new ItemVoidBag(ItemVoidBag.BagSize.SMALL);
         itemVoidBagBig = new ItemVoidBag(ItemVoidBag.BagSize.LARGE);
+        itemLastCompass = new ItemLastCompass();
 
         GameRegistry.registerItem(itemCompactorStone, "item." + Names.Items.ITEM_COMPACTOR + "_" + Names.Items.ITEM_COMPACTOR_SUBTYPES[0]);
         GameRegistry.registerItem(itemCompactorIron, "item." + Names.Items.ITEM_COMPACTOR + "_" + Names.Items.ITEM_COMPACTOR_SUBTYPES[1]);
@@ -28,6 +27,12 @@ public class ModItems {
         GameRegistry.registerItem(itemTorchPouch, "item." + Names.Items.ITEM_TORCH_POUCH);
         GameRegistry.registerItem(itemVoidBag, "item." + Names.Items.ITEM_VOID_BAG);
         GameRegistry.registerItem(itemVoidBagBig, "item." + Names.Items.ITEM_VOID_BAG_BIG);
+        GameRegistry.registerItem(itemLastCompass, "item." + Names.Items.ITEM_LAST_COMPASS);
+
+        if (Settings.blockSceptreEnabled) {
+            itemMagicBlockPlacer = new ItemMagicBlockPlacer();
+            GameRegistry.registerItem(itemMagicBlockPlacer, "item." + Names.Items.ITEM_MAGIC_BLOCK_PLACER);
+        }
     }
 
     public static void initialize() {
@@ -44,4 +49,6 @@ public class ModItems {
     public static ItemWini itemTorchPouch;
     public static ItemWini itemVoidBag;
     public static ItemWini itemVoidBagBig;
+    public static ItemWini itemMagicBlockPlacer;
+    public static ItemWini itemLastCompass;
 }

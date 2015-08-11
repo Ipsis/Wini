@@ -14,12 +14,15 @@ item.wini:compactor_diamond.name=Diamond Compactor
 item.wini:torchPouch.name=Torch Pouch
 item.wini:voidBag.name=Void Bag
 item.wini:voidBagBig.name=Big Void Bag
+item.wini:magicBlockPlacer.name=Block Sceptre
+item.wini:lastCompass.name=Last Compass
 
 # Tooltips
 tooltip.wini:voidBag=Bag with a hole
 tooltip.wini:voidBagBig=Bigger bag, still with a hole
 tooltip.wini:bagLocked=Locked
 tooltip.wini:bagUnlocked=Unlocked
+tooltip.wini:magicBlockPlacer=What dark sorcery is this!
 
 # Tabs
 itemGroup.wini:Wini=What I Need Is
@@ -28,7 +31,7 @@ itemGroup.wini:Wini=What I Need Is
 gui.wini:tab.info=Information
 gui.wini:tab.energy=Energy
 gui.wini:tab.tanks=Tanks
-gui.wini:tab.redstone=Redstone7
+gui.wini:tab.redstone=Redstone
 
 gui.wini:inv=Hysteresis Inventory
 gui.wini:inv_units=Items
@@ -37,6 +40,22 @@ gui.wini:rf_units=RF
 gui.wini:fluid=Hysteresis Fluid
 gui.wini:fluid_units=mB
 
+gui.wini:tooltip.strongRs=Strong redstone output
+gui.wini:tooltip.weakRs=Weak redstone output
+gui.wini:tooltip.normalSense=Normal redstone output
+gui.wini:tooltip.invertedSense=Inverted redstone output
+gui.wini:tooltip.incRs=Increase redstone output value
+gui.wini:tooltip.decRs=Decrease redstone output value
+gui.wini:tooltip.triggerSave=Save trigger value
+gui.wini:tooltip.resetSave=Save reset value
+gui.wini:tooltip.running=Running
+gui.wini:tooltip.stopped=Stopped
+gui.wini:tooltip.gt=Greater than
+gui.wini:tooltip.gte=Greater than or equal to
+gui.wini:tooltip.eq=Equal to
+gui.wini:tooltip.lt=Less than
+gui.wini:tooltip.lte=Less than or equal to
+
 gui.wini:info.hysteresis.0=This block allows you to emit a redstone signal on one condition, then clear it on another.
 gui.wini:info.hysteresis.1=Set the trigger to the level you want to emit the signal.
 gui.wini:info.hysteresis.2=Set the reset to the level you want to stop emitting the signal.
@@ -44,3 +63,5 @@ gui.wini:info.hysteresis.3=The redstone sense can be used to invert the signal. 
 
 # Configuration
 config.wini:hyst.updateRate=Number of ticks between updates
+config.wini:compactorDropType=Type of blocks that compacted blocks drop (0=compacted, 1=uncompacted)
+config.wini:blockSceptreEnabled=Enable the Block Sceptre item

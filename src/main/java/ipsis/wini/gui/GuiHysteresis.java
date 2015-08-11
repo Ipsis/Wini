@@ -91,6 +91,9 @@ public class GuiHysteresis extends GuiBaseWini {
 
         addTab(new TabInfo(this, TabBase.LEFT, buildInfoString(Lang.Gui.INFO_HYSTERICAL)));
         addTab(new TabRedstoneOutput(this, TabBase.RIGHT, te));
+
+        triggerSaveBtn.setToolTip(StringHelper.localize(Lang.Gui.TIP_TRIG_SAVE));
+        resetSaveBtn.setToolTip(StringHelper.localize(Lang.Gui.TIP_RESET_SAVE));
     }
 
     @Override
@@ -116,6 +119,8 @@ public class GuiHysteresis extends GuiBaseWini {
         this.runningBtn.setSheetX(b ? 176 : 196);
         this.runningBtn.setDisabledX(b ? 176 : 196);
         this.runningBtn.setHoverX(b ? 176 : 196);
+
+        this.runningBtn.setToolTip(b ? StringHelper.localize(Lang.Gui.TIP_RUNNING) : StringHelper.localize(Lang.Gui.TIP_STOPPED));
     }
 
     void setFuncBtn(ElementButton b, CompareFunc f) {
@@ -123,6 +128,20 @@ public class GuiHysteresis extends GuiBaseWini {
         b.setSheetX(xOffset);
         b.setDisabledX(xOffset);
         b.setHoverX(xOffset);
+        setFuncTooltip(b, f);
+    }
+
+    void setFuncTooltip(ElementButton b, CompareFunc f) {
+        if (f == CompareFunc.GT)
+            b.setToolTip(StringHelper.localize(Lang.Gui.TIP_HYST_GT));
+        else if (f == CompareFunc.GTE)
+            b.setToolTip(StringHelper.localize(Lang.Gui.TIP_HYST_GTE));
+        else if (f == CompareFunc.EQ)
+            b.setToolTip(StringHelper.localize(Lang.Gui.TIP_HYST_EQ));
+        else if (f == CompareFunc.LT)
+            b.setToolTip(StringHelper.localize(Lang.Gui.TIP_HYST_LT));
+        else if (f == CompareFunc.LTE)
+            b.setToolTip(StringHelper.localize(Lang.Gui.TIP_HYST_LTE));
     }
 
     @Override
