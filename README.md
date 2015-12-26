@@ -6,8 +6,11 @@ What I Need Is
 #What Is This?
 Some handy items that I've always wanted in Minecraft.
 
+[http://www.minecraftforum.net/forums/mapping-and-modding/minecraft-mods/wip-mods/2495020]
+
 #Dependencies
 This mod requires CoFHLib.
+
 [http://www.curse.com/mc-mods/minecraft/220333-cofhlib]
 
 #Credits
